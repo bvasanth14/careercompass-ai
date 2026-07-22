@@ -1130,3 +1130,84 @@ footer {
 
 
 }
+
+/* Resume Analyzer */
+
+
+.resume-card button {
+
+    margin-top:20px;
+
+    padding:12px 25px;
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+}
+
+
+
+.score {
+
+    font-size:45px;
+
+    font-weight:bold;
+
+    color:#2563eb;
+
+    margin:15px 0;
+
+}
+
+
+
+.skill-tags span {
+
+    display:inline-block;
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    margin:5px;
+
+}
+
+
+
+
+/* Roadmap */
+
+
+.frontend-progress {
+
+    width:60%;
+
+    height:100%;
+
+    background:#f59e0b;
+
+}
+
+
+
+.backend-progress {
+
+    width:45%;
+
+    height:100%;
+
+    background:#ef4444;
+
+}
