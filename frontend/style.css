@@ -581,3 +581,202 @@ footer {
 
 
 }
+
+/* ===============================
+   Authentication Pages
+================================ */
+
+
+.auth-section {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    padding: 20px;
+
+}
+
+
+
+.auth-box {
+
+    width: 400px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+
+    text-align: center;
+
+}
+
+
+
+.auth-box h1 {
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+
+    color: #1e293b;
+
+}
+
+
+
+.auth-box p {
+
+    color: #64748b;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+
+.auth-box form {
+
+    text-align: left;
+
+}
+
+
+
+.auth-box label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    color: #334155;
+
+}
+
+
+
+.auth-box input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    border: 1px solid #cbd5e1;
+
+    outline: none;
+
+    font-size: 15px;
+
+}
+
+
+
+.auth-box input:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+
+
+.auth-box button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 25px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+
+.auth-box button:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+
+}
+
+
+
+
+
+.auth-box a {
+
+    display: inline-block;
+
+    margin-top: 20px;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+}
+
+
+
+.auth-box a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+.register-link {
+
+    margin-top: 20px;
+
+}
+
+
+
+
+@media(max-width:500px){
+
+
+    .auth-box {
+
+        width: 100%;
+
+        padding: 30px;
+
+    }
+
+}
