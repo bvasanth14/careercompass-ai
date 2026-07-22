@@ -1211,3 +1211,532 @@ footer {
     background:#ef4444;
 
 }
+
+/* Placement Checker */
+
+
+.company-list {
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.company-card {
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:#f8fafc;
+
+}
+
+
+
+.company-card h3 {
+
+    margin-bottom:15px;
+
+}
+
+
+
+.eligible {
+
+    border-left:5px solid #16a34a;
+
+}
+
+
+
+.not-eligible {
+
+    border-left:5px solid #ef4444;
+
+}
+
+
+
+.company-card p {
+
+    color:#64748b;
+
+}
+
+
+
+
+@media(max-width:900px){
+
+    .company-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* Mock Interview */
+
+
+.interview-options {
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin:20px 0;
+
+}
+
+
+
+.interview-options button {
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+.interview-options button:hover {
+
+    transform:translateY(-3px);
+
+}
+
+
+
+.question-box {
+
+    margin-top:30px;
+
+    background:#f8fafc;
+
+    padding:25px;
+
+    border-radius:20px;
+
+}
+
+
+
+.question-box textarea {
+
+    width:100%;
+
+    height:120px;
+
+    padding:15px;
+
+    margin:20px 0;
+
+    border-radius:10px;
+
+    border:1px solid #cbd5e1;
+
+    resize:none;
+
+}
+
+
+
+.submit-answer {
+
+    padding:12px 25px;
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+}
+
+/* Certificate Manager */
+
+
+.certificate-header {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.upload-btn {
+
+    padding:12px 25px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+.certificate-list {
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.certificate-card {
+
+    background:#f8fafc;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    border-left:5px solid #f59e0b;
+
+}
+
+
+
+.certificate-card p {
+
+    color:#64748b;
+
+    margin-top:10px;
+
+}
+
+
+
+
+
+@media(max-width:900px){
+
+    .certificate-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* Project Showcase */
+
+
+.project-list {
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+
+
+
+.project-card {
+
+    background:#f8fafc;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    border-left:5px solid #2563eb;
+
+}
+
+
+
+.project-card h3 {
+
+    margin-bottom:15px;
+
+}
+
+
+
+.project-card p {
+
+    color:#64748b;
+
+    margin:10px 0;
+
+}
+
+
+
+.project-card a {
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+
+
+
+.add-project-btn {
+
+    margin-top:25px;
+
+    padding:13px 25px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:#16a34a;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+
+
+
+@media(max-width:900px){
+
+    .project-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* Notification Center */
+
+
+.notification-list {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.notification-card {
+
+    background:#f8fafc;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    border-left:5px solid #2563eb;
+
+}
+
+
+
+.notification-card h3 {
+
+    margin-bottom:10px;
+
+}
+
+
+
+.notification-card p {
+
+    color:#64748b;
+
+}
+
+
+
+.notification-card span {
+
+    display:block;
+
+    margin-top:10px;
+
+    font-size:14px;
+
+    color:#94a3b8;
+
+}
+
+/* Dark Mode Button */
+
+#theme-toggle {
+
+    margin-top:20px;
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#1e293b;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* Dark Theme */
+
+.dark-mode {
+
+    background:#020617;
+
+    color:white;
+
+}
+
+
+
+.dark-mode .dashboard-section,
+.dark-mode .dashboard-card {
+
+    background:#1e293b;
+
+    color:white;
+
+}
+
+
+
+.dark-mode .dashboard-section p,
+.dark-mode .dashboard-card h3 {
+
+    color:#cbd5e1;
+
+}
+
+
+
+.dark-mode .question-box,
+.dark-mode .certificate-card,
+.dark-mode .project-card,
+.dark-mode .company-card,
+.dark-mode .notification-card {
+
+    background:#334155;
+
+    color:white;
+
+}
+
+/* ===========================
+   Dashboard Dark Mode
+=========================== */
+
+.dark-mode .dashboard-header h1{
+    color:#ffffff;
+}
+
+.dark-mode .dashboard-header p{
+    color:#cbd5e1;
+}
+
+.dark-mode .dashboard-card{
+    background:#1e293b;
+    color:#ffffff;
+}
+
+.dark-mode .dashboard-section{
+    background:#1e293b;
+    color:#ffffff;
+}
+
+.dark-mode .sidebar{
+    background:#0f172a;
+}
+
+.dark-mode .sidebar a{
+    color:#e2e8f0;
+}
+
+.dark-mode .sidebar a:hover{
+    background:#334155;
+}
+
+.dark-mode input,
+.dark-mode textarea{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+/* Dashboard Header Dark Mode */
+
+.dark-mode .dashboard-header h1 {
+    color: #ffffff !important;
+}
+
+.dark-mode .dashboard-header p {
+    color: #cbd5e1 !important;
+}
+
+/* Dashboard Header */
+
+.dark-mode .dashboard-header{
+
+    background:#1e293b !important;
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
