@@ -1,0 +1,583 @@
+/* ===============================
+   CareerCompass-AI Global Styles
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    background: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+
+
+/* ===============================
+   Navigation Bar
+================================ */
+
+
+.navbar {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 8%;
+
+    background: white;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+}
+
+
+
+.logo {
+
+    font-size: 28px;
+    font-weight: 700;
+    color: #2563eb;
+
+}
+
+
+.logo span {
+
+    color: #7c3aed;
+
+}
+
+
+
+.nav-links {
+
+    display: flex;
+    list-style: none;
+    gap: 30px;
+
+}
+
+
+
+.nav-links a {
+
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
+
+}
+
+
+
+.nav-links a:hover {
+
+    color: #2563eb;
+
+}
+
+
+
+.login-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 25px;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+
+/* ===============================
+   Hero Section
+================================ */
+
+
+.hero {
+
+    min-height: 90vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 60px 8%;
+
+    gap: 40px;
+
+}
+
+
+
+.hero-content {
+
+    width: 55%;
+
+}
+
+
+
+.hero h1 {
+
+    font-size: 55px;
+
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.hero h1 span {
+
+    color: #2563eb;
+
+}
+
+
+
+.hero p {
+
+    font-size: 18px;
+
+    color: #64748b;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+.hero-buttons button {
+
+    padding: 15px 30px;
+
+    border-radius: 30px;
+
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    cursor: pointer;
+
+    margin-right: 15px;
+
+    font-size: 16px;
+
+}
+
+
+
+.secondary-btn {
+
+    background: white !important;
+
+    color: #2563eb !important;
+
+    border: 2px solid #2563eb !important;
+
+}
+
+
+
+/* AI Card */
+
+
+.hero-image {
+
+    width: 35%;
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+
+
+.ai-card {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+
+    animation: float 3s infinite ease-in-out;
+
+}
+
+
+
+.ai-card:first-letter {
+
+    font-size: 50px;
+
+}
+
+
+
+@keyframes float {
+
+    50% {
+
+        transform: translateY(-15px);
+
+    }
+
+}
+
+
+
+
+
+/* ===============================
+   Statistics
+================================ */
+
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    gap: 25px;
+
+    padding: 60px 8%;
+
+}
+
+
+
+.stat-card {
+
+    background: white;
+
+    text-align: center;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+.stat-card h2 {
+
+    color: #2563eb;
+
+    font-size: 35px;
+
+}
+
+
+
+
+/* ===============================
+   Features
+================================ */
+
+
+.features {
+
+    padding: 80px 8%;
+
+    text-align: center;
+
+}
+
+
+
+.features h2,
+.how h2,
+.testimonials h2 {
+
+    font-size: 38px;
+
+    margin-bottom: 40px;
+
+}
+
+
+
+.feature-container {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 30px;
+
+}
+
+
+
+.feature-card {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+
+}
+
+
+
+.feature-card:hover {
+
+    transform: translateY(-10px);
+
+}
+
+
+
+.feature-card h3 {
+
+    margin: 15px 0;
+
+}
+
+
+
+
+
+/* ===============================
+   How It Works
+================================ */
+
+
+.how {
+
+    padding: 80px 8%;
+
+    text-align:center;
+
+}
+
+
+
+.steps {
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.steps div {
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+}
+
+
+
+.steps span {
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:50px;
+
+    height:50px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:50%;
+
+    font-size:22px;
+
+}
+
+
+
+
+
+/* ===============================
+ Testimonials
+================================ */
+
+
+.testimonials {
+
+    padding:80px 8%;
+
+    text-align:center;
+
+}
+
+
+
+.testimonial-card {
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+
+
+
+
+/* ===============================
+ Contact
+================================ */
+
+
+.contact {
+
+    padding:80px 8%;
+
+    text-align:center;
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.contact button {
+
+    margin-top:20px;
+
+    padding:15px 30px;
+
+    border:none;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* ===============================
+ Footer
+================================ */
+
+
+footer {
+
+    text-align:center;
+
+    padding:30px;
+
+    background:#0f172a;
+
+    color:white;
+
+}
+
+
+
+
+
+/* ===============================
+ Mobile Responsive
+================================ */
+
+
+@media(max-width:900px){
+
+
+    .hero {
+
+        flex-direction:column;
+
+    }
+
+
+    .hero-content,
+    .hero-image {
+
+        width:100%;
+
+    }
+
+
+    .feature-container,
+    .steps,
+    .stats {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .nav-links {
+
+        display:none;
+
+    }
+
+
+}
