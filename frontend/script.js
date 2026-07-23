@@ -211,3 +211,35 @@ if (logoutBtn) {
     });
 
 }
+
+// Load dashboard data from backend
+
+
+
+if (student) {
+
+    fetch(`http://localhost:5000/profile/${student.id}`)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+
+        document.getElementById("cgpa").innerText = data.cgpa;
+
+        document.getElementById("skills").innerText = data.skills;
+
+        document.getElementById("certificates").innerText = data.certificates;
+
+        document.getElementById("projects").innerText = data.projects;
+
+
+    })
+
+    .catch(error => {
+
+        console.log("Dashboard data error:", error);
+
+    });
+
+}

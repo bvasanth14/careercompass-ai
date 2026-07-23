@@ -297,7 +297,59 @@ db.query(
 );
 
 
+// Get Student Dashboard Profile
 
+app.get("/profile/:id", (req, res) => {
+
+    const studentId = req.params.id;
+
+
+    const sql = `
+        SELECT 
+            students.name,
+            students.email,
+            students.department,
+            student_profile.cgpa,
+            student_profile.skills,
+            student_profile.certificates,
+            student_profile.projects
+
+        FROM students
+
+        JOIN student_profile
+        ON students.id = student_profile.student_id
+
+        WHERE students.id = ?
+    `;
+
+
+    db.query(sql, [studentId], (err, result) => {
+
+        if (err) {
+
+            console.log(err);
+
+            return res.status(500).json({
+                message: "Database error"
+            });
+
+        }
+
+
+        if (result.length === 0) {
+
+            return res.status(404).json({
+                message: "Profile not found"
+            });
+
+        }
+
+
+        res.json(result[0]);
+
+    });
+
+});
 
 
 // 404 Route
@@ -312,6 +364,7 @@ app.use((req, res) => {
     });
 
 });
+
 
 
 
