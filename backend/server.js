@@ -438,6 +438,78 @@ app.get("/student/:id", (req, res) => {
 });
 
 
+// =======================================
+// Update Student Profile
+// =======================================
+
+app.put("/profile/:id", (req, res) => {
+
+    const studentId = req.params.id;
+
+    const {
+        cgpa,
+        skills,
+        certificates,
+        projects
+    } = req.body;
+
+    const sql = `
+        UPDATE student_profile
+        SET
+            cgpa = ?,
+            skills = ?,
+            certificates = ?,
+            projects = ?
+        WHERE student_id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            cgpa,
+            skills,
+            certificates,
+            projects,
+            studentId
+        ],
+        (err, result) => {
+
+            if (err) {
+
+                console.log(err);
+
+                return res.status(500).json({
+
+                    success: false,
+                    message: "Profile Update Failed"
+
+                });
+
+            }
+
+            if (result.affectedRows === 0) {
+
+                return res.status(404).json({
+
+                    success: false,
+                    message: "Profile not found"
+
+                });
+
+            }
+
+            res.json({
+
+                success: true,
+                message: "Profile Updated Successfully"
+
+            });
+
+        }
+    );
+
+});
+
 // 404 Route
 
 app.use((req, res) => {
