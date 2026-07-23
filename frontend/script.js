@@ -197,3 +197,17 @@ else {
     document.getElementById("profile-initials").innerText = initials;
 
 }
+
+const logoutBtn = document.getElementById("logout-btn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", function () {
+
+        localStorage.removeItem("student");
+
+        window.location.href = "login.html";
+
+    });
+
+}
