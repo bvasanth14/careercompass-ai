@@ -16,81 +16,178 @@
 <body>
 
 
-    <section class="auth-section">
+<section class="auth-section">
 
 
-        <div class="auth-box">
+    <div class="auth-box">
 
 
-            <h1>
-                Welcome Back
-            </h1>
+        <h1>
+            Welcome Back
+        </h1>
 
 
-            <p>
-                Login to continue your career journey
-            </p>
-
-
-
-            <form>
-
-
-                <label>
-                    Email
-                </label>
-
-                <input 
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                >
+        <p>
+            Login to continue your career journey
+        </p>
 
 
 
-                <label>
-                    Password
-                </label>
+        <form id="loginForm">
 
 
-                <input
-                    type="password"
-                    placeholder="Enter your password"
-                    required
-                >
+            <label>
+                Email
+            </label>
 
 
-
-                <button type="submit">
-                    Login
-                </button>
-
-
-            </form>
+            <input 
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
 
 
 
-            <a href="forgot-password.html">
-                Forgot Password?
+            <label>
+                Password
+            </label>
+
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+
+
+            <button type="submit">
+                Login
+            </button>
+
+
+        </form>
+
+
+
+        <p id="message"></p>
+
+
+
+        <a href="forgot-password.html">
+            Forgot Password?
+        </a>
+
+
+
+        <p class="register-link">
+
+            Don't have an account?
+
+            <a href="register.html">
+                Register
             </a>
 
+        </p>
 
 
-            <p class="register-link">
-
-                Don't have an account?
-
-                <a href="register.html">
-                    Register
-                </a>
-
-            </p>
+    </div>
 
 
-        </div>
+</section>
 
 
-    </section>
+
+<script>
+
+const loginForm = document.getElementById("loginForm");
+
+
+loginForm.addEventListener("submit", async function(event){
+
+
+    event.preventDefault();
+
+
+
+    const email = document.getElementById("email").value;
+
+    const password = document.getElementById("password").value;
+
+
+
+    try {
+
+
+        const response = await fetch("http://localhost:5000/login", {
+
+
+            method: "POST",
+
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+
+            body: JSON.stringify({
+
+                email: email,
+
+                password: password
+
+            })
+
+
+        });
+
+
+
+        const data = await response.json();
+
+
+
+        document.getElementById("message").innerText = data.message;
+
+
+
+     if(response.ok){
+
+    alert("Login successful!");
+
+    localStorage.setItem("student", JSON.stringify(data.student));
+
+    window.location.href = "dashboard.html";
+
+  }
+
+
+    }
+
+
+    catch(error){
+
+
+        console.log(error);
+
+
+        document.getElementById("message").innerText =
+        "Cannot connect to server";
+
+
+    }
+
+
+
+});
+
+
+</script>
 
 
 

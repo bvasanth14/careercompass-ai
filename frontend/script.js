@@ -170,3 +170,30 @@ if (themeButton) {
 }
 
 console.log("CareerCompass-AI JavaScript Loaded Successfully 🚀");
+
+// Load logged-in student details
+
+const student = JSON.parse(localStorage.getItem("student"));
+
+if (!student) {
+
+    window.location.href = "login.html";
+
+}
+else {
+
+    document.getElementById("student-name").innerText = student.name;
+
+    document.getElementById("profile-name").innerText = student.name;
+
+
+    let initials = student.name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .toUpperCase();
+
+
+    document.getElementById("profile-initials").innerText = initials;
+
+}
