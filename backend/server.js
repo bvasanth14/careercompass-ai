@@ -116,12 +116,47 @@ app.post("/register", (req, res) => {
 
 
 
-            res.json({
+          // Create empty dashboard profile
 
-                success: true,
-                message: "Registration Successful!"
+const studentId = result.insertId;
+
+
+const profileSql = `
+    INSERT INTO student_profile
+    (student_id, cgpa, skills, certificates, projects)
+    VALUES (?, ?, ?, ?, ?)
+`;
+
+
+db.query(
+    profileSql,
+    [studentId, 0, 0, 0, 0],
+    (profileErr) => {
+
+        if (profileErr) {
+
+            console.log(profileErr);
+
+            return res.status(500).json({
+
+                success: false,
+                message: "Profile creation failed"
 
             });
+
+        }
+
+
+        res.json({
+
+            success: true,
+            message: "Registration Successful!"
+
+        });
+
+
+    }
+);
 
 
 
@@ -346,6 +381,57 @@ app.get("/profile/:id", (req, res) => {
 
 
         res.json(result[0]);
+
+    });
+
+});
+
+// Get Full Student Profile
+app.get("/student/:id", (req, res) => {
+
+    const studentId = req.params.id;
+
+    const sql = `
+        SELECT
+            students.id,
+            students.name,
+            students.email,
+            students.department,
+            students.college,
+            students.year,
+            student_profile.cgpa,
+            student_profile.skills,
+            student_profile.certificates,
+            student_profile.projects
+
+        FROM students
+
+        LEFT JOIN student_profile
+        ON students.id = student_profile.student_id
+
+        WHERE students.id = ?
+    `;
+
+    db.query(sql, [studentId], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                success: false,
+                message: "Database Error"
+            });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Student not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            student: result[0]
+        });
 
     });
 
