@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
+const multer = require("multer");
+const path = require("path");
 
 const app = express();
 
@@ -10,6 +12,48 @@ const PORT = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// ===============================
+// Multer Configuration
+// ===============================
+
+const storage = multer.diskStorage({
+
+    destination: function (req, file, cb) {
+
+        cb(null, "uploads/");
+
+    },
+
+    filename: function (req, file, cb) {
+
+        const uniqueName = Date.now() + path.extname(file.originalname);
+
+        cb(null, uniqueName);
+
+    }
+
+});
+
+const upload = multer({
+
+    storage: storage,
+
+    fileFilter: function (req, file, cb) {
+
+        if (file.mimetype === "application/pdf") {
+
+            cb(null, true);
+
+        } else {
+
+            cb(new Error("Only PDF files are allowed"));
+
+        }
+
+    }
+
+});
 
 
 // Request Logger
@@ -507,6 +551,30 @@ app.put("/profile/:id", (req, res) => {
 
         }
     );
+
+});
+
+// Upload Resume
+app.post("/upload-resume", upload.single("resume"), (req, res) => {
+
+    if (!req.file) {
+
+        return res.status(400).json({
+
+            success: false,
+            message: "No resume uploaded"
+
+        });
+
+    }
+
+    res.json({
+
+        success: true,
+        message: "Resume uploaded successfully!",
+        file: req.file.filename
+
+    });
 
 });
 
