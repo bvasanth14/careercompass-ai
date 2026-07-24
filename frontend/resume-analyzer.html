@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Analyzer | CareerCompass-AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="dashboard-logo">
+            CareerCompass<span>-AI</span>
+        </div>
+
+        <ul>
+
+            <li onclick="window.location.href='dashboard.html'">
+                🏠 Dashboard
+            </li>
+
+            <li onclick="window.location.href='profile.html'">
+                👤 Profile
+            </li>
+
+            <li class="active">
+                📄 Resume Analyzer
+            </li>
+
+            <li>
+                🛣️ Skill Roadmap
+            </li>
+
+            <li>
+                🏢 Placement Checker
+            </li>
+
+            <li>
+                🎤 Mock Interview
+            </li>
+
+            <li>
+                📜 Certificates
+            </li>
+
+            <li>
+                🚀 Projects
+            </li>
+
+            <li>
+                ⚙️ Settings
+            </li>
+
+            <li id="logout-btn">
+                🚪 Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>📄 Resume Analyzer</h1>
+
+                <p>Upload your resume and receive AI-powered feedback.</p>
+
+            </div>
+
+        </header>
+
+        <section class="resume-card">
+
+            <h2>Upload Your Resume</h2>
+
+            <p>Select your resume in PDF format.</p>
+
+            <form id="resumeForm">
+
+                <input
+                    type="file"
+                    id="resume"
+                    accept=".pdf"
+                    required
+                >
+
+                <button type="submit" class="upload-btn">
+
+                    📤 Upload Resume
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="analysis-card">
+
+            <h2>Analysis Result</h2>
+
+            <div id="analysis-result">
+
+                <p>No resume uploaded yet.</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="resume.js"></script>
+
+</body>
+
+</html>

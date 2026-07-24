@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | CareerCompass-AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="dashboard-logo">
+            CareerCompass<span>-AI</span>
+        </div>
+
+        <ul>
+
+            <li onclick="window.location.href='dashboard.html'">
+                🏠 Dashboard
+            </li>
+
+            <li class="active">
+                👤 Profile
+            </li>
+
+        <li onclick="window.location.href='resume-analyzer.html'" style="cursor:pointer;">
+    📄 Resume Analyzer
+</li>
+            <li>
+                🛣️ Skill Roadmap
+            </li>
+
+            <li>
+                🏢 Placement Checker
+            </li>
+
+            <li>
+                🎤 Mock Interview
+            </li>
+
+            <li>
+                📜 Certificates
+            </li>
+
+            <li>
+                🚀 Projects
+            </li>
+
+            <li>
+                ⚙️ Settings
+            </li>
+
+            <li id="logout-btn">
+                🚪 Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+
+    <!-- Main -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>👤 My Profile</h1>
+
+                <p>Manage your personal details.</p>
+
+            </div>
+
+        </header>
+
+
+        <section class="profile-card">
+
+            <div class="profile-avatar" id="profile-avatar">
+                VB
+            </div>
+
+            <form id="profileForm">
+
+                <div class="profile-grid">
+
+                    <div class="profile-group">
+
+                        <label>Name</label>
+
+                        <input type="text" id="name" readonly>
+
+                    </div>
+
+
+                    <div class="profile-group">
+
+                        <label>Email</label>
+
+                        <input type="email" id="email" readonly>
+
+                    </div>
+
+
+                    <div class="profile-group">
+
+                        <label>Department</label>
+
+                        <input type="text" id="department" readonly>
+
+                    </div>
+
+
+                    <div class="profile-group">
+
+                        <label>CGPA</label>
+
+                        <input type="number" step="0.01" id="cgpa">
+
+                    </div>
+
+
+                    <div class="profile-group">
+
+                        <label>Skills</label>
+
+                        <input type="number" id="skills">
+
+                    </div>
+
+
+                    <div class="profile-group">
+
+                        <label>Certificates</label>
+
+                        <input type="number" id="certificates">
+
+                    </div>
+
+
+                    <div class="profile-group">
+
+                        <label>Projects</label>
+
+                        <input type="number" id="projects">
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="save-btn">
+
+                    💾 Save Changes
+
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="profile.js"></script>
+
+</body>
+
+</html>
