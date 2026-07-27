@@ -6,6 +6,7 @@ const path = require("path");
 const fs = require("fs");
 const pdfParse = require("pdf-parse");
 const calculateResumeScore = require("./resumeScore");
+const checkATS = require("./atsChecker");
 
 const app = express();
 
@@ -743,6 +744,8 @@ const resumeScore = calculateResumeScore(
     detectedSkills
 );
 
+const atsResult = checkATS(resumeText);
+
 
         console.log("Extracted Text:");
          console.log(pdfData.text);
@@ -753,6 +756,9 @@ console.log(detectedSkills);
      console.log("Resume Score:");
 console.log(resumeScore);
 
+     console.log("ATS Result:");
+console.log(atsResult);
+
 
        res.json({
 
@@ -761,7 +767,8 @@ console.log(resumeScore);
     file: req.file.filename,
     text: pdfData.text,
     skills: detectedSkills,
-    resumeScore: resumeScore
+    resumeScore: resumeScore,
+     atsResult: atsResult
 
 });
 
