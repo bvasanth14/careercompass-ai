@@ -27,17 +27,59 @@ uploadBtn.onclick = async () => {
             throw new Error(data.message);
         }
 
-        document.getElementById("analysis-result").innerHTML = `
-            <h2>✅ Resume Uploaded Successfully</h2>
+      let skillsHTML = "";
 
-            <p><strong>File:</strong> ${data.file}</p>
+for (const category in data.skills) {
 
-            <hr>
+    if (data.skills[category].length > 0) {
 
-            <h3>📄 Extracted Resume Text</h3>
+        skillsHTML += `
+            <h3>${category}</h3>
 
-            <pre style="white-space: pre-wrap;">${data.text}</pre>
+            <ul>
+                ${data.skills[category]
+                .map(skill => `<li>✅ ${skill}</li>`)
+                .join("")}
+            </ul>
         `;
+    }
+
+}
+
+
+document.getElementById("analysis-result").innerHTML = `
+
+    <h2>✅ Resume Uploaded Successfully</h2>
+
+    <p><strong>File:</strong> ${data.file}</p>
+
+
+    <hr>
+
+
+    <h2>🎯 Skills Detected</h2>
+
+    ${skillsHTML}
+
+
+    <hr>
+
+
+    <details>
+
+        <summary>
+            📄 View Extracted Resume Text
+        </summary>
+
+
+        <pre style="white-space: pre-wrap;">
+${data.text}
+        </pre>
+
+
+    </details>
+
+`;
 
     } catch (err) {
 

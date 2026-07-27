@@ -558,6 +558,138 @@ app.put("/profile/:id", (req, res) => {
 
 });
 
+// =======================================
+// CareerCompass-AI Skills Database
+// =======================================
+
+const skillsDatabase = {
+
+    "Programming Languages": [
+        "Java",
+        "Core Java",
+        "Advanced Java",
+        "Java SE",
+        "Java EE",
+        "JDBC",
+        "Python",
+        "C",
+        "C++",
+        "C#",
+        "JavaScript",
+        "TypeScript",
+        "PHP",
+        "Go",
+        "Kotlin",
+        "Swift",
+        "R",
+        "Java core"
+    ],
+
+    "Web Development": [
+        "HTML",
+        "HTML5",
+        "CSS",
+        "CSS3",
+        "Bootstrap",
+        "Tailwind CSS",
+        "JavaScript",
+        "React",
+        "Angular",
+        "Vue.js",
+        "Node.js",
+        "Express.js",
+        "Next.js",
+        "REST API",
+        "JSON",
+        "AJAX"
+    ],
+
+    "Databases": [
+        "SQL",
+        "MySQL",
+        "PostgreSQL",
+        "Oracle",
+        "SQLite",
+        "MongoDB",
+        "Firebase",
+        "MariaDB"
+    ],
+
+    "Cloud & DevOps": [
+        "AWS",
+        "Azure",
+        "Google Cloud",
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "GitHub",
+        "GitHub Actions",
+        "CI/CD",
+        "Linux",
+        "Nginx"
+    ],
+
+    "Data Science & AI": [
+        "Machine Learning",
+        "Deep Learning",
+        "Artificial Intelligence",
+        "TensorFlow",
+        "PyTorch",
+        "Pandas",
+        "NumPy",
+        "OpenCV",
+        "Scikit-learn",
+        "NLP",
+        "Data Analysis",
+        "Data Visualization"
+    ],
+
+    "Mobile Development": [
+        "Android",
+        "Android Studio",
+        "Flutter",
+        "React Native",
+        "Kotlin",
+        "Swift",
+        "Firebase"
+    ],
+
+    "Cyber Security": [
+        "Ethical Hacking",
+        "Cyber Security",
+        "Penetration Testing",
+        "Kali Linux",
+        "OWASP",
+        "Burp Suite",
+        "Wireshark",
+        "Nmap"
+    ],
+
+    "Tools": [
+        "VS Code",
+        "Visual Studio",
+        "Eclipse",
+        "IntelliJ IDEA",
+        "NetBeans",
+        "Postman",
+        "Figma",
+        "Canva",
+        "Jira"
+    ],
+
+    "Soft Skills": [
+        "Leadership",
+        "Communication",
+        "Teamwork",
+        "Problem Solving",
+        "Critical Thinking",
+        "Time Management",
+        "Adaptability",
+        "Presentation"
+    ]
+
+};
+
 // Upload Resume
 app.post("/upload-resume", upload.single("resume"), async (req, res) => {
 
@@ -575,31 +707,62 @@ app.post("/upload-resume", upload.single("resume"), async (req, res) => {
         const pdfBuffer = fs.readFileSync(req.file.path);
 
         const pdfData = await pdfParse(pdfBuffer);
+        console.log("Reached after PDF parsing");
+
+        // =======================================
+// Detect Skills from Resume
+// =======================================
+
+console.log("Starting skill detection...");
+const resumeText = pdfData.text.toLowerCase();
+
+const detectedSkills = {};
+
+for (const category in skillsDatabase) {
+
+    detectedSkills[category] = [];
+
+    skillsDatabase[category].forEach(skill => {
+
+  const escapedSkill = skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const regex = new RegExp(`\\b${escapedSkill}\\b`, "i");
+
+if (regex.test(resumeText)) {
+    detectedSkills[category].push(skill);
+}
+    });
+
+}
 
         console.log("Extracted Text:");
          console.log(pdfData.text);
 
-        res.json({
+         console.log("Detected Skills:");
+console.log(detectedSkills);
 
-            success: true,
-            message: "Resume uploaded successfully!",
-            file: req.file.filename,
-            text: pdfData.text
+       res.json({
 
-        });
+    success: true,
+    message: "Resume uploaded successfully!",
+    file: req.file.filename,
+    text: pdfData.text,
+    skills: detectedSkills
 
-    } catch (error) {
+});
 
-        console.log(error);
+} catch (error) {
 
-        res.status(500).json({
+    console.error("===== ERROR =====");
+    console.error(error);
+    console.error(error.stack);
 
-            success: false,
-            message: "Unable to read PDF"
+    res.status(500).json({
+        success: false,
+        message: "Unable to read PDF"
+    });
 
-        });
-
-    }
+}
 
 });
 
