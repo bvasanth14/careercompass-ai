@@ -1,29 +1,52 @@
-const resumeForm = document.getElementById("resumeForm");
+console.log("resume.js started");
 
-resumeForm.addEventListener("submit", function (event) {
+const uploadBtn = document.getElementById("uploadBtn");
 
-    event.preventDefault();
+uploadBtn.onclick = async () => {
 
-    const fileInput = document.getElementById("resume");
-
-    const file = fileInput.files[0];
+    const file = document.getElementById("resume").files[0];
 
     if (!file) {
-
-        alert("Please select a resume.");
-
+        alert("Please select a PDF.");
         return;
-
     }
 
-    if (file.type !== "application/pdf") {
+    const formData = new FormData();
+    formData.append("resume", file);
 
-        alert("Only PDF files are allowed.");
+    try {
 
-        return;
+        const response = await fetch("/upload-resume", {
+            method: "POST",
+            body: formData
+        });
 
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        document.getElementById("analysis-result").innerHTML = `
+            <h2>✅ Resume Uploaded Successfully</h2>
+
+            <p><strong>File:</strong> ${data.file}</p>
+
+            <hr>
+
+            <h3>📄 Extracted Resume Text</h3>
+
+            <pre style="white-space: pre-wrap;">${data.text}</pre>
+        `;
+
+    } catch (err) {
+
+        console.error(err);
+
+        document.getElementById("analysis-result").innerHTML = `
+            <h2 style="color:red;">❌ Error</h2>
+            <p>${err.message}</p>
+        `;
     }
 
-    alert("Resume selected successfully!");
-
-});
+};

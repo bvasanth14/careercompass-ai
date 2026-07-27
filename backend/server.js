@@ -3,6 +3,8 @@ const cors = require("cors");
 const db = require("./db");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+const pdfParse = require("pdf-parse");
 
 const app = express();
 
@@ -12,6 +14,9 @@ const PORT = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 // ===============================
 // Multer Configuration
@@ -69,10 +74,9 @@ app.use((req, res, next) => {
 // Home Route
 app.get("/", (req, res) => {
 
-    res.send("🚀 CareerCompass-AI Backend is Running Successfully!");
+    res.sendFile(path.join(__dirname, "../frontend/login.html"));
 
 });
-
 
 
 
@@ -555,44 +559,49 @@ app.put("/profile/:id", (req, res) => {
 });
 
 // Upload Resume
-app.post("/upload-resume", upload.single("resume"), (req, res) => {
+app.post("/upload-resume", upload.single("resume"), async (req, res) => {
 
     if (!req.file) {
 
         return res.status(400).json({
-
             success: false,
             message: "No resume uploaded"
+        });
+
+    }
+
+    try {
+
+        const pdfBuffer = fs.readFileSync(req.file.path);
+
+        const pdfData = await pdfParse(pdfBuffer);
+
+        console.log("Extracted Text:");
+         console.log(pdfData.text);
+
+        res.json({
+
+            success: true,
+            message: "Resume uploaded successfully!",
+            file: req.file.filename,
+            text: pdfData.text
+
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+
+            success: false,
+            message: "Unable to read PDF"
 
         });
 
     }
 
-    res.json({
-
-        success: true,
-        message: "Resume uploaded successfully!",
-        file: req.file.filename
-
-    });
-
 });
-
-// 404 Route
-
-app.use((req, res) => {
-
-    res.status(404).json({
-
-        success:false,
-        message:"Route not found"
-
-    });
-
-});
-
-
-
 
 
 
