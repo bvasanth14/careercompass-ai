@@ -5,6 +5,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const pdfParse = require("pdf-parse");
+const calculateResumeScore = require("./resumeScore");
 
 const app = express();
 
@@ -718,6 +719,7 @@ const resumeText = pdfData.text.toLowerCase();
 
 const detectedSkills = {};
 
+
 for (const category in skillsDatabase) {
 
     detectedSkills[category] = [];
@@ -735,11 +737,22 @@ if (regex.test(resumeText)) {
 
 }
 
+// Calculate Resume Score AFTER skills detection
+const resumeScore = calculateResumeScore(
+    resumeText,
+    detectedSkills
+);
+
+
         console.log("Extracted Text:");
          console.log(pdfData.text);
 
          console.log("Detected Skills:");
 console.log(detectedSkills);
+
+     console.log("Resume Score:");
+console.log(resumeScore);
+
 
        res.json({
 
@@ -747,7 +760,8 @@ console.log(detectedSkills);
     message: "Resume uploaded successfully!",
     file: req.file.filename,
     text: pdfData.text,
-    skills: detectedSkills
+    skills: detectedSkills,
+    resumeScore: resumeScore
 
 });
 
