@@ -8,6 +8,8 @@ const pdfParse = require("pdf-parse");
 const calculateResumeScore = require("./resumeScore");
 const checkATS = require("./atsChecker");
 const extractResumeSections = require("./resumeExtractor");
+console.log("🔥 THIS IS THE UPDATED SERVER.JS");
+console.log("SERVER FILE:", __filename);
 
 const app = express();
 
@@ -696,6 +698,8 @@ const skillsDatabase = {
 // Upload Resume
 app.post("/upload-resume", upload.single("resume"), async (req, res) => {
 
+   
+
     if (!req.file) {
 
         return res.status(400).json({
@@ -709,9 +713,19 @@ app.post("/upload-resume", upload.single("resume"), async (req, res) => {
 
         const pdfBuffer = fs.readFileSync(req.file.path);
 
-        const pdfData = await pdfParse(pdfBuffer);
-        console.log("Reached after PDF parsing");
+      const pdfData = await pdfParse(pdfBuffer);
 
+
+const lines = pdfData.text
+    .split("\n")
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+
+lines.slice(0, 50).forEach((line, index) => {
+    console.log(`${index + 1}: ${line}`);
+});
+
+console.log("Reached after PDF parsing");
         // =======================================
 // Detect Skills from Resume
 // =======================================
