@@ -760,7 +760,10 @@ const resumeScore = calculateResumeScore(
 );
 
 const atsResult = checkATS(resumeText);
-const extractedData = extractResumeSections(pdfData.text);
+const extractedData = extractResumeSections(
+    pdfData.text,
+    detectedSkills
+);
 
 
         console.log("Extracted Text:");
