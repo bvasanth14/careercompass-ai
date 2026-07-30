@@ -8,6 +8,11 @@ const pdfParse = require("pdf-parse");
 const calculateResumeScore = require("./resumeScore");
 const checkATS = require("./atsChecker");
 const extractResumeSections = require("./resumeExtractor");
+const jobRoles = require("./jobRoles");
+const analyzeSkillGap = require("./skillGapAnalyzer");
+const learningRoadmaps = require("./learningRoadmaps");
+const roadmapRoute = require("./routes/roadmap");
+
 console.log("🔥 THIS IS THE UPDATED SERVER.JS");
 console.log("SERVER FILE:", __filename);
 
@@ -19,6 +24,7 @@ const PORT = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/roadmap", roadmapRoute);
 
 
 app.use(express.static(path.join(__dirname, "../frontend")));
@@ -811,6 +817,118 @@ console.log(extractedData);
 });
 
 
+
+// =========================================
+// Skill Gap Analyzer API
+// =========================================
+
+app.post("/skill-gap", (req, res) => {
+
+    try {
+
+
+        const {
+            skills,
+            role
+        } = req.body;
+
+
+
+        if (!skills || !role) {
+
+            return res.status(400).json({
+
+                success:false,
+
+                message:"Skills and role are required"
+
+            });
+
+        }
+
+
+
+        const result = analyzeSkillGap(
+            skills,
+            role,
+            jobRoles
+        );
+
+
+
+        res.json(result);
+
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        res.status(500).json({
+
+            success:false,
+
+            message:"Skill gap analysis failed"
+
+        });
+
+    }
+
+});
+
+// =========================================
+// Learning Roadmap Generator API
+// =========================================
+
+
+
+
+app.post("/learning-roadmap", (req,res)=>{
+
+
+    const {role} = req.body;
+
+
+    console.log("Selected Role:");
+    console.log(role);
+
+
+
+    const roadmap = learningRoadmaps[role];
+
+
+    if(!roadmap){
+
+        return res.json({
+
+            success:false,
+
+            message:"Roadmap not found"
+
+        });
+
+    }
+
+
+
+    res.json({
+
+        success:true,
+
+        goal: roadmap.goal,
+
+        duration: roadmap.duration,
+
+        phases: roadmap.phases,
+
+        careerOptions: roadmap.careerOptions
+
+    });
+
+
+});
 
 // Start Server
 

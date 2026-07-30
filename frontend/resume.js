@@ -47,6 +47,20 @@ console.log(responseText);
 const data = JSON.parse(responseText);
 console.log(data);
 
+// Store detected skills for Skill Gap Analyzer
+
+detectedUserSkills = [];
+
+for (const category in data.skills) {
+
+    detectedUserSkills.push(
+        ...data.skills[category]
+    );
+
+}
+
+console.log("User Skills:", detectedUserSkills);
+
 
 
         if (!response.ok) {
@@ -310,6 +324,141 @@ ${data.text}
         <pre>${err.stack || err.message}</pre>
     `;
 }
+
+
+};
+
+// =========================================
+// Skill Gap Analyzer
+// =========================================
+
+let detectedUserSkills = [];
+
+
+document.getElementById("analyzeGapBtn").onclick = async () => {
+
+
+    const role = document.getElementById("jobRole").value;
+
+
+    if (!role) {
+
+        alert("Please select a career role");
+
+        return;
+
+    }
+
+
+
+    if (detectedUserSkills.length === 0) {
+
+        alert("Please upload and analyze a resume first");
+
+        return;
+
+    }
+
+
+
+    try {
+
+
+        const response = await fetch("/skill-gap", {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+
+            body: JSON.stringify({
+
+                skills: detectedUserSkills,
+
+                role: role
+
+            })
+
+        });
+
+
+
+        const data = await response.json();
+
+
+        console.log("Skill Gap Result:");
+        console.log(data);
+
+
+
+       document.getElementById("skill-gap-result").innerHTML = `
+
+
+<div class="skill-match-card">
+
+    <h3>📊 Skill Match</h3>
+
+    <h1>${data.skillMatch}%</h1>
+
+</div>
+
+
+
+<div class="skill-box">
+
+    <h3>✅ Current Skills</h3>
+
+    <ul>
+
+    ${
+        data.currentSkills
+        .map(skill => 
+        `<li class="current-skill">✔ ${skill}</li>`
+        )
+        .join("")
+    }
+
+    </ul>
+
+</div>
+
+
+
+
+<div class="skill-box">
+
+    <h3>❌ Missing Skills</h3>
+
+    <ul>
+
+    ${
+        data.missingSkills
+        .map(skill => 
+        `<li class="missing-skill">⚠ ${skill}</li>`
+        )
+        .join("")
+    }
+
+    </ul>
+
+</div>
+
+
+`;
+
+
+}
+ catch(error){
+
+        console.error(error);
+
+        alert("Skill gap analysis failed");
+
+    }
 
 
 };

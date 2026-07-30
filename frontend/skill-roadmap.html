@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Roadmap | CareerCompass-AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="dashboard-logo">
+            CareerCompass<span>-AI</span>
+        </div>
+
+        <ul>
+
+            <li onclick="window.location.href='dashboard.html'">
+                🏠 Dashboard
+            </li>
+
+            <li onclick="window.location.href='profile.html'">
+                👤 Profile
+            </li>
+
+            <li onclick="window.location.href='resume.html'">
+                📄 Resume Analyzer
+            </li>
+
+            <li class="active">
+                🛣 Skill Roadmap
+            </li>
+
+            <li>
+                🏢 Placement Checker
+            </li>
+
+            <li>
+                🎤 Mock Interview
+            </li>
+
+            <li>
+                📜 Certificates
+            </li>
+
+            <li>
+                🚀 Projects
+            </li>
+
+            <li>
+                ⚙ Settings
+            </li>
+
+            <li id="logout-btn">
+                🚪 Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <h1>🛣 Skill Roadmap</h1>
+
+            <p>
+                Select your dream career and generate a complete learning roadmap.
+            </p>
+
+        </header>
+
+        <section class="analysis-card">
+
+            <h2>Select Career</h2>
+
+            <select id="careerRole">
+
+                <option value="">Choose Career</option>
+
+                <option>Java Full Stack Developer</option>
+
+                <option>Python Developer</option>
+
+                <option>Software Developer</option>
+
+                <option>Frontend Developer</option>
+
+                <option>Backend Developer</option>
+
+                <option>Data Analyst</option>
+
+                <option>Data Scientist</option>
+
+                <option>Machine Learning Engineer</option>
+
+                <option>AI Engineer</option>
+
+                <option>Cyber Security Analyst</option>
+
+                <option>Cloud Engineer</option>
+
+                <option>DevOps Engineer</option>
+
+                <option>Android Developer</option>
+
+                <option>Blockchain Developer</option>
+
+                <option>UI/UX Designer</option>
+
+            </select>
+
+            <br><br>
+
+            <button id="generateRoadmapBtn">
+
+                🚀 Generate Roadmap
+
+            </button>
+
+        </section>
+
+        <section class="analysis-card">
+
+            <div id="roadmap-result">
+
+                <p>Select a career and click Generate Roadmap.</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="skill-roadmap.js"></script>
+
+</body>
+
+</html>

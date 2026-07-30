@@ -802,6 +802,28 @@ footer {
 
 /* Sidebar */
 
+.sidebar{
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 250px;
+
+    height: 100vh;
+
+    overflow-y: auto;
+
+    background: #1e293b;
+
+    color: white;
+
+    z-index: 1000;
+
+}
+
 .sidebar {
 
     width: 260px;
@@ -876,15 +898,15 @@ footer {
 
 
 /* Main Area */
+.dashboard-main{
 
-.dashboard-main {
+    margin-left: 250px;
+
+    padding: 30px;
 
     flex: 1;
 
-    padding: 35px;
-
 }
-
 
 
 
@@ -901,6 +923,16 @@ footer {
     align-items: center;
 
     margin-bottom: 35px;
+    
+      position: sticky;
+
+    top: 0;
+
+    background: white;
+
+    z-index: 100;
+
+    padding: 20px;
 
 }
 
@@ -2404,5 +2436,565 @@ color:#2563eb;
 
 font-size:16px;
 line-height:1.8;
+
+}
+
+/* =========================================
+   Skill Gap Analyzer
+========================================= */
+
+#jobRole {
+
+    width: 100%;
+    padding: 12px;
+
+    margin-top: 15px;
+
+    border-radius: 10px;
+
+    border: 1px solid #ccc;
+
+    font-size: 16px;
+
+    background: white;
+
+}
+
+
+
+#analyzeGapBtn {
+
+    margin-top: 15px;
+
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+
+#analyzeGapBtn:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+
+/* Skill Gap Result */
+
+#skill-gap-result {
+
+    margin-top: 25px;
+
+}
+
+
+
+/* Match Percentage */
+
+.skill-match-card {
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    background: #f8fafc;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.skill-match-card h1 {
+
+    font-size: 45px;
+
+}
+
+
+
+/* Skill Lists */
+
+.skill-box {
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    margin-top: 15px;
+
+    background: #ffffff;
+
+}
+
+
+
+.skill-box ul {
+
+    list-style: none;
+
+    padding: 0;
+
+}
+
+
+
+.skill-box li {
+
+    padding: 8px;
+
+    margin: 5px 0;
+
+    border-radius: 8px;
+
+}
+
+
+
+/* Current skills */
+
+.current-skill {
+
+    background: #dcfce7;
+
+}
+
+
+
+/* Missing skills */
+
+.missing-skill {
+
+    background: #fee2e2;
+
+}
+
+/* ===============================
+   Learning Roadmap
+================================ */
+
+
+.skill-box{
+
+    background:#f8fafc;
+
+    padding:20px;
+
+    margin-top:20px;
+
+    border-radius:15px;
+
+    border-left:5px solid #2563eb;
+
+}
+
+
+
+.skill-box h3{
+
+    margin-bottom:15px;
+
+}
+
+
+
+.skill-box ul{
+
+    padding-left:20px;
+
+}
+
+
+
+.skill-box li{
+
+    margin:8px 0;
+
+    color:#475569;
+
+}
+
+
+
+.skill-match-card{
+
+    background:#dbeafe;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-top:20px;
+
+    text-align:center;
+
+}
+
+
+
+.skill-match-card h1{
+
+    font-size:45px;
+
+    color:#2563eb;
+
+}
+
+/* ===============================
+   Skill Roadmap Page
+================================ */
+
+
+#roadmapRole{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid #cbd5e1;
+
+    font-size:16px;
+
+    margin:20px 0;
+
+}
+
+
+
+#generateRoadmapBtn{
+
+    padding:14px 30px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+
+
+#generateRoadmapBtn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+#roadmap-result{
+
+    margin-top:20px;
+
+}
+
+
+
+.skill-box{
+
+
+    background:white;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    border-radius:18px;
+
+    border-left:5px solid #2563eb;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+
+}
+
+
+
+.skill-box h3{
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.skill-box ul{
+
+    padding-left:25px;
+
+}
+
+
+
+.skill-box li{
+
+    margin:8px 0;
+
+    color:#475569;
+
+}
+
+/* ===============================
+   Career Roadmap
+================================ */
+
+
+.career-header{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+margin-top:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+.career-header h2{
+
+color:#2563eb;
+
+}
+
+
+
+.roadmap-phase{
+
+
+background:white;
+
+margin-top:25px;
+
+padding:25px;
+
+border-radius:20px;
+
+border-left:6px solid #2563eb;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+
+}
+
+
+
+.roadmap-phase h2{
+
+color:#2563eb;
+
+}
+
+
+
+.roadmap-phase h3{
+
+margin-top:20px;
+
+color:#0f172a;
+
+}
+
+
+
+.roadmap-phase li{
+
+margin:10px;
+
+color:#475569;
+
+}
+
+
+
+.career-options{
+
+
+background:#eff6ff;
+
+padding:25px;
+
+margin-top:25px;
+
+border-radius:20px;
+
+
+}
+
+
+
+.career-options li{
+
+margin:10px;
+
+font-weight:600;
+
+}
+
+/* =========================================
+   Skill Roadmap
+========================================= */
+
+#careerRole{
+
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:16px;
+    margin-top:10px;
+
+}
+
+#generateRoadmapBtn{
+
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+#generateRoadmapBtn:hover{
+
+    background:#1d4ed8;
+
+}
+
+#roadmap-result{
+
+    margin-top:25px;
+
+}
+
+.roadmap-header{
+
+    background:#2563eb;
+    color:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:25px;
+
+}
+
+.roadmap-header h2{
+
+    margin-bottom:10px;
+    font-size:28px;
+
+}
+
+.roadmap-header p{
+
+    font-size:18px;
+
+}
+
+.roadmap-phase{
+
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.roadmap-phase h2{
+
+    color:#2563eb;
+    margin-bottom:10px;
+
+}
+
+.roadmap-phase h3{
+
+    margin-top:18px;
+    color:#111827;
+
+}
+
+.roadmap-phase ul{
+
+    margin-top:10px;
+    padding-left:20px;
+
+}
+
+.roadmap-phase li{
+
+    margin-bottom:8px;
+    line-height:1.6;
+
+}
+
+.career-options{
+
+    background:#ecfdf5;
+    border-left:6px solid #10b981;
+    padding:25px;
+    border-radius:12px;
+    margin-top:20px;
+
+}
+
+.career-options h2{
+
+    color:#059669;
+    margin-bottom:15px;
+
+}
+
+.career-options ul{
+
+    padding-left:20px;
+
+}
+
+.career-options li{
+
+    margin-bottom:10px;
+    font-weight:600;
 
 }
