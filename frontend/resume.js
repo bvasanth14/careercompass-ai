@@ -14,12 +14,16 @@ uploadBtn.onclick = async () => {
     const formData = new FormData();
     formData.append("resume", file);
 
-    // Set loading state on button
+  // Set loading state on button
     uploadBtn.innerHTML = `⏳ Analyzing Resume...`;
     uploadBtn.disabled = true;
 
     try {
-        const response = await fetch("/upload-resume", {
+        const BACKEND_URL = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
+            ? "https://careercompass-ai-backend-tax8.onrender.com"
+            : "";
+
+        const response = await fetch(`${BACKEND_URL}/upload-resume`, {
             method: "POST",
             body: formData
         });
