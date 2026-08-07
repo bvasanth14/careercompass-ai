@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("http://localhost:5000/register", {
+        fetch("https://careercompass-ai-backend-tax8.onrender.com/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -163,8 +163,8 @@ if (!student) {
         profileInitialsElem.innerText = initials;
     }
 
-    // 3. Fetch Dashboard Stats from Backend (http://localhost:5000/profile/:id)
-    fetch(`http://localhost:5000/profile/${student.id}`)
+    // 3. Fetch Dashboard Stats from Backend (https://careercompass-ai-backend-tax8.onrender.com/profile/:id)
+    fetch(`https://careercompass-ai-backend-tax8.onrender.com/profile/${student.id}`)
         .then(response => response.json())
         .then(data => {
             if (data.message) {

@@ -4,7 +4,7 @@ if (!student) {
     window.location.href = "login.html";
 }
 
-fetch(`http://localhost:5000/student/${student.id}`)
+fetch(`https://careercompass-ai-backend-tax8.onrender.com/student/${student.id}`)
 .then(response => response.json())
 .then(data => {
 
@@ -55,7 +55,7 @@ profileForm.addEventListener("submit", async function (event) {
 
     try {
 
-        const response = await fetch(`http://localhost:5000/profile/${student.id}`, {
+        const response = await fetch(`https://careercompass-ai-backend-tax8.onrender.com/profile/${student.id}`, {
 
             method: "PUT",
 

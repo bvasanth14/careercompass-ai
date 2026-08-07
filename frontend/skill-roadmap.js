@@ -19,7 +19,7 @@ generateBtn.onclick = async () => {
     `;
 
     try {
-        const response = await fetch("http://localhost:5000/roadmap", {
+        const response = await fetch("https://careercompass-ai-backend-tax8.onrender.com/roadmap", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -162,7 +162,7 @@ generateBtn.onclick = async () => {
         resultArea.innerHTML = `
             <div class="text-center py-12 text-rose-400 space-y-2">
                 <h3 class="text-lg font-bold">Connection Error</h3>
-                <p class="text-sm">Unable to connect to the backend server at http://localhost:5000.</p>
+                <p class="text-sm">Unable to connect to the backend server at https://careercompass-ai-backend-tax8.onrender.com.</p>
             </div>
         `;
     }
