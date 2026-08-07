@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
 
-// Using createPool automatically handles dropped/lost connections in the cloud
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -26,4 +25,4 @@ pool.getConnection((err, connection) => {
   }
 });
 
-module.exports = pool.promise();
+module.exports = pool;
