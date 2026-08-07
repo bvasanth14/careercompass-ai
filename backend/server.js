@@ -34,104 +34,67 @@ app.use(express.static(path.join(__dirname, "../frontend")));
 // ===============================
 
 const storage = multer.diskStorage({
-
     destination: function (req, file, cb) {
-
         cb(null, "uploads/");
-
     },
-
     filename: function (req, file, cb) {
-
         const uniqueName = Date.now() + path.extname(file.originalname);
-
         cb(null, uniqueName);
-
     }
-
 });
 
 const upload = multer({
-
     storage: storage,
-
     fileFilter: function (req, file, cb) {
-
         if (file.mimetype === "application/pdf") {
-
             cb(null, true);
-
         } else {
-
             cb(new Error("Only PDF files are allowed"));
-
         }
-
     }
-
 });
 
 
 // Request Logger
 app.use((req, res, next) => {
-
     console.log(`${req.method} ${req.url}`);
     next();
-
 });
 
 
 
 // Home Route
 app.get("/", (req, res) => {
-
     res.sendFile(path.join(__dirname, "../frontend/login.html"));
-
 });
 
 
 
 // Test API Route
 app.get("/api/message", (req, res) => {
-
     res.json({
-
         success: true,
         message: "Welcome to CareerCompass-AI Backend!",
         status: "Server working correctly"
-
     });
-
 });
 
 
 
 
-// Register Route
+// Register Route (Updated with trim and lowercase handling)
 app.post("/register", (req, res) => {
-
-
-    const {
-        name,
-        email,
-        department,
-        password
-    } = req.body;
-
-
+    const name = req.body.name ? req.body.name.trim() : "";
+    const email = req.body.email ? req.body.email.trim().toLowerCase() : "";
+    const department = req.body.department ? req.body.department.trim() : "";
+    const password = req.body.password;
 
     if (!name || !email || !department || !password) {
-
         return res.status(400).json({
-
             success: false,
             message: "All fields are required"
-
         });
-
     }
-
-
 
     const sql = `
         INSERT INTO students
@@ -139,228 +102,134 @@ app.post("/register", (req, res) => {
         VALUES (?, ?, ?, ?)
     `;
 
-
-
     db.query(
         sql,
         [name, email, department, password],
         (err, result) => {
+            if (err) {
+                console.log(err);
 
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({
+                        success: false,
+                        message: "Email already registered. Please login."
+                    });
+                }
 
-          if (err) {
+                return res.status(500).json({
+                    success: false,
+                    message: "Registration Failed"
+                });
+            }
 
-    console.log(err);
+            // Create empty dashboard profile
+            const studentId = result.insertId;
 
+            const profileSql = `
+                INSERT INTO student_profile
+                (student_id, cgpa, skills, certificates, projects)
+                VALUES (?, ?, ?, ?, ?)
+            `;
 
-    if (err.code === "ER_DUP_ENTRY") {
+            db.query(
+                profileSql,
+                [studentId, 0, 0, 0, 0],
+                (profileErr) => {
+                    if (profileErr) {
+                        console.log(profileErr);
+                        return res.status(500).json({
+                            success: false,
+                            message: "Profile creation failed"
+                        });
+                    }
 
-        return res.status(400).json({
-
-            success: false,
-            message: "Email already registered. Please login."
-
-        });
-
-    }
-
-
-    return res.status(500).json({
-
-        success: false,
-        message: "Registration Failed"
-
-    });
-
-}
-
-
-
-          // Create empty dashboard profile
-
-const studentId = result.insertId;
-
-
-const profileSql = `
-    INSERT INTO student_profile
-    (student_id, cgpa, skills, certificates, projects)
-    VALUES (?, ?, ?, ?, ?)
-`;
-
-
-db.query(
-    profileSql,
-    [studentId, 0, 0, 0, 0],
-    (profileErr) => {
-
-        if (profileErr) {
-
-            console.log(profileErr);
-
-            return res.status(500).json({
-
-                success: false,
-                message: "Profile creation failed"
-
-            });
-
-        }
-
-
-        res.json({
-
-            success: true,
-            message: "Registration Successful!"
-
-        });
-
-
-    }
-);
-
-
-
+                    res.json({
+                        success: true,
+                        message: "Registration Successful!"
+                    });
+                }
+            );
         }
     );
-
-
 });
 
 
-// Login Route
+// Login Route (Updated with trim and lowercase handling + LOWER lookup)
 app.post("/login", (req, res) => {
-
-    const {
-        email,
-        password
-    } = req.body;
-
+    const email = req.body.email ? req.body.email.trim().toLowerCase() : "";
+    const password = req.body.password;
 
     // Check empty fields
     if (!email || !password) {
-
         return res.status(400).json({
-
             success: false,
             message: "Email and password are required"
-
         });
-
     }
-
-
 
     const sql = `
         SELECT * FROM students
-        WHERE email = ?
+        WHERE LOWER(email) = ?
     `;
-
-
 
     db.query(
         sql,
         [email],
         (err, result) => {
-
-
             if (err) {
-
                 console.log(err);
-
                 return res.status(500).json({
-
                     success: false,
                     message: "Login Failed"
-
                 });
-
             }
-
-
 
             // Check user exists
-
             if (result.length === 0) {
-
                 return res.status(404).json({
-
                     success: false,
                     message: "Email not registered"
-
                 });
-
             }
-
-
 
             const student = result[0];
 
-
-
             // Check password
-
             if (student.password !== password) {
-
                 return res.status(401).json({
-
                     success: false,
                     message: "Invalid password"
-
                 });
-
             }
 
-
-
             // Login success
-
             res.json({
-
                 success: true,
                 message: "Login Successful!",
                 student: {
-
                     id: student.id,
                     name: student.name,
                     email: student.email,
                     department: student.department
-
                 }
-
             });
-
-
-
         }
     );
-
-
 });
 
 
 
 // Get all students (Testing Database)
 app.get("/students", (req, res) => {
-
-
     db.query(
         "SELECT * FROM students",
         (err, result) => {
-
-
             if (err) {
-
                 return res.status(500).json(err);
-
             }
-
-
             res.json(result);
-
-
         }
     );
-
-
 });
 
 
@@ -368,35 +237,22 @@ app.get("/students", (req, res) => {
 
 
 // Database Connection Test
-
 db.query(
     "SELECT 1",
     (err, result) => {
-
-
         if (err) {
-
             console.log("❌ Database Connection Failed");
             console.log(err);
-
-        }
-        else {
-
+        } else {
             console.log("✅ MySQL Connected Successfully!");
-
         }
-
-
     }
 );
 
 
 // Get Student Dashboard Profile
-
 app.get("/profile/:id", (req, res) => {
-
     const studentId = req.params.id;
-
 
     const sql = `
         SELECT 
@@ -407,47 +263,32 @@ app.get("/profile/:id", (req, res) => {
             student_profile.skills,
             student_profile.certificates,
             student_profile.projects
-
         FROM students
-
         JOIN student_profile
         ON students.id = student_profile.student_id
-
         WHERE students.id = ?
     `;
 
-
     db.query(sql, [studentId], (err, result) => {
-
         if (err) {
-
             console.log(err);
-
             return res.status(500).json({
                 message: "Database error"
             });
-
         }
 
-
         if (result.length === 0) {
-
             return res.status(404).json({
                 message: "Profile not found"
             });
-
         }
 
-
         res.json(result[0]);
-
     });
-
 });
 
 // Get Full Student Profile
 app.get("/student/:id", (req, res) => {
-
     const studentId = req.params.id;
 
     const sql = `
@@ -462,17 +303,13 @@ app.get("/student/:id", (req, res) => {
             student_profile.skills,
             student_profile.certificates,
             student_profile.projects
-
         FROM students
-
         LEFT JOIN student_profile
         ON students.id = student_profile.student_id
-
         WHERE students.id = ?
     `;
 
     db.query(sql, [studentId], (err, result) => {
-
         if (err) {
             return res.status(500).json({
                 success: false,
@@ -491,20 +328,15 @@ app.get("/student/:id", (req, res) => {
             success: true,
             student: result[0]
         });
-
     });
-
 });
 
 
 // =======================================
 // Update Student Profile
 // =======================================
-
 app.put("/profile/:id", (req, res) => {
-
     const studentId = req.params.id;
-
     const {
         cgpa,
         skills,
@@ -532,49 +364,33 @@ app.put("/profile/:id", (req, res) => {
             studentId
         ],
         (err, result) => {
-
             if (err) {
-
                 console.log(err);
-
                 return res.status(500).json({
-
                     success: false,
                     message: "Profile Update Failed"
-
                 });
-
             }
 
             if (result.affectedRows === 0) {
-
                 return res.status(404).json({
-
                     success: false,
                     message: "Profile not found"
-
                 });
-
             }
 
             res.json({
-
                 success: true,
                 message: "Profile Updated Successfully"
-
             });
-
         }
     );
-
 });
 
 // =======================================
 // CareerCompass-AI Skills Database
 // =======================================
-
 const skillsDatabase = {
-
     "Programming Languages": [
         "Java",
         "Core Java",
@@ -595,7 +411,6 @@ const skillsDatabase = {
         "R",
         "Java core"
     ],
-
     "Web Development": [
         "HTML",
         "HTML5",
@@ -614,7 +429,6 @@ const skillsDatabase = {
         "JSON",
         "AJAX"
     ],
-
     "Databases": [
         "SQL",
         "MySQL",
@@ -625,7 +439,6 @@ const skillsDatabase = {
         "Firebase",
         "MariaDB"
     ],
-
     "Cloud & DevOps": [
         "AWS",
         "Azure",
@@ -639,7 +452,6 @@ const skillsDatabase = {
         "Linux",
         "Nginx"
     ],
-
     "Data Science & AI": [
         "Machine Learning",
         "Deep Learning",
@@ -654,7 +466,6 @@ const skillsDatabase = {
         "Data Analysis",
         "Data Visualization"
     ],
-
     "Mobile Development": [
         "Android",
         "Android Studio",
@@ -664,7 +475,6 @@ const skillsDatabase = {
         "Swift",
         "Firebase"
     ],
-
     "Cyber Security": [
         "Ethical Hacking",
         "Cyber Security",
@@ -675,7 +485,6 @@ const skillsDatabase = {
         "Wireshark",
         "Nmap"
     ],
-
     "Tools": [
         "VS Code",
         "Visual Studio",
@@ -687,7 +496,6 @@ const skillsDatabase = {
         "Canva",
         "Jira"
     ],
-
     "Soft Skills": [
         "Leadership",
         "Communication",
@@ -698,122 +506,94 @@ const skillsDatabase = {
         "Adaptability",
         "Presentation"
     ]
-
 };
 
 // Upload Resume
 app.post("/upload-resume", upload.single("resume"), async (req, res) => {
-
-   
-
     if (!req.file) {
-
         return res.status(400).json({
             success: false,
             message: "No resume uploaded"
         });
-
     }
 
     try {
-
         const pdfBuffer = fs.readFileSync(req.file.path);
+        const pdfData = await pdfParse(pdfBuffer);
 
-      const pdfData = await pdfParse(pdfBuffer);
+        const lines = pdfData.text
+            .split("\n")
+            .map(line => line.trim())
+            .filter(line => line.length > 0);
 
+        lines.slice(0, 50).forEach((line, index) => {
+            console.log(`${index + 1}: ${line}`);
+        });
 
-const lines = pdfData.text
-    .split("\n")
-    .map(line => line.trim())
-    .filter(line => line.length > 0);
+        console.log("Reached after PDF parsing");
 
-lines.slice(0, 50).forEach((line, index) => {
-    console.log(`${index + 1}: ${line}`);
-});
-
-console.log("Reached after PDF parsing");
         // =======================================
-// Detect Skills from Resume
-// =======================================
+        // Detect Skills from Resume
+        // =======================================
+        console.log("Starting skill detection...");
+        const resumeText = pdfData.text.toLowerCase();
+        const detectedSkills = {};
 
-console.log("Starting skill detection...");
-const resumeText = pdfData.text.toLowerCase();
+        for (const category in skillsDatabase) {
+            detectedSkills[category] = [];
+            skillsDatabase[category].forEach(skill => {
+                const escapedSkill = skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+                const regex = new RegExp(`\\b${escapedSkill}\\b`, "i");
+                if (regex.test(resumeText)) {
+                    detectedSkills[category].push(skill);
+                }
+            });
+        }
 
-const detectedSkills = {};
+        // Calculate Resume Score AFTER skills detection
+        const resumeScore = calculateResumeScore(
+            resumeText,
+            detectedSkills
+        );
 
-
-for (const category in skillsDatabase) {
-
-    detectedSkills[category] = [];
-
-    skillsDatabase[category].forEach(skill => {
-
-  const escapedSkill = skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-const regex = new RegExp(`\\b${escapedSkill}\\b`, "i");
-
-if (regex.test(resumeText)) {
-    detectedSkills[category].push(skill);
-}
-    });
-
-}
-
-// Calculate Resume Score AFTER skills detection
-const resumeScore = calculateResumeScore(
-    resumeText,
-    detectedSkills
-);
-
-const atsResult = checkATS(resumeText);
-const extractedData = extractResumeSections(
-    pdfData.text,
-    detectedSkills
-);
-
+        const atsResult = checkATS(resumeText);
+        const extractedData = extractResumeSections(
+            pdfData.text,
+            detectedSkills
+        );
 
         console.log("Extracted Text:");
-         console.log(pdfData.text);
+        console.log(pdfData.text);
+        console.log("Detected Skills:");
+        console.log(detectedSkills);
+        console.log("Resume Score:");
+        console.log(resumeScore);
+        console.log("ATS Result:");
+        console.log(atsResult);
+        console.log("Extracted Resume Data:");
+        console.log(extractedData);
 
-         console.log("Detected Skills:");
-console.log(detectedSkills);
+        res.json({
+            success: true,
+            message: "Resume uploaded successfully!",
+            file: req.file.filename,
+            text: pdfData.text,
+            skills: detectedSkills,
+            resumeScore: resumeScore,
+            atsResult: atsResult,
+            extractedData: extractedData
+        });
 
-     console.log("Resume Score:");
-console.log(resumeScore);
+    } catch (error) {
+        console.error("===== ERROR =====");
+        console.error(error);
+        console.error(error.stack);
 
-     console.log("ATS Result:");
-console.log(atsResult);
-
-console.log("Extracted Resume Data:");
-console.log(extractedData);
-
-
-       res.json({
-
-    success: true,
-    message: "Resume uploaded successfully!",
-    file: req.file.filename,
-    text: pdfData.text,
-    skills: detectedSkills,
-    resumeScore: resumeScore,
-     atsResult: atsResult,
-      extractedData: extractedData
-
-});
-
-} catch (error) {
-
-    console.error("===== ERROR =====");
-    console.error(error);
-    console.error(error.stack);
-
-    res.status(500).json({
-        success: false,
-        message: "Unable to read PDF"
-    });
-
-}
-
+        res.status(500).json({
+            success: false,
+            message: "Unable to read PDF"
+        });
+    }
 });
 
 
@@ -821,32 +601,19 @@ console.log(extractedData);
 // =========================================
 // Skill Gap Analyzer API
 // =========================================
-
 app.post("/skill-gap", (req, res) => {
-
     try {
-
-
         const {
             skills,
             role
         } = req.body;
 
-
-
         if (!skills || !role) {
-
             return res.status(400).json({
-
-                success:false,
-
-                message:"Skills and role are required"
-
+                success: false,
+                message: "Skills and role are required"
             });
-
         }
-
-
 
         const result = analyzeSkillGap(
             skills,
@@ -854,86 +621,45 @@ app.post("/skill-gap", (req, res) => {
             jobRoles
         );
 
-
-
         res.json(result);
 
-
-
-    }
-    catch(error){
-
+    } catch(error) {
         console.error(error);
-
-
         res.status(500).json({
-
-            success:false,
-
-            message:"Skill gap analysis failed"
-
+            success: false,
+            message: "Skill gap analysis failed"
         });
-
     }
-
 });
 
 // =========================================
 // Learning Roadmap Generator API
 // =========================================
-
-
-
-
-app.post("/learning-roadmap", (req,res)=>{
-
-
+app.post("/learning-roadmap", (req, res) => {
     const {role} = req.body;
-
 
     console.log("Selected Role:");
     console.log(role);
 
-
-
     const roadmap = learningRoadmaps[role];
 
-
-    if(!roadmap){
-
+    if(!roadmap) {
         return res.json({
-
-            success:false,
-
-            message:"Roadmap not found"
-
+            success: false,
+            message: "Roadmap not found"
         });
-
     }
 
-
-
     res.json({
-
-        success:true,
-
+        success: true,
         goal: roadmap.goal,
-
         duration: roadmap.duration,
-
         phases: roadmap.phases,
-
         careerOptions: roadmap.careerOptions
-
     });
-
-
 });
 
 // Start Server
-
 app.listen(PORT, () => {
-
     console.log(`✅ Server Running on http://localhost:${PORT}`);
-
 });

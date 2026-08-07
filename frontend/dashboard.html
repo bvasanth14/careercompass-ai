@@ -1,930 +1,478 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
-
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Student Dashboard | CareerCompass-AI</title>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Chart.js for AI Radar Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- DotLottie Web Component Script -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.4/dist/dotlottie-wc.js" type="module"></script>
+    
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0714; }
+        ::-webkit-scrollbar-thumb { background: #2d164d; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a85; }
+
+        /* Neon Glow Effects */
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(255, 42, 133, 0.25);
+        }
+        .neon-border {
+            border: 1px solid rgba(255, 42, 133, 0.3);
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+    </style>
 </head>
 
-
-<body>
-
-
-<div class="dashboard-container">
-
+<body class="bg-[#0d0714] text-slate-100 font-sans antialiased h-screen overflow-hidden flex selection:bg-[#ff2a85] selection:text-white">
 
     <!-- Sidebar -->
+    <aside class="w-[260px] bg-[#120921] border-r border-white/10 flex flex-col shrink-0 z-25 relative">
+        <div class="absolute -left-20 top-20 w-40 h-40 bg-[#ff2a85]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-    <aside class="sidebar">
-
-
-        <div class="dashboard-logo">
-
-            CareerCompass<span>-AI</span>
-
+        <!-- Logo Area -->
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="p-2.5 rounded-xl bg-gradient-to-br from-[#ff2a85] to-[#7928ca] text-white shadow-lg shadow-[#ff2a85]/30">
+                <i data-lucide="compass" class="w-6 h-6"></i>
+            </div>
+            <span class="text-lg font-bold tracking-wide text-white">
+                CareerCompass<span class="text-[#ff2a85]">AI</span>
+            </span>
         </div>
 
-
-
-        <ul>
-
-
-            <li class="active">
-                🏠 Dashboard
-            </li>
-
-            <li onclick="window.location.href='profile.html'">
-                 👤 Profile
-         </li>
-
-           <li onclick="window.location.href='resume-analyzer.html'" style="cursor:pointer;">
-    📄 Resume Analyzer
-</li>
-
+        <!-- Navigation Links -->
+        <ul class="flex-1 overflow-y-auto px-4 py-6 space-y-1.5 text-sm font-medium text-slate-400">
             <li>
-                🛣️ Skill Roadmap
+                <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white shadow-lg shadow-[#ff2a85]/30 transition-all font-semibold">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+                </a>
             </li>
-
-
             <li>
-                🏢 Placement Checker
+                <a href="profile.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="user" class="w-5 h-5"></i> Profile
+                </a>
             </li>
-
-
             <li>
-                🎤 Mock Interview
+                <a href="resume-analyzer.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="file-text" class="w-5 h-5"></i> Resume Analyzer
+                </a>
             </li>
-
-
             <li>
-                📜 Certificates
+                <a href="skill-roadmap.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="git-fork" class="w-5 h-5"></i> Skill Roadmap
+                </a>
             </li>
-
-
             <li>
-                🚀 Projects
+                <a href="placement-checker.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="building-2" class="w-5 h-5"></i> Placement Checker
+                </a>
             </li>
-
-
             <li>
-                ⚙️ Settings
+                <a href="mock-interview.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="mic" class="w-5 h-5"></i> Mock Interview
+                </a>
             </li>
-
-
-          <li id="logout-btn">
-           🚪 Logout
-      </li>
-
-
+            <li>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="award" class="w-5 h-5"></i> Certificates
+                </a>
+            </li>
+            <li>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i> Projects
+                </a>
+            </li>
+            <li>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="settings" class="w-5 h-5"></i> Settings
+                </a>
+            </li>
         </ul>
-
-
+        
+        <div class="p-4 border-t border-white/10 mt-auto">
+            <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-rose-400 hover:bg-rose-500/10 transition-all text-left font-medium">
+                <i data-lucide="log-out" class="w-5 h-5"></i> Logout
+            </button>
+        </div>
     </aside>
 
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto bg-gradient-to-br from-[#0d0714] via-[#180a2a] to-[#240b3b] relative z-10">
+        
+        <!-- Ambient Background Glow -->
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-[#c026d3]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
 
-
-
-
-
-    <!-- Main Dashboard -->
-
-
-    <main class="dashboard-main">
-
-
-
-        <!-- Header -->
-
-
-        <header class="dashboard-header">
-
-
+        <!-- Top Header -->
+        <header class="px-8 py-6 flex items-center justify-between sticky top-0 z-40 bg-[#0d0714]/80 backdrop-blur-xl border-b border-white/5">
             <div>
-
-              <h1>
-    Welcome Back, <span id="student-name">Student</span> 👋
-</h1>
-
-
-                <p>
-                    Continue your journey towards your dream career.
-                </p>
-
+                <h1 class="text-2xl font-extrabold text-white flex items-center gap-2">
+                    Welcome Back, <span id="dash-header-name" class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff2a85] to-[#c026d3]">Vasanth</span> 👋
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">Review your career metrics and proficiency breakdown.</p>
             </div>
 
-
-
-           <div class="profile-circle" id="profile-initials">
-
-    VB
-
-</div>
-            <button id="theme-toggle">
-               🌙 Dark Mode
-           </button>
-
-
+            <div class="flex items-center gap-5">
+                <button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1b0d30] hover:bg-[#281347] text-slate-200 text-sm font-semibold border border-white/10 shadow-lg transition-all">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-[#ff2a85]"></i> Pro Mode
+                </button>
+                <div id="dash-avatar" class="w-10 h-10 rounded-full bg-gradient-to-r from-[#ff2a85] to-[#7928ca] font-bold text-white text-lg flex items-center justify-center shadow-lg shadow-[#ff2a85]/30 border border-white/20">
+                    V
+                </div>
+            </div>
         </header>
 
-
-
-
-
-
-        <!-- Summary Cards -->
-
-
-        <section class="dashboard-cards">
-
-
-            <div class="dashboard-card">
-
-
-                <h3>
-                    CGPA
-                </h3>
-
-
-               <h2 id="cgpa">
-                  0
-             </h2>
-
-
-            </div>
-
-
-
-
-
-            <div class="dashboard-card">
-
-
-                <h3>
-                    Skills
-                </h3>
-
-
-               <h2 id="skills">
-                 0
-               </h2>
-
-
-            </div>
-
-
-
-
-
-            <div class="dashboard-card">
-
-
-                <h3>
-                    Certificates
-                </h3>
-
-
-              <h2 id="certificates">
-                 0
-               </h2>
-
-
-            </div>
-
-
-
-
-
-            <div class="dashboard-card">
-
-
-                <h3>
-                    Projects
-                </h3>
-
-
-             <h2 id="projects">
-              0 
-             </h2>
-
-            </div>
-
-
-
-        </section>
-
-
-
-
-
-
-
-        <!-- Profile Section -->
-
-
-        <section class="dashboard-section">
-
-
-            <h2>
-                My Profile
-            </h2>
-
-
-            <div class="profile-details">
-
-
-               <p>
-    <b>Name:</b> <span id="profile-name">Student Name</span>
-</p>
-
-
-                <p>
-                    <b>Department:</b> Information Technology
-                </p>
-
-
-                <p>
-                    <b>Career Goal:</b> Software Developer
-                </p>
-
-
-                <p>
-                    <b>Profile Completion:</b> 75%
-                </p>
-
-
-            </div>
-
-
-        </section>
-
-
-<!-- Resume Analyzer -->
-
-<section class="dashboard-section">
-
-
-<h2>
-📄 Resume Analyzer
-</h2>
-
-
-<div class="resume-card">
-
-
-<h3>
-Resume Score
-</h3>
-
-
-<div class="score">
-78/100
-</div>
-
-
-<p>
-Missing Skills:
-</p>
-
-
-<div class="skill-tags">
-
-<span>React</span>
-<span>GitHub</span>
-<span>Docker</span>
-
-</div>
-
-
-<p>
-Suggestions:
-</p>
-
-
-<ul>
-
-<li>Add more projects</li>
-
-<li>Improve technical skills</li>
-
-<li>Add internship experience</li>
-
-</ul>
-
-
-<button>
-Upload Resume
-</button>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- Career Roadmap -->
-
-
-<section class="dashboard-section">
-
-
-<h2>
-🛣️ Career Roadmap
-</h2>
-
-
-<div class="roadmap">
-
-
-<h3>
-Full Stack Developer
-</h3>
-
-
-<p>
-Java
-</p>
-
-<div class="progress-bar">
-
-<div class="java-progress"></div>
-
-</div>
-
-
-
-<p>
-Frontend Development
-</p>
-
-<div class="progress-bar">
-
-<div class="frontend-progress"></div>
-
-</div>
-
-
-
-<p>
-Backend Development
-</p>
-
-<div class="progress-bar">
-
-<div class="backend-progress"></div>
-
-</div>
-
-
-</div>
-
-
-</section>
-
-<!-- Placement Eligibility Checker -->
-
-
-<section class="dashboard-section">
-
-
-<h2>
-🏢 Placement Eligibility Checker
-</h2>
-
-
-
-<div class="company-list">
-
-
-
-<div class="company-card eligible">
-
-
-<h3>
-✅ Infosys
-</h3>
-
-
-<p>
-Status: Eligible
-</p>
-
-
-<p>
-Reason:
-CGPA and skills requirements satisfied
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="company-card eligible">
-
-
-<h3>
-✅ TCS
-</h3>
-
-
-<p>
-Status: Eligible
-</p>
-
-
-<p>
-Reason:
-Java + SQL skills matched
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="company-card not-eligible">
-
-
-<h3>
-❌ Zoho
-</h3>
-
-
-<p>
-Status: Not Eligible
-</p>
-
-
-<p>
-Reason:
-Need DSA and advanced programming skills
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-
-</section>
-
-<!-- Mock Interview -->
-
-
-<section class="dashboard-section">
-
-
-<h2>
-🎤 AI Mock Interview
-</h2>
-
-
-
-<div class="interview-box">
-
-
-
-<h3>
-Choose Interview Type
-</h3>
-
-
-
-<div class="interview-options">
-
-
-<button>
-Java
-</button>
-
-
-<button>
-SQL
-</button>
-
-
-<button>
-HR
-</button>
-
-
-<button>
-Networking
-</button>
-
-
-</div>
-
-
-
-
-
-<div class="question-box">
-
-
-<h3>
-AI Question:
-</h3>
-
-
-<p>
-Explain the difference between ArrayList and LinkedList in Java.
-</p>
-
-
-
-<textarea 
-placeholder="Type your answer here..."
-></textarea>
-
-
-
-<button class="submit-answer">
-
-Submit Answer
-
-</button>
-
-
-</div>
-
-
-
-</div>
-
-
-
-</section>
-
-<!-- Certificate Manager -->
-
-
-<section class="dashboard-section">
-
-
-<h2>
-📜 Certificate Manager
-</h2>
-
-
-
-<div class="certificate-header">
-
-
-<h3>
-Your Certificates
-</h3>
-
-
-<button class="upload-btn">
-Upload Certificate
-</button>
-
-
-</div>
-
-
-
-
-<div class="certificate-list">
-
-
-
-<div class="certificate-card">
-
-
-<h3>
-🏆 Cybersecurity Certification
-</h3>
-
-
-<p>
-Category: Security
-</p>
-
-
-<p>
-Issued: 2026
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="certificate-card">
-
-
-<h3>
-🏆 Cloud Computing Certificate
-</h3>
-
-
-<p>
-Category: Cloud
-</p>
-
-
-<p>
-Issued: 2026
-</p>
-
-
-</div>
-
-
-
-
-
-
-<div class="certificate-card">
-
-
-<h3>
-🏆 Java Programming Certificate
-</h3>
-
-
-<p>
-Category: Programming
-</p>
-
-
-<p>
-Issued: 2026
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-<!-- Project Showcase -->
-
-
-<section class="dashboard-section">
-
-
-<h2>
-🚀 Project Showcase
-</h2>
-
-
-
-
-<div class="project-list">
-
-
-
-<div class="project-card">
-
-
-<h3>
-CareerCompass-AI
-</h3>
-
-
-<p>
-AI-powered career guidance platform for students.
-</p>
-
-
-<p>
-<b>Technologies:</b>
-HTML, CSS, JavaScript, Node.js
-</p>
-
-
-<a href="#">
-GitHub Repository
-</a>
-
-
-</div>
-
-
-
-
-
-
-<div class="project-card">
-
-
-<h3>
-Student Management System
-</h3>
-
-
-<p>
-Application to manage student records.
-</p>
-
-
-<p>
-<b>Technologies:</b>
-Java, MySQL, JDBC
-</p>
-
-
-<a href="#">
-Live Demo
-</a>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-<button class="add-project-btn">
-
-+ Add New Project
-
-</button>
-
-
-</section>
-
-<!-- Notification Center -->
-
-
-<section class="dashboard-section">
-
-
-<h2>
-🔔 Notification Center
-</h2>
-
-
-
-
-<div class="notification-list">
-
-
-
-<div class="notification-card">
-
-<h3>
-🎯 New Placement Drive
-</h3>
-
-<p>
-TCS hiring drive registration is open.
-</p>
-
-<span>
-Today
-</span>
-
-</div>
-
-
-
-
-
-<div class="notification-card">
-
-<h3>
-💼 Internship Opportunity
-</h3>
-
-<p>
-New AI internship opportunity available.
-</p>
-
-<span>
-Yesterday
-</span>
-
-</div>
-
-
-
-
-
-
-<div class="notification-card">
-
-<h3>
-🏆 Coding Contest
-</h3>
-
-<p>
-Participate in the upcoming coding challenge.
-</p>
-
-<span>
-2 days ago
-</span>
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-        <!-- Learning Progress -->
-
-
-        <section class="dashboard-section">
-
-
-            <h2>
-                Learning Progress
-            </h2>
-
-
-
-            <div class="progress-box">
-
-
-                <p>
-                    Java
-                </p>
-
-
-                <div class="progress-bar">
-
-                    <div class="java-progress"></div>
-
+        <!-- Dashboard Content Container -->
+        <div class="p-8 space-y-8 max-w-[1400px] w-full mx-auto">
+
+            <!-- Interactive Lottie Animation Hero Banner -->
+            <section class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#170c28] via-[#240b3b] to-[#170c28] border border-white/10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 neon-glow">
+                <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#ff2a85]/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="space-y-3 z-10 max-w-xl">
+                    <span class="px-3 py-1 rounded-full bg-[#ff2a85]/10 border border-[#ff2a85]/30 text-[#ff2a85] text-xs font-semibold flex items-center gap-1.5 w-max">
+                        <i data-lucide="zap" class="w-3.5 h-3.5"></i> AI Career Engine Active
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Accelerate Your Professional Journey</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Your real-time metrics, skill proficiencies, and placement readiness matrices are fully synchronized with CareerCompass-AI intelligence.
+                    </p>
+                </div>
+                <div class="z-10 shrink-0 flex items-center justify-center bg-[#10061e]/60 p-4 rounded-2xl border border-white/10 shadow-inner">
+                    <dotlottie-wc src="https://lottie.host/a4499ce3-81ff-40e1-9b92-61428e260475/bx1EZ0Nksh.lottie" style="width: 200px; height: 200px;" autoplay loop></dotlottie-wc>
+                </div>
+            </section>
+
+            <!-- STAT CARDS -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-[#170c28]/80 backdrop-blur-md border border-white/10 shadow-xl relative overflow-hidden group hover:border-[#ff2a85]/50 transition-all">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-[#ff2a85]/5 rounded-bl-full pointer-events-none"></div>
+                    <span class="text-slate-400 text-sm font-medium mb-3 flex items-center gap-2">
+                        <i data-lucide="graduation-cap" class="w-4 h-4 text-[#ff2a85]"></i> CGPA
+                    </span>
+                    <h2 id="dash-cgpa" class="text-4xl font-extrabold text-white">8.79</h2>
                 </div>
 
-
-
-                <p>
-                    DSA
-                </p>
-
-
-                <div class="progress-bar">
-
-                    <div class="dsa-progress"></div>
-
+                <div class="p-6 rounded-2xl bg-[#170c28]/80 backdrop-blur-md border border-white/10 shadow-xl relative overflow-hidden group hover:border-[#ff2a85]/50 transition-all">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-[#c026d3]/5 rounded-bl-full pointer-events-none"></div>
+                    <span class="text-slate-400 text-sm font-medium mb-3 flex items-center gap-2">
+                        <i data-lucide="cpu" class="w-4 h-4 text-[#c026d3]"></i> Total Skills
+                    </span>
+                    <h2 id="dash-skills" class="text-4xl font-extrabold text-white">0 </h2>
                 </div>
 
-
-
-
-                <p>
-                    Python
-                </p>
-
-
-                <div class="progress-bar">
-
-                    <div class="python-progress"></div>
-
+                <div class="p-6 rounded-2xl bg-[#170c28]/80 backdrop-blur-md border border-white/10 shadow-xl relative overflow-hidden group hover:border-[#ff2a85]/50 transition-all">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-[#ff2a85]/5 rounded-bl-full pointer-events-none"></div>
+                    <span class="text-slate-400 text-sm font-medium mb-3 flex items-center gap-2">
+                        <i data-lucide="award" class="w-4 h-4 text-[#ff2a85]"></i> Certificates
+                    </span>
+                    <h2 id="dash-certs" class="text-4xl font-extrabold text-white">8</h2>
                 </div>
 
+                <div class="p-6 rounded-2xl bg-[#170c28]/80 backdrop-blur-md border border-white/10 shadow-xl relative overflow-hidden group hover:border-[#ff2a85]/50 transition-all">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-[#c026d3]/5 rounded-bl-full pointer-events-none"></div>
+                    <span class="text-slate-400 text-sm font-medium mb-3 flex items-center gap-2">
+                        <i data-lucide="folder-kanban" class="w-4 h-4 text-[#c026d3]"></i> Projects
+                    </span>
+                    <h2 id="dash-projects" class="text-4xl font-extrabold text-white">4</h2>
+                </div>
+            </section>
 
+            <!-- PROFILE & SKILLS SECTION -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Profile Details Card -->
+                <section class="p-6 rounded-2xl bg-[#170c28]/90 backdrop-blur-md border border-white/10 shadow-xl space-y-5">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="user-circle" class="w-5 h-5 text-[#ff2a85]"></i> Profile Overview
+                        </h2>
+                        <span class="text-xs text-slate-400 font-semibold bg-white/5 px-2.5 py-1 rounded-full border border-white/10">Verified</span>
+                    </div>
+
+                    <div class="space-y-4 text-sm">
+                        <div class="p-3.5 rounded-xl bg-[#10061e] border border-white/5">
+                            <span class="text-slate-400 block mb-1">Full Name:</span> 
+                            <span id="dash-overview-name" class="text-white font-bold text-base">Vasanth</span>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-[#10061e] border border-white/5">
+                            <span class="text-slate-400 block mb-1">Department:</span> 
+                            <span id="dash-overview-dept" class="text-white font-bold text-base">Information Technology</span>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-[#10061e] border border-white/5">
+                            <span class="text-slate-400 block mb-1">Career Goal:</span> 
+                            <span id="dash-overview-goal" class="text-white font-bold text-base">Software Developer</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Technical Stack Display -->
+                <section class="lg:col-span-2 p-6 rounded-2xl bg-[#170c28]/90 backdrop-blur-md border border-white/10 shadow-xl space-y-5 flex flex-col justify-between">
+                    <div>
+                       <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
+    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+        <i data-lucide="cpu" class="w-5 h-5 text-[#c026d3]"></i> Technical Stack & Skills
+    </h2>
+    <!-- Added an id to the text part so JavaScript can update it -->
+    <span class="text-xs text-[#ff2a85] font-semibold bg-[#ff2a85]/10 px-2.5 py-1 rounded-full border border-[#ff2a85]/30">
+        <span id="dash-skills-count">0</span> Active
+    </span>
+</div>
+
+                        <p class="text-slate-400 text-sm mb-3 font-medium">Core competencies recorded in system:</p>
+                        <div id="dash-skills-container" class="flex flex-wrap gap-2.5">
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">Java</span>
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">Python</span>
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">HTML/CSS</span>
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">JavaScript</span>
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">SQL</span>
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">Git</span>
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">Problem Solving</span>
+                            <span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">Data Structures</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-[#10061e] border border-white/5 flex items-center justify-between text-xs text-slate-400 mt-4">
+                        <span>🔒 Profile attributes are managed securely via administrator settings.</span>
+                        <span class="font-bold text-[#ff2a85]">Synced with AI</span>
+                    </div>
+                </section>
 
             </div>
 
+            <!-- Radar Chart & Resume Analyzer Grid -->
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- AI Skill Radar Chart -->
+                <div class="p-6 rounded-2xl bg-[#170c28]/90 backdrop-blur-md border border-white/10 shadow-xl space-y-4 flex flex-col">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="radar" class="w-5 h-5 text-[#ff2a85]"></i> Competency Radar
+                    </h2>
+                    <div class="flex-1 p-4 rounded-xl bg-[#10061e] border border-white/5 flex items-center justify-center relative min-h-[300px]">
+                        <canvas id="skillRadarChart"></canvas>
+                    </div>
+                </div>
 
-        </section>
+                <!-- Resume Analyzer Preview -->
+                <div class="p-6 rounded-2xl bg-[#170c28]/90 backdrop-blur-md border border-white/10 shadow-xl space-y-4">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-5 h-5 text-[#c026d3]"></i> Resume Analyzer
+                    </h2>
+                    
+                    <div class="p-6 rounded-xl bg-[#10061e] border border-white/5 space-y-5">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-base font-semibold text-white">Overall Score</h3>
+                            <div class="px-5 py-2 rounded-xl bg-[#281347] border border-[#ff2a85]/30 text-white font-extrabold text-xl shadow-lg shadow-[#ff2a85]/20">
+                                78/100
+                            </div>
+                        </div>
 
+                        <div>
+                            <p class="text-slate-400 text-sm mb-2 font-medium">Missing Market Skills:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">React</span>
+                                <span class="px-3 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">GitHub Actions</span>
+                                <span class="px-3 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">Kubernetes</span>
+                            </div>
+                        </div>
 
+                        <div>
+                            <p class="text-slate-400 text-sm mb-2 font-medium">AI Recommendations:</p>
+                            <ul class="list-disc list-inside text-sm text-slate-300 space-y-1.5 ml-1">
+                                <li>Integrate cloud deployment notes in your primary project.</li>
+                                <li>Highlight advanced object-oriented design patterns.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
+            </section>
 
+            <!-- Placement Eligibility Checker -->
+            <section class="p-6 rounded-2xl bg-[#170c28]/90 backdrop-blur-md border border-white/10 shadow-xl space-y-4">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-lucide="building-2" class="w-5 h-5 text-[#ff2a85]"></i> Placement Eligibility Matrix
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="p-5 rounded-xl bg-[#10061e] border border-emerald-500/30 space-y-2 hover:border-emerald-500 transition-all">
+                        <h3 class="text-base font-bold text-emerald-400 flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-5 h-5"></i> Infosys
+                        </h3>
+                        <p class="text-sm font-medium text-emerald-300">Status: Eligible</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">CGPA criteria met. Core fundamentals verified.</p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-[#10061e] border border-emerald-500/30 space-y-2 hover:border-emerald-500 transition-all">
+                        <h3 class="text-base font-bold text-emerald-400 flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-5 h-5"></i> TCS
+                        </h3>
+                        <p class="text-sm font-medium text-emerald-300">Status: Eligible</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">Java + Database requirements fully satisfied.</p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-[#10061e] border border-rose-500/30 space-y-2 hover:border-rose-500 transition-all">
+                        <h3 class="text-base font-bold text-rose-400 flex items-center gap-2">
+                            <i data-lucide="x-circle" class="w-5 h-5"></i> Zoho
+                        </h3>
+                        <p class="text-sm font-medium text-rose-300">Status: Not Eligible</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">Requires advanced coding test score clearance.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
     </main>
 
+    <!-- JavaScript Script Section -->
+    <script>
+        lucide.createIcons();
 
-</div>
+        // Chart.js Radar Initialization with neon pink aesthetic
+        const ctx = document.getElementById('skillRadarChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(255, 42, 133, 0.4)');   
+        gradient.addColorStop(1, 'rgba(121, 40, 202, 0.05)');
 
-<script src ="script.js"></script>
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Logic', 'System Design', 'Algorithms', 'Frontend', 'Communication', 'Database'],
+                datasets: [{
+                    label: 'Proficiency Level',
+                    data: [85, 60, 75, 50, 90, 66],
+                    backgroundColor: gradient,
+                    borderColor: '#ff2a85',
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#ff2a85',
+                    pointHoverBackgroundColor: '#ff2a85',
+                    pointHoverBorderColor: '#ffffff',
+                    borderWidth: 2.5,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: {
+                            color: '#cbd5e1',
+                            font: { family: 'Inter, sans-serif', size: 12, weight: '600' }
+                        },
+                        ticks: { display: false, min: 0, max: 100 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
 
+        // Smart Dynamic Sync from LocalStorage to Dashboard UI
+        window.addEventListener('DOMContentLoaded', () => {
+            const student = JSON.parse(localStorage.getItem('student') || '{}');
+
+            // Name & Avatar
+            if (student.name) {
+                const headerName = document.getElementById('dash-header-name');
+                const overviewName = document.getElementById('dash-overview-name');
+                const avatar = document.getElementById('dash-avatar');
+
+                if (headerName) headerName.textContent = student.name;
+                if (overviewName) overviewName.textContent = student.name;
+                if (avatar) avatar.textContent = student.name.charAt(0).toUpperCase();
+            }
+
+            // Department
+            if (student.department) {
+                const deptEl = document.getElementById('dash-overview-dept');
+                if (deptEl) deptEl.textContent = student.department;
+            }
+
+            // Career Goal
+            if (student.careerGoal || student.goal) {
+                const goalEl = document.getElementById('dash-overview-goal');
+                if (goalEl) goalEl.textContent = student.careerGoal || student.goal;
+            }
+
+            // CGPA
+            if (student.cgpa !== undefined && student.cgpa !== "") {
+                const cgpaEl = document.getElementById('dash-cgpa');
+                if (cgpaEl) cgpaEl.textContent = student.cgpa;
+            }
+
+            // Certificates
+            if (student.certificates !== undefined && student.certificates !== "") {
+                const certsEl = document.getElementById('dash-certs');
+                if (certsEl) certsEl.textContent = Array.isArray(student.certificates) ? student.certificates.length : student.certificates;
+            }
+
+            // Projects
+            if (student.projects !== undefined && student.projects !== "") {
+                const projectsEl = document.getElementById('dash-projects');
+                if (projectsEl) projectsEl.textContent = Array.isArray(student.projects) ? student.projects.length : student.projects;
+            }
+
+            // --- SMART SKILLS HANDLING ---
+            if (student.skills !== undefined && student.skills !== "") {
+                const skillsVal = String(student.skills).trim();
+                const dashSkills = document.getElementById('dash-skills');
+                const dashBadge = document.getElementById('dash-skills-count-badge');
+                const skillsContainer = document.getElementById('dash-skills-container');
+
+                // CASE 1: If user entered a plain number (e.g., "11")
+                if (!isNaN(skillsVal) && skillsVal !== "") {
+                    if (dashSkills) dashSkills.textContent = skillsVal;
+                    if (dashBadge) dashBadge.textContent = `${skillsVal} Active`;
+                } 
+                // CASE 2: If user entered comma-separated skill names (e.g., "Java, Python, SQL")
+                else {
+                    const skillList = skillsVal.split(',').map(s => s.trim()).filter(Boolean);
+                    if (skillList.length > 0) {
+                        if (dashSkills) dashSkills.textContent = skillList.length;
+                        if (dashBadge) dashBadge.textContent = `${skillList.length} Active`;
+
+                        if (skillsContainer) {
+                            skillsContainer.innerHTML = skillList.map(skill => 
+                                `<span class="px-4 py-2 rounded-xl bg-[#10061e] border border-[#ff2a85]/30 text-white text-xs font-semibold shadow-sm">${skill}</span>`
+                            ).join('');
+                        }
+                    }
+                }
+            }
+        });
+
+        // Global Logout Handler
+        document.addEventListener('click', function(event) {
+            const logoutBtn = event.target.closest('#logout-btn');
+            if (logoutBtn) {
+                event.preventDefault();
+                localStorage.removeItem('student');
+                localStorage.clear(); 
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </body>
 
 </html>

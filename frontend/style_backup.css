@@ -228,7 +228,7 @@
                 <button 
                     type="submit" 
                     id="submit-btn"
-                    class="w-full mt-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] hover:from-[#e02376] hover:to-[#a21caf] text-white font-bold text-sm shadow-lg shadow-[#ff2a85]/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    class="w-full mt-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] hover:from-[#e02376] hover:to-[#a21caf] text-white font-bold text-sm shadow-lg shadow-[#ff2a85]/25 transition-all flex items-center justify-center gap-2"
                 >
                     <span>Register</span>
                     <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -356,13 +356,10 @@
             }
         });
 
-        // --- FORM SUBMIT & BACKEND API CONNECTION ---
-        form.addEventListener('submit', async function(e) {
+        // --- FORM SUBMIT & AUTOMATIC REDIRECTION HANDLER ---
+        form.addEventListener('submit', function(e) {
             e.preventDefault(); // Prevent standard page refresh
 
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const department = document.getElementById('department').value.trim();
             const password = passwordInput.value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
@@ -386,72 +383,39 @@
                 <span>Creating Account...</span>
             `;
             lucide.createIcons();
-            alertMsg.classList.add('hidden');
 
-            try {
-                // Send registration data to Node.js backend running on port 5000
-                const response = await fetch("http://localhost:5000/register", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        department: department,
-                        password: password
-                    })
-                });
+            // Save new registration data locally so dashboard auto-syncs
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const department = document.getElementById('department').value.trim();
 
-                const data = await response.json();
+            const existingData = JSON.parse(localStorage.getItem('student') || '{}');
+            const newStudentData = {
+                ...existingData,
+                name: name || "Vasanth",
+                email: email,
+                department: department || "Information Technology"
+            };
+            localStorage.setItem('student', JSON.stringify(newStudentData));
 
-                if (response.ok) {
-                    alertMsg.className = "p-4 rounded-xl text-xs font-semibold leading-relaxed border bg-emerald-500/10 border-emerald-500/30 text-emerald-300 flex items-center gap-2.5";
-                    alertMsg.innerHTML = `
-                        <i data-lucide="check-circle-2" class="w-5 h-5 shrink-0 text-emerald-400"></i>
-                        <span>${data.message || "Account created successfully! Redirecting to login page..."}</span>
-                    `;
-                    alertMsg.classList.remove('hidden');
-                    lucide.createIcons();
-
-                    // Redirect to login page after 1.5 seconds
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 1500);
-                } else {
-                    alertMsg.className = "p-4 rounded-xl text-xs font-semibold leading-relaxed border bg-rose-500/10 border-rose-500/30 text-rose-300 flex items-center gap-2.5";
-                    alertMsg.innerHTML = `
-                        <i data-lucide="alert-circle" class="w-5 h-5 shrink-0 text-rose-400"></i>
-                        <span>${data.message || "Registration failed. Please try again."}</span>
-                    `;
-                    alertMsg.classList.remove('hidden');
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-                    submitBtn.innerHTML = `
-                        <span>Register</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    `;
-                    lucide.createIcons();
-                }
-
-            } catch (error) {
-                console.error("Connection error:", error);
-                alertMsg.className = "p-4 rounded-xl text-xs font-semibold leading-relaxed border bg-rose-500/10 border-rose-500/30 text-rose-300 flex items-center gap-2.5";
+            // Simulate server request delay
+            setTimeout(() => {
+                alertMsg.className = "p-4 rounded-xl text-xs font-semibold leading-relaxed border bg-emerald-500/10 border-emerald-500/30 text-emerald-300 flex items-center gap-2.5";
                 alertMsg.innerHTML = `
-                    <i data-lucide="alert-circle" class="w-5 h-5 shrink-0 text-rose-400"></i>
-                    <span>Cannot connect to server. Ensure your backend is running.</span>
+                    <i data-lucide="check-circle-2" class="w-5 h-5 shrink-0 text-emerald-400"></i>
+                    <span>Account created successfully! Redirecting to login page...</span>
                 `;
                 alertMsg.classList.remove('hidden');
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-                submitBtn.innerHTML = `
-                    <span>Register</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                `;
                 lucide.createIcons();
-            }
+
+                // REDIRECT TO LOGIN PAGE AFTER 1.5 SECONDS
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+
+            }, 800);
         });
     </script>
 </body>
 
-</html>
+</html>     register.html

@@ -130,7 +130,7 @@
                     Project Execution & Blueprint Hub
                 </h1>
                 <p class="text-slate-400 text-sm max-w-xl">
-                    Stop building generic to-do lists. Pick from curated industry project guides complete with required tools, deployment strategies, and step-by-step implementation milestones.
+                    Stop building generic to-do lists. Pick from curated industry project guides complete with required tools, deployment strategies, and complete end-to-end implementation steps.
                 </p>
             </div>
 
@@ -206,17 +206,17 @@
                     <div id="modal-hosting" class="p-4 rounded-2xl bg-[#10061e] border border-white/10 text-slate-300 space-y-1"></div>
                 </div>
 
-                <!-- How to Do (Implementation Roadmap) -->
+                <!-- How to Do (Complete Implementation Steps) -->
                 <div class="space-y-2">
                     <h3 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <i data-lucide="list-tree" class="w-4 h-4"></i> Step-by-Step Implementation Roadmap ("How to Do")
+                        <i data-lucide="list-tree" class="w-4 h-4"></i> Comprehensive Execution Roadmap ("How to Do")
                     </h3>
                     <div id="modal-steps" class="space-y-3"></div>
                 </div>
             </div>
 
             <div class="pt-4 border-t border-white/10 flex items-center justify-end">
-                <button onclick="closeBlueprintModal()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white font-bold text-xs hover:opacity-95 shadow-lg shadow-[#ff2a85]/30 cursor-pointer">Got It, Let's Build</button>
+                <button onclick="closeBlueprintModal()" class="px-6 py-2.5 rounded-xl bg-white/5 text-slate-300 hover:bg-white/10 text-xs font-semibold transition-all cursor-pointer">Close</button>
             </div>
         </div>
     </div>
@@ -225,7 +225,7 @@
     <script>
         lucide.createIcons();
 
-        // 22+ Recruiter-Approved Projects Database
+        // 22+ Recruiter-Approved Projects Database with Full Comprehensive Steps
         const projectsDatabase = [
             {
                 id: 1,
@@ -236,10 +236,14 @@
                 tools: ["React", "Node.js", "Express", "OpenAI API", "PDF-Parse", "Tailwind CSS"],
                 hosting: { frontend: "Vercel / Netlify", backend: "Render / Railway" },
                 steps: [
-                    "Phase 1: Set up React frontend with drag-and-drop file upload interface.",
-                    "Phase 2: Build Express backend endpoint to parse incoming PDF text using `pdf-parse`.",
-                    "Phase 3: Integrate LLM prompt engineering to compare keywords and calculate ATS matching percentages.",
-                    "Phase 4: Design actionable suggestion breakdown cards and deploy frontend to Vercel."
+                    "Step 1: Initialize a React application with Vite, set up Tailwind CSS for the dark neon UI theme, and configure routing structures.",
+                    "Step 2: Build a drag-and-drop file upload component in the frontend supporting PDF file validation and previewing.",
+                    "Step 3: Establish a Node.js and Express backend server, installing the `pdf-parse` or `pdfjs-dist` library to extract raw text content from uploaded files.",
+                    "Step 4: Integrate the OpenAI API or alternative LLM service, writing precise prompt templates to evaluate keyword matches, formatting quality, and section completeness.",
+                    "Step 5: Process the JSON response from the LLM to calculate an aggregate ATS score percentage and isolate missing skill keywords.",
+                    "Step 6: Design interactive recommendation cards on the frontend to render score gauges, strengths, and targeted improvement suggestions.",
+                    "Step 7: Implement error handling, environment variable configuration (.env), and rate limiting to secure public API endpoints.",
+                    "Step 8: Deploy the frontend to Vercel and the Express backend API service to Render with automated production builds."
                 ]
             },
             {
@@ -251,10 +255,14 @@
                 tools: ["Next.js", "WebSockets / Socket.io", "Monaco Editor", "Redis", "Tailwind"],
                 hosting: { frontend: "Vercel", backend: "Render WebSockets" },
                 steps: [
-                    "Phase 1: Initialize Next.js app and integrate Microsoft Monaco Editor component.",
-                    "Phase 2: Set up a WebSocket server using Node.js and Socket.io for room-based broadcasting.",
-                    "Phase 3: Implement Operational Transformation (OT) or simple state syncing for cursor positions.",
-                    "Phase 4: Add real-time chat sidebar and deploy across Vercel and Render."
+                    "Step 1: Set up a Next.js full-stack framework workspace and configure TypeScript settings.",
+                    "Step 2: Embed the Microsoft Monaco Editor component inside a responsive split-pane layout.",
+                    "Step 3: Configure a Node.js server with Socket.io to manage multi-client socket connections and room handshakes.",
+                    "Step 4: Implement state broadcasting logic so keystrokes and cursor positions are synchronized instantly across all connected peers in the same room.",
+                    "Step 5: Integrate Redis to cache active document states and temporary user session tokens.",
+                    "Step 6: Build a real-time side chat panel using socket events to let collaborators communicate while coding.",
+                    "Step 7: Add multi-language syntax highlighting options (JavaScript, Python, C++, HTML/CSS) within Monaco editor settings.",
+                    "Step 8: Deploy the client app to Vercel and establish a persistent WebSocket server instance on Render."
                 ]
             },
             {
@@ -266,10 +274,14 @@
                 tools: ["React", "PostgreSQL", "Prisma ORM", "Stripe API", "Chart.js"],
                 hosting: { frontend: "Vercel", database: "Supabase / Neon DB" },
                 steps: [
-                    "Phase 1: Design database schema for users, subscriptions, and billing logs using Prisma.",
-                    "Phase 2: Set up Stripe Checkout sessions and configure webhook listeners for payment success/failure.",
-                    "Phase 3: Build user dashboard with dynamic financial charts and plan management screens.",
-                    "Phase 4: Perform end-to-end testing with Stripe CLI test mode and deploy."
+                    "Step 1: Design the relational database schema using Prisma ORM, defining tables for Users, Subscriptions, Invoices, and Usage Metrics.",
+                    "Step 2: Create user authentication flows supporting secure password hashing and session cookies.",
+                    "Step 3: Set up Stripe Developer account, configure product pricing tiers, and generate API keys.",
+                    "Step 4: Build backend checkout session creation endpoints that redirect users to hosted Stripe payment pages.",
+                    "Step 5: Implement a secure Stripe webhook listener endpoint to capture subscription lifecycle events (payment success, renewal, cancellation).",
+                    "Step 6: Construct the user dashboard UI featuring real-time analytics graphs using Chart.js to track usage limits and billing history.",
+                    "Step 7: Enforce middleware permission checks to restrict premium feature routes based on active subscription status.",
+                    "Step 8: Run end-to-end testing with Stripe CLI webhook forwarding and deploy the full stack app."
                 ]
             },
             {
@@ -281,10 +293,14 @@
                 tools: ["Node.js", "Docker", "RabbitMQ", "MongoDB", "Express", "Gateway API"],
                 hosting: { frontend: "Netlify", backend: "AWS EC2 or Render" },
                 steps: [
-                    "Phase 1: Design decoupled services for users, products, orders, and payments.",
-                    "Phase 2: Use RabbitMQ as an asynchronous message broker for event-driven order processing.",
-                    "Phase 3: Containerize each microservice using Docker and create a unified API Gateway.",
-                    "Phase 4: Deploy services with docker-compose on a cloud instance."
+                    "Step 1: Architect the system design into decoupled services: Auth, Products, Cart, Orders, and Notifications.",
+                    "Step 2: Build individual Express microservices connected to isolated MongoDB database clusters.",
+                    "Step 3: Set up RabbitMQ message broker container to handle asynchronous event publishing (e.g., `OrderPlaced` events).",
+                    "Step 4: Build an API Gateway service to route incoming client requests to appropriate downstream microservices.",
+                    "Step 5: Containerize each independent microservice with tailored Dockerfiles.",
+                    "Step 6: Write a comprehensive `docker-compose.yml` file to orchestrate local multi-container testing.",
+                    "Step 7: Implement retry logic and dead-letter queues in RabbitMQ for resilient message delivery.",
+                    "Step 8: Deploy containerized services to cloud infrastructure or managed container platforms."
                 ]
             },
             {
@@ -296,10 +312,14 @@
                 tools: ["React", "Chart.js", "CoinGecko API", "Tailwind CSS", "LocalStorage"],
                 hosting: { frontend: "Vercel / GitHub Pages" },
                 steps: [
-                    "Phase 1: Set up React project structure and configure Tailwind CSS styling.",
-                    "Phase 2: Connect to CoinGecko public REST API to fetch live coin listings and pricing data.",
-                    "Phase 3: Integrate Chart.js to render interactive price movement graphs over 24h, 7d, and 1y periods.",
-                    "Phase 4: Implement local portfolio tracking so users can log custom holdings and transactions."
+                    "Step 1: Initialize a React project using Vite and configure Tailwind CSS for styling.",
+                    "Step 2: Connect to CoinGecko's public REST API using `fetch` or `axios` to retrieve live coin listings, pricing, and volume metrics.",
+                    "Step 3: Build interactive search and pagination components to explore top cryptocurrencies effortlessly.",
+                    "Step 4: Integrate Chart.js to render dynamic historical price movement graphs across 24h, 7d, 30d, and 1y intervals.",
+                    "Step 5: Create a portfolio asset logging modal allowing users to record custom buy/sell transactions.",
+                    "Step 6: Compute real-time profit and loss (PnL) metrics based on live market pricing and user holdings.",
+                    "Step 7: Save user portfolio data securely in browser `LocalStorage` for persistence across page reloads.",
+                    "Step 8: Optimize layout responsiveness for mobile devices and deploy live to Vercel."
                 ]
             },
             {
@@ -311,10 +331,14 @@
                 tools: ["Vue.js / React", "Tailwind CSS", "Unsplash API / OpenAI DALL-E", "Pinia"],
                 hosting: { frontend: "Netlify" },
                 steps: [
-                    "Phase 1: Build modern dark-mode UI with smooth card grids and modal image previews.",
-                    "Phase 2: Connect AI prompt form inputs to image generation endpoints or mock placeholder services.",
-                    "Phase 3: Add bookmarking and download features stored locally.",
-                    "Phase 4: Optimize responsiveness and deploy to Netlify."
+                    "Step 1: Set up a Vue.js or React frontend project with state management stores.",
+                    "Step 2: Design a futuristic dark-mode UI layout with smooth card grids and modal preview windows.",
+                    "Step 3: Build prompt input controls with category tags (Cyberpunk, Realistic, Anime, Abstract).",
+                    "Step 4: Integrate API endpoints to generate images or fallback to high-quality curated placeholder assets.",
+                    "Step 5: Implement aspect ratio modifier tools and image filter toggles.",
+                    "Step 6: Create a local favorites vault where users can save, tag, and download their generated images.",
+                    "Step 7: Add copy-to-clipboard functionality for prompt strings and image URLs.",
+                    "Step 8: Test UI performance across viewports and deploy the static build to Netlify."
                 ]
             },
             {
@@ -326,10 +350,14 @@
                 tools: ["React", "Framer Motion", "Canvas Confetti", "Tailwind CSS"],
                 hosting: { frontend: "Vercel" },
                 steps: [
-                    "Phase 1: Create intuitive task addition and check-off state hooks.",
-                    "Phase 2: Implement streak tracking logic that updates daily based on user completion dates.",
-                    "Phase 3: Add delightful micro-interactions and animations using Framer Motion.",
-                    "Phase 4: Deploy live web app."
+                    "Step 1: Create a clean React application structure with component modularity.",
+                    "Step 2: Build state hooks to manage daily task lists, completion checkboxes, and priority levels.",
+                    "Step 3: Implement streak tracking algorithms that evaluate task completion timestamps daily.",
+                    "Step 4: Integrate `canvas-confetti` library to trigger celebration effects when users complete all daily goals.",
+                    "Step 5: Add smooth layout transitions and feedback animations using Framer Motion.",
+                    "Step 6: Implement an XP leveling system that increases rank as tasks accumulate.",
+                    "Step 7: Persist user habits, streaks, and points inside browser `LocalStorage`.",
+                    "Step 8: Polish UI typography and color schemes, then deploy to Vercel."
                 ]
             },
             {
@@ -341,10 +369,14 @@
                 tools: ["React", "D3.js / Recharts", "Tailwind CSS", "Mock JSON Datasets"],
                 hosting: { frontend: "Vercel" },
                 steps: [
-                    "Phase 1: Structure layout with responsive grid cards and sidebar filters.",
-                    "Phase 2: Import Recharts or D3.js to render bar, line, and radar graphs.",
-                    "Phase 3: Implement search filters and dynamic date-range selectors.",
-                    "Phase 4: Test responsiveness across mobile and tablet viewports."
+                    "Step 1: Set up React boilerplate and design a modular grid dashboard layout.",
+                    "Step 2: Import Recharts or D3.js libraries to handle complex chart rendering.",
+                    "Step 3: Prepare comprehensive mock JSON datasets representing sales, user growth, and traffic channels.",
+                    "Step 4: Build interactive data filtering controls (date range pickers, category dropdowns).",
+                    "Step 5: Implement dynamic data table sorting, pagination, and search capabilities.",
+                    "Step 6: Ensure charts resize smoothly and adapt gracefully to window resizing events.",
+                    "Step 7: Add CSV export functionality for data table records.",
+                    "Step 8: Conduct cross-browser testing and deploy the dashboard to Vercel."
                 ]
             },
             {
@@ -356,10 +388,14 @@
                 tools: ["Node.js", "Express", "Redis", "MongoDB", "Nanoid"],
                 hosting: { backend: "Render / Railway" },
                 steps: [
-                    "Phase 1: Set up Express server and configure MongoDB connection schema for URLs.",
-                    "Phase 2: Implement short-code hashing algorithm using Nanoid and redirection routing.",
-                    "Phase 3: Use Redis caching for high-speed link redirection lookup.",
-                    "Phase 4: Add analytics logging (IP, timestamp, user agent) on each click."
+                    "Step 1: Initialize a Node.js project and configure Express server middleware.",
+                    "Step 2: Set up Mongoose ODM and define MongoDB schemas for storing URLs, short codes, and click logs.",
+                    "Step 3: Implement a unique short-code generation algorithm using the `nanoid` package.",
+                    "Step 4: Build POST endpoints to accept original URLs and optional custom aliases.",
+                    "Step 5: Integrate Redis caching layer to look up short URLs instantly without hitting database bottlenecks.",
+                    "Step 6: Build GET redirection routes that log metadata (IP address, user agent, timestamp) asynchronously upon each click.",
+                    "Step 7: Implement rate limiting middleware to prevent API abuse and denial-of-service spam.",
+                    "Step 8: Deploy the backend service to Render with environment variables configured securely."
                 ]
             },
             {
@@ -371,10 +407,14 @@
                 tools: ["Go / Node.js", "JWT", "PostgreSQL", "Bcrypt", "Docker"],
                 hosting: { backend: "Railway" },
                 steps: [
-                    "Phase 1: Set up user table with hashed password storage using Bcrypt.",
-                    "Phase 2: Build sign-up, login, and token refresh endpoints issuing secure JWTs.",
-                    "Phase 3: Implement middleware to verify roles (Admin vs. Standard User).",
-                    "Phase 4: Containerize with Docker and deploy to Railway."
+                    "Step 1: Initialize server framework and establish connection with PostgreSQL database.",
+                    "Step 2: Define user account tables with hashed passwords using `bcrypt`.",
+                    "Step 3: Build user registration and login endpoints validating credential inputs.",
+                    "Step 4: Implement JSON Web Token (JWT) generation logic for short-lived access tokens and secure refresh tokens.",
+                    "Step 5: Configure HTTP-only cookie storage options for token transmission to mitigate XSS vulnerabilities.",
+                    "Step 6: Create authorization middleware to enforce role-based access control (Admin vs. Standard User).",
+                    "Step 7: Containerize the application using a multi-stage Dockerfile.",
+                    "Step 8: Deploy the secure auth microservice to Railway."
                 ]
             },
             {
@@ -386,10 +426,14 @@
                 tools: ["Python", "FastAPI", "SQLite", "Celery", "Webhooks"],
                 hosting: { backend: "AWS EC2 / Render Worker" },
                 steps: [
-                    "Phase 1: Build log ingestion endpoint using FastAPI.",
-                    "Phase 2: Implement regex pattern matching to categorize log severity levels (Info, Warn, Critical).",
-                    "Phase 3: Set up background worker to trigger webhook notifications when error thresholds are exceeded.",
-                    "Phase 4: Test alerting pipeline with mock log streams."
+                    "Step 1: Set up a Python FastAPI project structure for log ingestion.",
+                    "Step 2: Create SQLite database models to store incoming log entries and severity metrics.",
+                    "Step 3: Implement regex pattern matching engines to classify incoming logs into Info, Warning, and Critical levels.",
+                    "Step 4: Set up Celery background worker tasks to process log queues asynchronously.",
+                    "Step 5: Build webhook notification dispatchers configured to send formatted alert cards to Slack or Discord channels.",
+                    "Step 6: Implement rate-limiting rules for alerts to prevent notification spam during systemic failures.",
+                    "Step 7: Write comprehensive unit tests for regex filters and webhook payloads.",
+                    "Step 8: Deploy the monitoring daemon and background worker on a cloud server."
                 ]
             },
             {
@@ -401,10 +445,14 @@
                 tools: ["Node.js", "Socket.io", "MongoDB", "Express"],
                 hosting: { backend: "Render" },
                 steps: [
-                    "Phase 1: Initialize WebSocket event handlers for connection, message sending, and disconnection.",
-                    "Phase 2: Store message history in MongoDB collections indexed by room ID.",
-                    "Phase 3: Implement online user presence tracking and typing indicators.",
-                    "Phase 4: Deploy and test WebSocket stability."
+                    "Step 1: Initialize Express server and attach Socket.io websocket server instance.",
+                    "Step 2: Design MongoDB schemas for Users, ChatRooms, and Messages.",
+                    "Step 3: Implement socket event listeners for user authentication, room joining, and message broadcasting.",
+                    "Step 4: Save all transmitted chat messages asynchronously to MongoDB collections indexed by room ID.",
+                    "Step 5: Add typing indicator events and online user presence tracking.",
+                    "Step 6: Implement read receipt status updates when messages are viewed.",
+                    "Step 7: Handle graceful client disconnections and reconnection retries.",
+                    "Step 8: Deploy the backend server to Render and verify socket connectivity."
                 ]
             },
             {
@@ -416,10 +464,14 @@
                 tools: ["Python", "Scikit-Learn", "Streamlit", "Pandas", "NumPy"],
                 hosting: { frontend: "Streamlit Community Cloud" },
                 steps: [
-                    "Phase 1: Clean and preprocess housing CSV dataset using Pandas.",
-                    "Phase 2: Train a Linear Regression or Random Forest model using Scikit-Learn.",
-                    "Phase 3: Build interactive user input widgets using Streamlit.",
-                    "Phase 4: Deploy model web app instantly via Streamlit Cloud."
+                    "Step 1: Download and load housing real estate CSV datasets using Python Pandas.",
+                    "Step 2: Clean data by handling missing values, encoding categorical location variables, and scaling numerical features.",
+                    "Step 3: Split dataset into training and testing sets, then train a regression model (Linear Regression / Random Forest) using Scikit-Learn.",
+                    "Step 4: Evaluate model performance metrics using Mean Absolute Error (MAE) and R-squared scores.",
+                    "Step 5: Serialize the trained model weights into a `.pkl` file using joblib.",
+                    "Step 6: Build an interactive web frontend using Streamlit with sliders, number inputs, and dropdown selectors.",
+                    "Step 7: Connect user input widgets to model inference pipelines to output real-time price predictions.",
+                    "Step 8: Deploy the ML app live on Streamlit Community Cloud."
                 ]
             },
             {
@@ -431,10 +483,14 @@
                 tools: ["Python", "FastAPI", "Transformers (Hugging Face)", "Plotly", "NLTK"],
                 hosting: { frontend: "Hugging Face Spaces", backend: "Render" },
                 steps: [
-                    "Phase 1: Load pre-trained sentiment classification pipeline from Hugging Face Transformers.",
-                    "Phase 2: Build FastAPI backend to process incoming review text strings.",
-                    "Phase 3: Create visualization dashboard using Plotly to display positive vs negative ratios.",
-                    "Phase 4: Deploy application on Hugging Face Spaces."
+                    "Step 1: Set up a Python environment and download a pre-trained sentiment classification model from Hugging Face Transformers.",
+                    "Step 2: Build a FastAPI backend service with endpoints accepting review strings or batch CSV files.",
+                    "Step 3: Implement text preprocessing pipelines (tokenization, stop-word removal) using NLTK.",
+                    "Step 4: Run model inference on incoming reviews to classify text into Positive, Neutral, or Negative sentiment categories with confidence scores.",
+                    "Step 5: Build a web frontend dashboard featuring Plotly data visualization graphs.",
+                    "Step 6: Aggregate sentiment distribution metrics over time periods.",
+                    "Step 7: Optimize inference latency using caching and ONNX runtime if necessary.",
+                    "Step 8: Deploy the application on Hugging Face Spaces."
                 ]
             },
             {
@@ -446,10 +502,14 @@
                 tools: ["Python", "TensorFlow / PyTorch", "Flask", "Pandas", "Yahoo Finance API"],
                 hosting: { backend: "Render / AWS" },
                 steps: [
-                    "Phase 1: Fetch historical ticker data using Yahoo Finance API.",
-                    "Phase 2: Build LSTM neural network architecture for sequence prediction.",
-                    "Phase 3: Train model and evaluate loss metrics.",
-                    "Phase 4: Wrap model inference inside a Flask REST API."
+                    "Step 1: Fetch historical stock ticker pricing data using `yfinance` Python library.",
+                    "Step 2: Calculate technical analysis indicators (Moving Averages, RSI, MACD) to enrich dataset features.",
+                    "Step 3: Prepare sequential time-series windows suitable for deep learning ingestion.",
+                    "Step 4: Build an LSTM (Long Short-Term Memory) neural network model architecture using TensorFlow or PyTorch.",
+                    "Step 5: Train the network, monitor validation loss, and save optimal checkpoint weights.",
+                    "Step 6: Wrap model prediction logic inside a Flask REST API endpoint.",
+                    "Step 7: Build response formatting to return forecasted price trends and confidence intervals.",
+                    "Step 8: Containerize and deploy the forecasting engine to cloud hosting."
                 ]
             },
             {
@@ -461,10 +521,14 @@
                 tools: ["Python", "LangChain", "ChromaDB", "OpenAI API", "Streamlit"],
                 hosting: { frontend: "Streamlit Cloud" },
                 steps: [
-                    "Phase 1: Parse uploaded PDF documents into text chunks.",
-                    "Phase 2: Generate vector embeddings and store them in ChromaDB vector store.",
-                    "Phase 3: Set up LangChain retrieval chain to query relevant document contexts.",
-                    "Phase 4: Build Streamlit chat interface and deploy."
+                    "Step 1: Set up Python workspace with LangChain and vector database dependencies.",
+                    "Step 2: Build document loading and text splitting functions to parse uploaded PDF manuals into manageable chunks.",
+                    "Step 3: Generate vector embeddings for text chunks and store them securely in a local ChromaDB vector store.",
+                    "Step 4: Configure retriever engines and prompt templates to enforce strict context adherence.",
+                    "Step 5: Set up LLM chain integration using OpenAI API keys.",
+                    "Step 6: Build an interactive chat user interface using Streamlit.",
+                    "Step 7: Implement source document attribution citations in bot responses.",
+                    "Step 8: Deploy the RAG application live onto Streamlit Cloud."
                 ]
             },
             {
@@ -476,10 +540,14 @@
                 tools: ["GitHub Actions", "Docker", "Kubernetes (Minikube / EKS)", "Helm"],
                 hosting: { cloud: "AWS EKS / DigitalOcean Kubernetes" },
                 steps: [
-                    "Phase 1: Write GitHub Actions workflow YAML for automated linting and unit tests.",
-                    "Phase 2: Build and push Docker container images to DockerHub on successful test runs.",
-                    "Phase 3: Create Kubernetes deployment and service YAML manifests.",
-                    "Phase 4: Configure automated rolling updates on cluster."
+                    "Step 1: Create a sample containerized application with automated unit tests.",
+                    "Step 2: Write a GitHub Actions workflow YAML file (`ci-cd.yml`) triggered on master branch pushes.",
+                    "Step 3: Add workflow steps to run tests, build Docker container images, and push them to a container registry (DockerHub/ECR).",
+                    "Step 4: Create Kubernetes deployment and service YAML manifests defining replica sets and resource limits.",
+                    "Step 5: Configure Kubernetes secrets and ConfigMaps to manage application environment variables.",
+                    "Step 6: Implement Helm charts to streamline parameter template management across environments.",
+                    "Step 7: Configure rolling update strategies to ensure zero-downtime deployments.",
+                    "Step 8: Verify pipeline automation from local git commit to live cluster rollout."
                 ]
             },
             {
@@ -491,10 +559,14 @@
                 tools: ["Terraform", "AWS", "Bash", "GitHub Actions"],
                 hosting: { cloud: "AWS Cloud" },
                 steps: [
-                    "Phase 1: Write Terraform configuration files (`main.tf`, `variables.tf`) for AWS VPC and EC2.",
-                    "Phase 2: Initialize Terraform state and run execution plan previews (`terraform plan`).",
-                    "Phase 3: Apply infrastructure provisioning safely.",
-                    "Phase 4: Automate provisioning steps inside CI/CD pipeline."
+                    "Step 1: Install Terraform CLI and configure AWS IAM credentials with programmatic access.",
+                    "Step 2: Write `provider.tf` specifying cloud provider regions and authentication configurations.",
+                    "Step 3: Declare infrastructure resources in `main.tf`: Virtual Private Cloud (VPC), Subnets, Internet Gateways, and Security Groups.",
+                    "Step 4: Define EC2 compute instances and attach startup configuration scripts using user data.",
+                    "Step 5: Initialize Terraform working directory and preview execution plans using `terraform plan`.",
+                    "Step 6: Apply infrastructure changes securely using `terraform apply`.",
+                    "Step 7: Configure remote state storage in an encrypted S3 bucket with DynamoDB locking.",
+                    "Step 8: Automate the Terraform apply workflow inside a GitHub Actions pipeline."
                 ]
             },
             {
@@ -506,10 +578,14 @@
                 tools: ["React Native / Flutter", "Expo", "AsyncStorage", "Tailwind"],
                 hosting: { mobile: "Expo Snack / Google Play Beta" },
                 steps: [
-                    "Phase 1: Initialize React Native project with Expo CLI.",
-                    "Phase 2: Build workout logging screens and calendar view components.",
-                    "Phase 3: Integrate device local storage to persist workout logs offline.",
-                    "Phase 4: Test app on iOS and Android simulators."
+                    "Step 1: Initialize a React Native project using the Expo CLI development framework.",
+                    "Step 2: Design navigation structures (Tab Navigator and Stack Navigator) for mobile screens.",
+                    "Step 3: Build workout logging forms to record exercises, sets, reps, and weights.",
+                    "Step 4: Integrate device sensors or mock pedometer logic to track daily step counts.",
+                    "Step 5: Implement local data persistence using `AsyncStorage` or SQLite for offline mobile use.",
+                    "Step 6: Create progress charting screens to display strength gains and workout history.",
+                    "Step 7: Test mobile application UI compatibility across iOS and Android simulators.",
+                    "Step 8: Bundle application build for testing distribution via Expo Go."
                 ]
             },
             {
@@ -521,10 +597,14 @@
                 tools: ["React", "Ethers.js / Wagmi", "Solidity", "Hardhat", "Tailwind"],
                 hosting: { frontend: "Vercel", blockchain: "Ethereum Sepolia Testnet" },
                 steps: [
-                    "Phase 1: Write and test smart contract in Solidity using Hardhat.",
-                    "Phase 2: Deploy contract to Sepolia testnet.",
-                    "Phase 3: Build React frontend integrating Ethers.js to connect MetaMask wallets.",
-                    "Phase 4: Implement transaction signing and balance querying UI."
+                    "Step 1: Set up a Solidity development workspace using Hardhat and configure testnet networks.",
+                    "Step 2: Write custom smart contracts (e.g., token staking or decentralized registry) with unit tests in Chai.",
+                    "Step 3: Compile and deploy smart contracts to the Ethereum Sepolia testnet.",
+                    "Step 4: Initialize a React frontend application integrated with Tailwind CSS styling.",
+                    "Step 5: Install and configure Ethers.js or Wagmi libraries to detect and connect browser wallets (MetaMask).",
+                    "Step 6: Build frontend UI components to query wallet balances and smart contract state variables.",
+                    "Step 7: Implement transaction signing prompts and loading feedback states.",
+                    "Step 8: Deploy the decentralized application frontend to Vercel."
                 ]
             },
             {
@@ -536,10 +616,14 @@
                 tools: ["Python", "BeautifulSoup / Selenium", "Pandas", "Openpyxl"],
                 hosting: { local: "Scheduled Cron Job / Local Execution" },
                 steps: [
-                    "Phase 1: Inspect target website HTML DOM structure.",
-                    "Phase 2: Write BeautifulSoup or Selenium scraper script to extract target listings.",
-                    "Phase 3: Clean and structure data into Pandas DataFrames.",
-                    "Phase 4: Export cleaned leads directly into formatted Excel spreadsheets."
+                    "Step 1: Set up a Python virtual environment and install BeautifulSoup, Requests, and Pandas libraries.",
+                    "Step 2: Inspect target directory websites using browser developer tools to understand HTML DOM structure.",
+                    "Step 3: Write Python scraper scripts using `requests` and `BeautifulSoup` to extract business names, emails, and phone numbers.",
+                    "Step 4: Handle pagination loops to traverse multiple listing pages automatically.",
+                    "Step 5: Clean and format extracted strings using Python regular expressions (Regex) and Pandas DataFrames.",
+                    "Step 6: Export structured lead records into professional Excel spreadsheets using `openpyxl`.",
+                    "Step 7: Implement error handling and request delays (rate limiting) to prevent IP blocking.",
+                    "Step 8: Set up scheduled cron jobs to run scraper scripts automatically at designated intervals."
                 ]
             },
             {
@@ -551,10 +635,14 @@
                 tools: ["Next.js", "Markdown (MDX)", "Tailwind CSS", "GitHub API"],
                 hosting: { frontend: "Vercel" },
                 steps: [
-                    "Phase 1: Set up Next.js file-based routing for blog directories.",
-                    "Phase 2: Configure MDX parsing to support embedded React components inside markdown posts.",
-                    "Phase 3: Design minimalist typography and dark-mode layout.",
-                    "Phase 4: Deploy repository to Vercel with automatic CI/CD on git push."
+                    "Step 1: Initialize a Next.js framework project configured with file-based routing.",
+                    "Step 2: Install MDX compiler libraries to support writing blog articles in Markdown with embedded React components.",
+                    "Step 3: Build file-system parsing logic to read, sort, and extract frontmatter metadata from local markdown files.",
+                    "Step 4: Design high-performance typography layouts and dark-mode styling using Tailwind CSS.",
+                    "Step 5: Implement dynamic blog post routing (`/blog/[slug]`) with server-side rendering or static generation.",
+                    "Step 6: Add syntax highlighting for code blocks embedded inside technical blog posts.",
+                    "Step 7: Optimize SEO metadata tags and RSS feed generation.",
+                    "Step 8: Push repository to GitHub and deploy live instantly to Vercel with automatic CI/CD."
                 ]
             }
         ];
@@ -662,9 +750,9 @@
 
             const stepsContainer = document.getElementById('modal-steps');
             stepsContainer.innerHTML = p.steps.map((step, idx) => `
-                <div class="flex items-start gap-3 p-3 rounded-xl bg-[#10061e] border border-white/5">
+                <div class="flex items-start gap-3 p-3.5 rounded-xl bg-[#10061e] border border-white/5">
                     <span class="w-6 h-6 rounded-lg bg-[#ff2a85]/20 text-[#ff2a85] font-bold text-xs flex items-center justify-center shrink-0 border border-[#ff2a85]/30">${idx + 1}</span>
-                    <p class="text-xs text-slate-300 leading-relaxed">${step}</p>
+                    <p class="text-xs text-slate-300 leading-relaxed pt-0.5">${step}</p>
                 </div>
             `).join('');
 

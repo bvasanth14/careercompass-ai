@@ -1,504 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>CareerCompass-AI | AI Career Guidance Platform</title>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Lottie Web Component CDN -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.4/dist/dotlottie-wc.js" type="module"></script>
+
+    <!-- Custom Tailwind Config & CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        blob: "blob 7s infinite",
+                        float: "float 6s ease-in-out infinite",
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" },
+                        },
+                        float: {
+                            "0%, 100%": { transform: "translateY(0)" },
+                            "50%": { transform: "translateY(-15px)" },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom subtle grid background */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(168, 85, 247, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-[#0b0c10] text-slate-100 font-sans antialiased selection:bg-purple-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Background Blobs -->
+    <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob pointer-events-none"></div>
+    <div class="absolute top-0 -right-4 w-72 h-72 bg-fuchsia-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob animation-delay-2000 pointer-events-none"></div>
+    <div class="absolute -bottom-8 left-20 w-72 h-72 bg-indigo-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob animation-delay-4000 pointer-events-none"></div>
 
     <!-- Navigation -->
-    <header>
-        <nav class="navbar">
-
-            <div class="logo">
-                CareerCompass<span>-AI</span>
+    <header class="fixed w-full top-0 z-50 backdrop-blur-xl bg-[#0b0c10]/70 border-b border-purple-500/10 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-2" data-aos="fade-right">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-purple-500 blur-md opacity-50 rounded-full"></div>
+                    <i data-lucide="compass" class="w-8 h-8 text-purple-400 relative z-10 animate-[spin_10s_linear_infinite]"></i>
+                </div>
+                <a href="#home" class="text-2xl font-extrabold tracking-wide text-white">
+                    CareerCompass<span class="text-purple-400">-AI</span>
+                </a>
             </div>
 
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#how">How It Works</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <!-- Links -->
+            <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300" data-aos="fade-down" data-aos-delay="100">
+                <li><a href="#home" class="hover:text-purple-400 hover:-translate-y-0.5 inline-block transition-all">Home</a></li>
+                <li><a href="#features" class="hover:text-purple-400 hover:-translate-y-0.5 inline-block transition-all">Features</a></li>
+                <li><a href="#how" class="hover:text-purple-400 hover:-translate-y-0.5 inline-block transition-all">How It Works</a></li>
+                <li><a href="#contact" class="hover:text-purple-400 hover:-translate-y-0.5 inline-block transition-all">Contact</a></li>
             </ul>
 
-          <a href="login.html">
-    <button class="login-btn">
-        Login
-    </button>
-    </a>
-
+            <!-- Login CTA -->
+            <div data-aos="fade-left">
+                <a href="login.html" class="inline-flex items-center gap-2 bg-purple-500/10 hover:bg-purple-600 text-white font-medium text-sm px-5 py-2.5 rounded-xl border border-purple-500/20 hover:border-purple-500 transition-all shadow-lg hover:shadow-purple-500/25 active:scale-95 duration-300">
+                    <i data-lucide="log-in" class="w-4 h-4"></i> Login
+                </a>
+            </div>
         </nav>
     </header>
 
-
-
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="relative pt-32 pb-24 px-6 overflow-hidden bg-grid-pattern border-b border-purple-500/10">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10 min-h-[75vh]">
+            
+            <!-- Text Content -->
+            <div class="space-y-8 text-center md:text-left">
+                <div data-aos="fade-right" data-aos-delay="100">
+                    <span class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i> Next-Gen Career Intelligence
+                    </span>
+                </div>
 
-        <div class="hero-content">
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-tight" data-aos="fade-up" data-aos-delay="200">
+                    Navigate Your Career <br />
+                    <span class="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent pb-2 inline-block">
+                        With AI Intelligence
+                    </span>
+                </h1>
 
-            <h1>
-                Navigate Your Career
-                <span>With AI Intelligence</span>
-            </h1>
-
-
-            <p>
-                CareerCompass-AI helps students discover suitable career paths,
-                analyze resumes, identify skill gaps, and build personalized
-                learning roadmaps for their future.
-            </p>
-
-
-            <div class="hero-buttons">
-
-                <button>
-                    Get Started
-                </button>
-
-
-                <button class="secondary-btn">
-                    Explore Features
-                </button>
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="hero-image">
-
-            <div class="ai-card">
-
-                🤖
-
-                <h3>
-                    AI Career Assistant
-                </h3>
-
-                <p>
-                    Your intelligent guide for career growth
+                <p class="text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed mx-auto md:mx-0" data-aos="fade-up" data-aos-delay="300">
+                    CareerCompass-AI helps students discover suitable career paths, analyze resumes, identify skill gaps, and build personalized learning roadmaps for their future.
                 </p>
 
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="login.html" class="group relative overflow-hidden bg-purple-600 hover:bg-purple-500 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-[0_0_40px_rgba(168,85,247,0.4)] hover:shadow-[0_0_60px_rgba(168,85,247,0.6)] flex items-center justify-center gap-2 hover:-translate-y-1 active:scale-95">
+                        <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                        <i data-lucide="zap" class="w-5 h-5 fill-current"></i> Get Started Free
+                    </a>
+
+                    <a href="#features" class="bg-purple-900/20 hover:bg-purple-900/40 text-slate-200 border border-purple-500/20 font-semibold px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 hover:-translate-y-1 active:scale-95 backdrop-blur-md">
+                        Explore Features <i data-lucide="arrow-down" class="w-4 h-4 group-hover:animate-bounce"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Integrated Animated AI Card with Lottie Web Component -->
+            <div class="flex justify-center" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="w-full max-w-md p-8 rounded-[2rem] bg-[#0f111a] border border-purple-500/20 shadow-[0_0_50px_rgba(168,85,247,0.15)] relative group transition-all duration-500 animate-float">
+                    
+                    <!-- Subtle Purple Hover Gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-fuchsia-500/5 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                    <div class="relative z-10">
+                        <!-- Lottie Animation Container -->
+                        <div class="w-full h-48 mb-6 flex items-center justify-center bg-purple-950/20 rounded-2xl border border-purple-500/20 overflow-hidden p-2">
+                            <dotlottie-wc 
+                                src="https://lottie.host/bbc2897e-3101-4f86-8c3d-42c1bddc65dd/q8LpU8njlD.lottie" 
+                                style="width: 100%; height: 100%;" 
+                                autoplay 
+                                loop>
+                            </dotlottie-wc>
+                        </div>
+
+                        <!-- Title & Status Dot -->
+                        <h3 class="text-2xl font-extrabold text-white mb-4 flex items-center gap-3">
+                            AI Career Assistant 
+                            <span class="relative flex h-3.5 w-3.5 mt-1">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.6)]"></span>
+                            </span>
+                        </h3>
+
+                        <!-- Description -->
+                        <p class="text-slate-400 text-[15px] leading-relaxed mb-8">
+                            Your 24/7 intelligent guide for skill analysis, resume evaluations, and career roadmaps.
+                        </p>
+
+                        <!-- Status Box -->
+                        <div class="px-5 py-4 rounded-xl bg-[#0b0c10]/80 border border-purple-500/10 flex items-center gap-4 group-hover:border-purple-500/30 transition-colors shadow-inner">
+                            <div class="rounded-full border border-emerald-500/50 flex items-center justify-center p-0.5 bg-emerald-500/10">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            </div>
+                            <span class="text-[14px] text-slate-200 font-semibold tracking-wide">Ready to analyze your tech profile</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
-
-
     </section>
 
+    <!-- Project Highlights Stats -->
+    <section class="py-12 bg-purple-950/10 border-b border-purple-500/10 relative z-20">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-6 rounded-2xl bg-white/[0.02] border border-purple-500/10 hover:bg-purple-900/20 transition-colors" data-aos="fade-up" data-aos-delay="0">
+                <h2 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400 mb-2">20+</h2>
+                <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">Career Paths</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-white/[0.02] border border-purple-500/10 hover:bg-purple-900/20 transition-colors" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400 mb-2">15+</h2>
+                <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">AI Features</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-white/[0.02] border border-purple-500/10 hover:bg-purple-900/20 transition-colors" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400 mb-2">100%</h2>
+                <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">Student Focused</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-white/[0.02] border border-purple-500/10 hover:bg-purple-900/20 transition-colors" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400 mb-2">24/7</h2>
+                <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">AI Guidance</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-6 border-b border-purple-500/10 relative bg-grid-pattern">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0c10]/80 to-[#0b0c10] pointer-events-none"></div>
 
+        <div class="max-w-7xl mx-auto space-y-16 relative z-10">
+            <div class="text-center max-w-2xl mx-auto space-y-4" data-aos="fade-up">
+                <h2 class="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+                    Powerful Career Intelligence
+                </h2>
+                <p class="text-slate-400 text-lg">
+                    Everything you need to level up your resume, target high-growth roles, and crack placement interviews.
+                </p>
+            </div>
 
-    <!-- Project Highlights -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Cards -->
+                <div class="p-8 rounded-3xl bg-[#0f111a]/80 border border-purple-500/10 hover:border-purple-500/50 hover:bg-purple-900/10 hover:-translate-y-2 transition-all duration-300 group backdrop-blur-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i data-lucide="file-search" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI Resume Analyzer</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Analyze resumes, identify weaknesses, boost ATS compatibility, and receive actionable score improvements.
+                    </p>
+                </div>
 
-    <section class="stats">
+                <div class="p-8 rounded-3xl bg-[#0f111a]/80 border border-purple-500/10 hover:border-fuchsia-500/50 hover:bg-fuchsia-900/10 hover:-translate-y-2 transition-all duration-300 group backdrop-blur-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-fuchsia-500 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i data-lucide="git-fork" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Skill Roadmap</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Generate structured, phase-by-phase learning paths custom tailored to your target tech role.
+                    </p>
+                </div>
 
+                <div class="p-8 rounded-3xl bg-[#0f111a]/80 border border-purple-500/10 hover:border-indigo-500/50 hover:bg-indigo-900/10 hover:-translate-y-2 transition-all duration-300 group backdrop-blur-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i data-lucide="building-2" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Placement Eligibility</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Check top tech company eligibility using academic scores and current technical skill sets.
+                    </p>
+                </div>
 
-        <div class="stat-card">
+                <div class="p-8 rounded-3xl bg-[#0f111a]/80 border border-purple-500/10 hover:border-pink-500/50 hover:bg-pink-900/10 hover:-translate-y-2 transition-all duration-300 group backdrop-blur-sm" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-pink-500 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i data-lucide="mic" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI Mock Interview</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Practice real-time technical and HR interview questions with instantaneous feedback and suggestions.
+                    </p>
+                </div>
 
-            <h2>
-                20+
+                <div class="p-8 rounded-3xl bg-[#0f111a]/80 border border-purple-500/10 hover:border-violet-500/50 hover:bg-violet-900/10 hover:-translate-y-2 transition-all duration-300 group backdrop-blur-sm" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-violet-500 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i data-lucide="briefcase" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Job Recommendation</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Discover suitable career paths and active opportunities suited precisely to your skillset profile.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-[#0f111a]/80 border border-purple-500/10 hover:border-rose-500/50 hover:bg-rose-900/10 hover:-translate-y-2 transition-all duration-300 group backdrop-blur-sm" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i data-lucide="message-square-code" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI Career Chatbot</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Get instant career advice, tech stack recommendations, and guidance from an intelligent AI assistant.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how" class="py-24 px-6 border-b border-purple-500/10 bg-[#0b0c10]">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-xl mx-auto space-y-4" data-aos="fade-up">
+                <h2 class="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+                    How It Works
+                </h2>
+                <p class="text-slate-400 text-lg">
+                    4 simple steps to accelerate your career readiness.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                <!-- Connector Line for Desktop -->
+                <div class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500/0 via-purple-500/30 to-purple-500/0 -translate-y-1/2 z-0"></div>
+
+                <div class="p-8 rounded-3xl bg-[#0f111a] border border-purple-500/10 relative z-10 hover:border-purple-500/50 transition-colors backdrop-blur-md" data-aos="fade-right" data-aos-delay="100">
+                    <span class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-600 text-white font-extrabold flex items-center justify-center text-xl mb-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]">1</span>
+                    <h3 class="text-xl font-bold text-white mb-3">Create Profile</h3>
+                    <p class="text-slate-400 text-sm">Add academic details, skills, and target career interests securely.</p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-[#0f111a] border border-purple-500/10 relative z-10 hover:border-purple-500/50 transition-colors backdrop-blur-md" data-aos="fade-right" data-aos-delay="200">
+                    <span class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-600 text-white font-extrabold flex items-center justify-center text-xl mb-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]">2</span>
+                    <h3 class="text-xl font-bold text-white mb-3">Analyze Skills</h3>
+                    <p class="text-slate-400 text-sm">AI evaluates your strengths and pinpoints key industry skill gaps.</p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-[#0f111a] border border-purple-500/10 relative z-10 hover:border-purple-500/50 transition-colors backdrop-blur-md" data-aos="fade-right" data-aos-delay="300">
+                    <span class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-600 text-white font-extrabold flex items-center justify-center text-xl mb-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]">3</span>
+                    <h3 class="text-xl font-bold text-white mb-3">Get Roadmap</h3>
+                    <p class="text-slate-400 text-sm">Receive step-by-step personalized learning and project recommendations.</p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-[#0f111a] border border-purple-500/10 relative z-10 hover:border-purple-500/50 transition-colors backdrop-blur-md" data-aos="fade-right" data-aos-delay="400">
+                    <span class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-600 text-white font-extrabold flex items-center justify-center text-xl mb-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]">4</span>
+                    <h3 class="text-xl font-bold text-white mb-3">Achieve Goals</h3>
+                    <p class="text-slate-400 text-sm">Track your progress and land top tech industry job offers with confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial / Vision Section -->
+    <section class="py-24 px-6 border-b border-purple-500/10 bg-purple-950/10">
+        <div class="max-w-4xl mx-auto text-center space-y-10" data-aos="zoom-in">
+            <i data-lucide="quote" class="w-16 h-16 text-purple-500/30 mx-auto transform -scale-x-100"></i>
+            
+            <blockquote class="text-2xl sm:text-4xl font-medium text-slate-200 leading-snug tracking-tight">
+                "A platform designed to help students deeply understand their skills, explore infinite career options, and confidently prepare for industry opportunities."
+            </blockquote>
+
+            <div class="pt-4">
+                <div class="w-12 h-1 bg-purple-500 rounded-full mx-auto mb-4"></div>
+                <h4 class="text-white font-bold text-xl tracking-wide">CareerCompass-AI Vision</h4>
+                <p class="text-purple-400 text-sm uppercase tracking-widest mt-1">Empowering Student Careers</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA Section -->
+    <section id="contact" class="py-28 px-6 text-center relative overflow-hidden bg-purple-900/10">
+        <!-- Background glows -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-64 bg-purple-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-3xl mx-auto space-y-8 relative z-10">
+            <h2 class="text-4xl sm:text-6xl font-black text-white tracking-tight" data-aos="fade-down">
+                Build Your Future With AI
             </h2>
-
-            <p>
-                Career Paths
+            <p class="text-slate-300 text-lg sm:text-xl max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Join thousands of students accelerating their tech careers. Start your journey towards a smarter path today.
             </p>
-
+            <div class="pt-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="register.html" class="inline-flex items-center gap-3 bg-white text-purple-950 font-bold px-10 py-5 rounded-2xl transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 group">
+                    Get Started For Free <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
         </div>
-
-
-
-        <div class="stat-card">
-
-            <h2>
-                15+
-            </h2>
-
-            <p>
-                AI Career Features
-            </p>
-
-        </div>
-
-
-
-
-        <div class="stat-card">
-
-            <h2>
-                100%
-            </h2>
-
-            <p>
-                Student Focused
-            </p>
-
-        </div>
-
-
-
-
-        <div class="stat-card">
-
-            <h2>
-                AI
-            </h2>
-
-            <p>
-                Powered Guidance
-            </p>
-
-        </div>
-
-
     </section>
-
-
-
-
-
-    <!-- Features -->
-
-    <section id="features" class="features">
-
-
-        <h2>
-            Powerful Career Intelligence Features
-        </h2>
-
-
-
-        <div class="feature-container">
-
-
-
-            <div class="feature-card">
-
-                📄
-
-                <h3>
-                    AI Resume Analyzer
-                </h3>
-
-                <p>
-                    Analyze resumes, identify weaknesses,
-                    and receive improvement suggestions.
-                </p>
-
-            </div>
-
-
-
-
-            <div class="feature-card">
-
-                🛣️
-
-                <h3>
-                    Skill Roadmap
-                </h3>
-
-                <p>
-                    Generate personalized learning paths
-                    based on career goals.
-                </p>
-
-            </div>
-
-
-
-
-
-            <div class="feature-card">
-
-                🏢
-
-                <h3>
-                    Placement Eligibility
-                </h3>
-
-                <p>
-                    Check company eligibility using
-                    academic and skill requirements.
-                </p>
-
-            </div>
-
-
-
-
-
-            <div class="feature-card">
-
-                🎤
-
-                <h3>
-                    AI Mock Interview
-                </h3>
-
-                <p>
-                    Practice technical and HR interviews
-                    with AI feedback.
-                </p>
-
-            </div>
-
-
-
-
-
-            <div class="feature-card">
-
-                💼
-
-                <h3>
-                    Job Recommendation
-                </h3>
-
-                <p>
-                    Discover suitable career roles
-                    based on your profile.
-                </p>
-
-            </div>
-
-
-
-
-
-            <div class="feature-card">
-
-                🤖
-
-                <h3>
-                    AI Career Chatbot
-                </h3>
-
-                <p>
-                    Get instant career guidance
-                    from an AI assistant.
-                </p>
-
-            </div>
-
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-
-    <!-- How It Works -->
-
-
-    <section id="how" class="how">
-
-
-        <h2>
-            How CareerCompass-AI Works
-        </h2>
-
-
-
-        <div class="steps">
-
-
-            <div>
-
-                <span>
-                    1
-                </span>
-
-                <h3>
-                    Create Profile
-                </h3>
-
-                <p>
-                    Add academic details,
-                    skills, and interests.
-                </p>
-
-            </div>
-
-
-
-            <div>
-
-                <span>
-                    2
-                </span>
-
-                <h3>
-                    Analyze Skills
-                </h3>
-
-                <p>
-                    AI understands your strengths
-                    and career goals.
-                </p>
-
-            </div>
-
-
-
-
-            <div>
-
-                <span>
-                    3
-                </span>
-
-                <h3>
-                    Get Roadmap
-                </h3>
-
-                <p>
-                    Receive personalized learning
-                    recommendations.
-                </p>
-
-            </div>
-
-
-
-
-            <div>
-
-                <span>
-                    4
-                </span>
-
-                <h3>
-                    Achieve Goals
-                </h3>
-
-                <p>
-                    Track progress and improve
-                    your career readiness.
-                </p>
-
-            </div>
-
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-
-
-    <!-- Testimonials -->
-
-
-    <section class="testimonials">
-
-
-        <h2>
-            Designed For Students
-        </h2>
-
-
-        <div class="testimonial-card">
-
-
-            <p>
-                "A platform designed to help students
-                understand their skills, explore career options,
-                and prepare for industry opportunities."
-            </p>
-
-
-            <h4>
-                CareerCompass-AI Vision
-            </h4>
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-
-    <!-- Contact -->
-
-
-    <section id="contact" class="contact">
-
-
-        <h2>
-            Build Your Future With AI
-        </h2>
-
-
-        <p>
-            Start your journey towards a smarter career path.
-        </p>
-
-
-        <button>
-            Get Started
-        </button>
-
-
-    </section>
-
-
-
-
-
 
     <!-- Footer -->
-
-
-    <footer>
-
-
-        <h3>
-            CareerCompass-AI
-        </h3>
-
-
-        <p>
-            AI-powered career guidance platform
-            for students and graduates.
-        </p>
-
-
-        <p>
-            © 2026 CareerCompass-AI
-        </p>
-
-
+    <footer class="bg-[#0b0c10] border-t border-purple-500/10 py-12 px-6 text-center text-slate-500 text-sm space-y-4">
+        <div class="flex items-center justify-center gap-2 font-bold text-white text-xl">
+            <i data-lucide="compass" class="w-6 h-6 text-purple-500"></i> CareerCompass-AI
+        </div>
+        <p class="max-w-md mx-auto">An AI-powered career guidance platform strictly engineered for students and modern tech graduates.</p>
+        <p class="text-slate-600 text-xs pt-4">© 2026 CareerCompass-AI. All rights reserved.</p>
     </footer>
 
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Initialization Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-
-<script src="script.js"></script>
-
-
+        // Initialize AOS Animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic',
+        });
+    </script>
 </body>
-
 </html>

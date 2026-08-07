@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy & Data Management | CareerCompass-AI</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --theme-from: #ff2a85;
+            --theme-to: #c026d3;
+            --theme-glow: rgba(255, 42, 133, 0.3);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0714; }
+        ::-webkit-scrollbar-thumb { background: #2d164d; border-radius: 10px; }
+
+        .dynamic-bg-gradient {
+            background-image: linear-gradient(to right, var(--theme-from), var(--theme-to)) !important;
+        }
+        .dynamic-text-color {
+            color: var(--theme-from) !important;
+        }
+        .dynamic-border-color {
+            border-color: var(--theme-from) !important;
+        }
+        .dynamic-shadow {
+            box-shadow: 0 10px 25px -5px var(--theme-glow) !important;
+        }
+    </style>
+
+    <!-- Apply Theme Immediately on Page Load -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('app_theme_preset');
+            if (savedTheme) {
+                try {
+                    const theme = JSON.parse(savedTheme);
+                    document.documentElement.style.setProperty('--theme-from', theme.from);
+                    document.documentElement.style.setProperty('--theme-to', theme.to);
+                    document.documentElement.style.setProperty('--theme-glow', theme.glow);
+                } catch(e) {}
+            }
+        })();
+    </script>
+</head>
+
+<body class="bg-[#0d0714] text-slate-100 font-sans antialiased min-h-screen flex m-0">
+
+    <!-- Fully Correct Sidebar with All Features -->
+    <aside class="w-[260px] bg-[#120921] border-r border-white/10 flex flex-col shrink-0 h-screen sticky top-0 z-50">
+        <!-- Logo Area -->
+        <div class="p-6 border-b border-white/10 flex items-center gap-3 cursor-pointer shrink-0" onclick="window.location.href='dashboard.html'">
+            <div class="p-2.5 rounded-xl dynamic-bg-gradient text-white dynamic-shadow">
+                <i data-lucide="compass" class="w-6 h-6"></i>
+            </div>
+            <span class="text-lg font-bold tracking-wide text-white">
+                CareerCompass<span class="dynamic-text-color">AI</span>
+            </span>
+        </div>
+
+        <!-- Full Navigation Links -->
+        <ul class="flex-1 overflow-y-auto px-4 py-4 space-y-1 text-sm font-medium text-slate-400">
+            <li>
+                <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="profile.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="user" class="w-5 h-5"></i> Profile
+                </a>
+            </li>
+            <li>
+                <a href="resume-analyzer.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="file-text" class="w-5 h-5"></i> Resume Analyzer
+                </a>
+            </li>
+            <li>
+                <a href="roadmap.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="git-branch" class="w-5 h-5"></i> Skill Roadmap
+                </a>
+            </li>
+            <li>
+                <a href="placement.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="building-2" class="w-5 h-5"></i> Placement Checker
+                </a>
+            </li>
+            <li>
+                <a href="mock-interview.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="mic" class="w-5 h-5"></i> Mock Interview
+                </a>
+            </li>
+            <li>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="award" class="w-5 h-5"></i> Certificates
+                </a>
+            </li>
+            <li>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i> Projects
+                </a>
+            </li>
+            <li>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl dynamic-bg-gradient text-white dynamic-shadow transition-all font-semibold">
+                    <i data-lucide="settings" class="w-5 h-5"></i> Settings
+                </a>
+            </li>
+        </ul>
+        
+        <!-- Logout Button -->
+        <div class="p-4 border-t border-white/10 shrink-0">
+            <button onclick="performLogout()" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-rose-400 hover:bg-rose-500/15 transition-all text-left font-medium cursor-pointer">
+                <i data-lucide="log-out" class="w-5 h-5"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col min-h-screen overflow-y-auto bg-gradient-to-br from-[#0d0714] via-[#180a2a] to-[#240b3b] p-8 space-y-8">
+        
+        <!-- Header Banner -->
+        <header class="px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-6 border-b border-white/10 bg-[#0d0714]/60 backdrop-blur-xl sticky top-0 z-40">
+            <div class="space-y-1 text-center md:text-left">
+                <span class="px-3 py-1 rounded-full bg-white/5 dynamic-text-color text-xs font-bold border border-white/10 flex items-center gap-1.5 w-fit mx-auto md:mx-0">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Security & Data Center
+                </span>
+                <h1 class="text-3xl font-extrabold text-white tracking-tight">
+                    Privacy & Data Management
+                </h1>
+                <p class="text-slate-400 text-sm max-w-xl">
+                    Manage your security preferences, account visibility, data backups, and local storage controls.
+                </p>
+            </div>
+
+            <!-- Toast Notification -->
+            <div id="toast-notification" class="hidden px-4 py-2.5 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2 shadow-xl transition-all">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                <span id="toast-message">Settings updated successfully!</span>
+            </div>
+        </header>
+
+        <div class="max-w-4xl w-full mx-auto space-y-8">
+            
+            <!-- SECTION 1: Privacy & Security -->
+            <div class="p-8 rounded-3xl bg-[#170c28] border border-white/10 space-y-6 shadow-2xl">
+                <div class="border-b border-white/10 pb-4">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="lock" class="w-5 h-5 dynamic-text-color"></i> Privacy & Security
+                    </h2>
+                    <p class="text-xs text-slate-400">Control your account protection layers and recruiter visibility.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Profile Visibility Toggle -->
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-[#10061e] border border-white/5">
+                        <div class="space-y-0.5">
+                            <h4 class="text-sm font-semibold text-white">Public Recruiter Visibility</h4>
+                            <p class="text-xs text-slate-400">Allow verified employers to view your profile and resume analytics.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer" onchange="showToast('Visibility setting updated')">
+                            <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-[var(--theme-from)] peer-checked:to-[var(--theme-to)]"></div>
+                        </label>
+                    </div>
+
+                    <!-- Two-Factor Authentication -->
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-[#10061e] border border-white/5">
+                        <div class="space-y-0.5">
+                            <h4 class="text-sm font-semibold text-white">Two-Factor Authentication (2FA)</h4>
+                            <p class="text-xs text-slate-400">Require an extra security code during login sign-ins.</p>
+                        </div>
+                        <button onclick="showToast('2FA configuration modal opened')" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all cursor-pointer">
+                            Configure 2FA
+                        </button>
+                    </div>
+
+                    <!-- Password Update -->
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-[#10061e] border border-white/5">
+                        <div class="space-y-0.5">
+                            <h4 class="text-sm font-semibold text-white">Password Management</h4>
+                            <p class="text-xs text-slate-400">Last changed over 3 months ago.</p>
+                        </div>
+                        <button onclick="showToast('Password reset link sent to your email')" class="px-4 py-2 rounded-xl dynamic-bg-gradient text-xs font-semibold text-white dynamic-shadow transition-all cursor-pointer">
+                            Change Password
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Data & Storage Management -->
+            <div class="p-8 rounded-3xl bg-[#170c28] border border-white/10 space-y-6 shadow-2xl">
+                <div class="border-b border-white/10 pb-4">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="database" class="w-5 h-5 dynamic-text-color"></i> Data & Storage Management
+                    </h2>
+                    <p class="text-xs text-slate-400">Manage your local storage data caches, account backups, and data removal.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Export Data -->
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-[#10061e] border border-white/5">
+                        <div class="space-y-0.5">
+                            <h4 class="text-sm font-semibold text-white">Export Account Data</h4>
+                            <p class="text-xs text-slate-400">Download a complete backup of your profile, roadmap progress, and settings as JSON.</p>
+                        </div>
+                        <button onclick="showToast('Data exported successfully!')" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all cursor-pointer flex items-center gap-2">
+                            <i data-lucide="download" class="w-4 h-4"></i> Export Data
+                        </button>
+                    </div>
+
+                    <!-- Clear Cache -->
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-[#10061e] border border-white/5">
+                        <div class="space-y-0.5">
+                            <h4 class="text-sm font-semibold text-white">Clear Local Storage Cache</h4>
+                            <p class="text-xs text-slate-400">Clear temporary application caches without losing saved configurations.</p>
+                        </div>
+                        <button onclick="localStorage.clear(); showToast('Local cache cleared successfully!')" class="px-4 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 text-xs font-semibold text-amber-300 transition-all cursor-pointer">
+                            Clear Cache
+                        </button>
+                    </div>
+
+                    <!-- Delete Account -->
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-rose-500/5 border border-rose-500/20">
+                        <div class="space-y-0.5">
+                            <h4 class="text-sm font-semibold text-rose-300">Permanently Delete Account</h4>
+                            <p class="text-xs text-rose-400/80">Permanently erase all your personal data, roadmaps, and resume analyses.</p>
+                        </div>
+                        <button onclick="if(confirm('Are you sure you want to delete your account?')) { localStorage.clear(); window.location.href='login.html'; }" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-xs font-semibold text-white transition-all cursor-pointer shadow-lg">
+                            Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Future Updates / More Features Notice -->
+            <div class="p-8 rounded-3xl bg-[#170c28] border border-white/10 space-y-6 shadow-2xl">
+                <div class="border-b border-white/10 pb-4">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-5 h-5 dynamic-text-color"></i> Future Updates
+                    </h2>
+                    <p class="text-xs text-slate-400">What's next for CareerCompass-AI.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#10061e] border border-white/5">
+                    <div class="space-y-1 max-w-2xl">
+                        <h4 class="text-sm font-semibold text-white">More Features Coming Soon</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            We are continuously working to improve the platform. Additional settings, features, and customization options will be added to the website in future updates to enhance your experience.
+                        </p>
+                    </div>
+                    <div class="shrink-0 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-slate-300 flex items-center gap-2">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--theme-from)] opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--theme-from)]"></span>
+                        </span>
+                        In Development
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Operational Script Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            const span = document.getElementById('toast-message');
+            span.innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function performLogout() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+
+</html>

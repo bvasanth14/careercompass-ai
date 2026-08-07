@@ -3,12 +3,9 @@
 // Job Role Skills Database
 // =========================================
 
-
 const jobRoles = {
 
-
     "Java Full Stack Developer": [
-
         "Java",
         "OOP",
         "JDBC",
@@ -22,13 +19,20 @@ const jobRoles = {
         "REST API",
         "Git",
         "GitHub"
-
     ],
 
-
+    "Software Developer": [
+        "Java",
+        "Python",
+        "C++",
+        "OOP",
+        "SQL",
+        "Git",
+        "GitHub",
+        "Problem Solving"
+    ],
 
     "Python Developer": [
-
         "Python",
         "OOP",
         "SQL",
@@ -38,13 +42,9 @@ const jobRoles = {
         "REST API",
         "Git",
         "GitHub"
-
     ],
 
-
-
     "Data Scientist": [
-
         "Python",
         "Statistics",
         "Machine Learning",
@@ -54,27 +54,42 @@ const jobRoles = {
         "Data Analysis",
         "SQL",
         "Data Visualization"
-
     ],
 
-
+    "Data Analyst": [
+        "SQL",
+        "Excel",
+        "Python",
+        "Pandas",
+        "Data Analysis",
+        "Data Visualization",
+        "Communication"
+    ],
 
     "Frontend Developer": [
-
         "HTML",
         "CSS",
         "JavaScript",
         "React",
         "Bootstrap",
+        "Tailwind CSS",
         "Git",
         "GitHub"
-
     ],
 
-
+    "Backend Developer": [
+        "Node.js",
+        "Express.js",
+        "Java",
+        "Python",
+        "SQL",
+        "MySQL",
+        "MongoDB",
+        "REST API",
+        "Git"
+    ],
 
     "Cyber Security Analyst": [
-
         "Networking",
         "Linux",
         "Cyber Security",
@@ -82,10 +97,29 @@ const jobRoles = {
         "Wireshark",
         "Nmap",
         "Python"
+    ],
 
+    "Cloud Engineer": [
+        "AWS",
+        "Azure",
+        "Docker",
+        "Kubernetes",
+        "Linux",
+        "Git",
+        "Networking"
+    ],
+
+    "AI Engineer": [
+        "Python",
+        "Machine Learning",
+        "Deep Learning",
+        "TensorFlow",
+        "PyTorch",
+        "Pandas",
+        "NumPy",
+        "Artificial Intelligence"
     ]
 
 };
-
 
 module.exports = jobRoles;

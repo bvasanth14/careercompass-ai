@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Checker | CareerCompass-AI</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0714; }
+        ::-webkit-scrollbar-thumb { background: #2d164d; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a85; }
+
+        /* Neon Glow & Focus Effects */
+        .neon-border {
+            border: 1px solid rgba(255, 42, 133, 0.2);
+        }
+        .neon-border:focus {
+            border-color: #ff2a85;
+            box-shadow: 0 0 15px rgba(255, 42, 133, 0.35);
+            outline: none;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-[#0d0714] text-slate-100 font-sans antialiased min-h-screen flex selection:bg-[#ff2a85] selection:text-white">
+
+    <!-- Sidebar -->
+    <aside class="w-[260px] bg-[#120921] border-r border-white/10 flex flex-col shrink-0 z-25 relative min-h-screen">
+        <div class="absolute -left-20 top-20 w-40 h-40 bg-[#ff2a85]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Logo Area -->
+        <div class="p-6 border-b border-white/10 flex items-center gap-3 cursor-pointer" onclick="window.location.href='dashboard.html'">
+            <div class="p-2.5 rounded-xl bg-gradient-to-br from-[#ff2a85] to-[#7928ca] text-white shadow-lg shadow-[#ff2a85]/30">
+                <i data-lucide="compass" class="w-6 h-6"></i>
+            </div>
+            <span class="text-lg font-bold tracking-wide text-white">
+                CareerCompass<span class="text-[#ff2a85]">AI</span>
+            </span>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="flex-1 overflow-y-auto px-4 py-6 space-y-1.5 text-sm font-medium text-slate-400">
+            <li>
+                <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="profile.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="user" class="w-5 h-5"></i> Profile
+                </a>
+            </li>
+            <li>
+                <a href="resume-analyzer.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="file-text" class="w-5 h-5"></i> Resume Analyzer
+                </a>
+            </li>
+            <li>
+                <a href="skill-roadmap.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="git-fork" class="w-5 h-5"></i> Skill Roadmap
+                </a>
+            </li>
+            <li>
+                <a href="placement-checker.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white shadow-lg shadow-[#ff2a85]/30 transition-all font-semibold">
+                    <i data-lucide="building-2" class="w-5 h-5"></i> Placement Checker
+                </a>
+            </li>
+            <li>
+                <a href="mock-interview.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="mic" class="w-5 h-5"></i> Mock Interview
+                </a>
+            </li>
+            <li>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="award" class="w-5 h-5"></i> Certificates
+                </a>
+            </li>
+            <li>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i> Projects
+                </a>
+            </li>
+            <li>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="settings" class="w-5 h-5"></i> Settings
+                </a>
+            </li>
+        </ul>
+        
+        <!-- Logout Button -->
+        <div class="p-4 border-t border-white/10 mt-auto">
+            <button id="logout-btn" onclick="performLogout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-rose-400 hover:bg-rose-500/10 transition-all text-left font-medium cursor-pointer">
+                <i data-lucide="log-out" class="w-5 h-5"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col min-h-screen overflow-y-auto bg-gradient-to-br from-[#0d0714] via-[#180a2a] to-[#240b3b] relative z-10">
+        
+        <!-- Ambient Glow -->
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-[#c026d3]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
+
+        <!-- Header -->
+        <header class="px-8 py-6 flex items-center justify-between sticky top-0 z-40 bg-[#0d0714]/80 backdrop-blur-xl border-b border-white/5">
+            <div>
+                <h1 class="text-2xl font-extrabold text-white flex items-center gap-2">
+                    🏢 Placement Eligibility & Criteria Matcher
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">Select any company below to evaluate your complete profile criteria and skill breakdown.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <span id="student-badge" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> Active Profile Synced
+                </span>
+            </div>
+        </header>
+
+        <!-- Content Container -->
+        <div class="p-8 max-w-6xl w-full mx-auto space-y-8 pb-16">
+
+            <!-- Active Profile Quick Banner -->
+            <div class="p-4 rounded-2xl bg-[#170c28] border border-white/10 flex flex-wrap items-center justify-between gap-4 text-sm shadow-xl">
+                <div class="flex items-center gap-6">
+                    <div><span class="text-slate-400 text-xs block">Current CGPA</span> <span id="banner-cgpa" class="font-bold text-white text-base">--</span></div>
+                    <div class="h-8 w-[1px] bg-white/10"></div>
+                    <div><span class="text-slate-400 text-xs block">Projects Logged</span> <span id="banner-projects" class="font-bold text-white text-base">--</span></div>
+                    <div class="h-8 w-[1px] bg-white/10"></div>
+                    <div><span class="text-slate-400 text-xs block">Skills Stack</span> <span id="banner-skills" class="font-bold text-white text-base truncate max-w-xs block">--</span></div>
+                </div>
+                <a href="profile.html" class="text-xs px-3 py-1.5 rounded-lg bg-[#ff2a85]/20 text-[#ff2a85] border border-[#ff2a85]/40 hover:bg-[#ff2a85] hover:text-white transition-all font-semibold">
+                    Edit Profile Metrics &rarr;
+                </a>
+            </div>
+
+            <!-- Controls Bar: Filtering & Sorting -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#170c28]/60 p-4 rounded-2xl border border-white/10">
+                <!-- Filter Tabs -->
+                <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+                    <button onclick="setFilter('all')" id="filter-all" class="filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-[#ff2a85] text-white shadow-md shadow-[#ff2a85]/30 transition-all cursor-pointer whitespace-nowrap">
+                        All Companies (<span id="count-all">0</span>)
+                    </button>
+                    <button onclick="setFilter('eligible')" id="filter-eligible" class="filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10 transition-all cursor-pointer whitespace-nowrap">
+                        Eligible Only (<span id="count-eligible">0</span>)
+                    </button>
+                    <button onclick="setFilter('ineligible')" id="filter-ineligible" class="filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10 transition-all cursor-pointer whitespace-nowrap">
+                        Gaps Detected (<span id="count-ineligible">0</span>)
+                    </button>
+                </div>
+
+                <!-- Sort Selector -->
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                    <span class="text-xs text-slate-400 whitespace-nowrap"><i data-lucide="arrow-up-down" class="w-3.5 h-3.5 inline mr-1"></i> Sort by:</span>
+                    <select id="sort-select" onchange="handleSort()" class="bg-[#10061e] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-200 focus:border-[#ff2a85] outline-none cursor-pointer">
+                        <option value="default">Default Order</option>
+                        <option value="cgpa-asc">CGPA Requirement: Low to High</option>
+                        <option value="cgpa-desc">CGPA Requirement: High to Low</option>
+                        <option value="name">Company Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Company Selection Grid -->
+            <section class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="company-grid">
+                    <!-- Populated Dynamically by JS -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Popup Modal Overlay (Initially Hidden) -->
+    <div id="results-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-[#170c28] border border-white/10 rounded-3xl max-w-2xl w-full p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 rounded-xl bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+                <div>
+                    <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Evaluation Report</span>
+                    <h2 id="selected-company-title" class="text-2xl font-bold text-white mt-0.5">Eligibility Analysis</h2>
+                </div>
+                <div id="overall-status-badge" class="px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Criteria Check Matrix -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                
+                <!-- CGPA Check -->
+                <div class="p-4 rounded-2xl bg-[#10061e] border border-white/10 space-y-2 shadow-inner">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-slate-300">CGPA Requirement</span>
+                        <div id="cgpa-icon"></div>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="student-cgpa-display" class="text-xl font-extrabold text-white">--</span>
+                        <span class="text-xs text-slate-400">/ Target: <span id="target-cgpa">--</span></span>
+                    </div>
+                    <p id="cgpa-msg" class="text-[11px] text-slate-400"></p>
+                </div>
+
+                <!-- Projects Check -->
+                <div class="p-4 rounded-2xl bg-[#10061e] border border-white/10 space-y-2 shadow-inner">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-slate-300">Projects Count</span>
+                        <div id="projects-icon"></div>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="student-projects-display" class="text-xl font-extrabold text-white">--</span>
+                        <span class="text-xs text-slate-400">/ Target: <span id="target-projects">--</span></span>
+                    </div>
+                    <p id="projects-msg" class="text-[11px] text-slate-400"></p>
+                </div>
+
+                <!-- Skills Check -->
+                <div class="p-4 rounded-2xl bg-[#10061e] border border-white/10 space-y-2 shadow-inner">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-slate-300">Skill Alignment</span>
+                        <div id="skills-icon"></div>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="student-skills-match" class="text-lg font-extrabold text-white">--</span>
+                    </div>
+                    <p id="skills-msg" class="text-[11px] text-slate-400"></p>
+                </div>
+
+            </div>
+
+            <!-- Granular Skill Tag Breakdown Matrix -->
+            <div class="p-4 rounded-2xl bg-[#10061e] border border-white/10 space-y-3 shadow-inner">
+                <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 text-[#ff2a85]"></i> Granular Skill Breakdown Matrix
+                </span>
+                <div id="skill-breakdown-tags" class="flex flex-wrap gap-1.5">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Actionable Recommendation Box -->
+            <div id="recommendation-box" class="p-4 rounded-2xl border flex items-start gap-3">
+                <div id="recommendation-icon" class="mt-0.5"></div>
+                <div class="space-y-1">
+                    <h4 class="font-bold text-white text-sm" id="recommendation-title">Action Plan</h4>
+                    <p id="recommendation-text" class="text-xs text-slate-300 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <!-- Action Buttons Footer -->
+            <div class="flex items-center gap-3 pt-2">
+                <button onclick="closeModal()" class="flex-1 py-3 rounded-xl bg-white/5 text-white font-bold text-sm hover:bg-white/10 transition-all border border-white/10 cursor-pointer flex items-center justify-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to List
+                </button>
+                <button id="apply-action-btn" onclick="" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-[#ff2a85]/20 cursor-pointer flex items-center justify-center gap-2 hidden">
+                    <i data-lucide="send" class="w-4 h-4"></i> Apply Now &rarr;
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripting Logic -->
+    <script>
+        lucide.createIcons();
+
+        // Comprehensive Company Criteria Database (Full Tier 1, Tier 2, Service, Product & FinTech catalog)
+        const companyCriteria = {
+            "Google": { tier: "Tier 1", type: "Product", minCgpa: 8.0, minProjects: 2, requiredKeywords: ["python", "java", "dsa", "algorithms", "c++", "react"] },
+            "Microsoft": { tier: "Tier 1", type: "Product", minCgpa: 7.8, minProjects: 2, requiredKeywords: ["c++", "java", "react", "system design", "python"] },
+            "Amazon": { tier: "Tier 1", type: "E-Commerce", minCgpa: 7.5, minProjects: 2, requiredKeywords: ["java", "aws", "dsa", "sql", "python"] },
+            "Meta": { tier: "Tier 1", type: "Product", minCgpa: 8.0, minProjects: 3, requiredKeywords: ["react", "graphql", "python", "system design", "c++"] },
+            "Apple": { tier: "Tier 1", type: "Product", minCgpa: 8.0, minProjects: 3, requiredKeywords: ["swift", "c++", "objective-c", "ios", "macos"] },
+            "Netflix": { tier: "Tier 1", type: "Product", minCgpa: 8.2, minProjects: 3, requiredKeywords: ["java", "aws", "distributed systems", "spring"] },
+            "Adobe": { tier: "Tier 1", type: "Product", minCgpa: 7.8, minProjects: 2, requiredKeywords: ["c++", "javascript", "react", "machine learning"] },
+            "Uber": { tier: "Tier 1", type: "Tech", minCgpa: 8.0, minProjects: 2, requiredKeywords: ["go", "java", "kafka", "distributed systems"] },
+            "Goldman Sachs": { tier: "Tier 1", type: "FinTech", minCgpa: 8.0, minProjects: 2, requiredKeywords: ["c++", "python", "java", "algorithms"] },
+            "Salesforce": { tier: "Tier 1", type: "SaaS", minCgpa: 7.5, minProjects: 2, requiredKeywords: ["java", "apex", "lightning", "cloud"] },
+            "Oracle": { tier: "Tier 1", type: "Product", minCgpa: 7.5, minProjects: 2, requiredKeywords: ["java", "sql", "plsql", "c++"] },
+            "PayPal": { tier: "Tier 1", type: "FinTech", minCgpa: 7.5, minProjects: 2, requiredKeywords: ["java", "node", "javascript", "react"] },
+            "Zoho": { tier: "Tier 2", type: "Product", minCgpa: 7.0, minProjects: 1, requiredKeywords: ["c", "java", "problem solving", "sql"] },
+            "Freshworks": { tier: "Tier 2", type: "SaaS", minCgpa: 7.0, minProjects: 2, requiredKeywords: ["ruby", "python", "javascript", "react"] },
+            "TCS": { tier: "Tier 2", type: "Service", minCgpa: 7.0, minProjects: 1, requiredKeywords: ["java", "python", "sql"] },
+            "Infosys": { tier: "Tier 2", type: "Service", minCgpa: 6.5, minProjects: 1, requiredKeywords: ["java", "python", "sql", "html"] },
+            "Wipro": { tier: "Tier 2", type: "Service", minCgpa: 6.0, minProjects: 1, requiredKeywords: ["java", "sql", "python"] },
+            "Cognizant": { tier: "Tier 2", type: "Service", minCgpa: 6.0, minProjects: 1, requiredKeywords: ["java", "sql", "python"] },
+            "Accenture": { tier: "Tier 2", type: "Consulting", minCgpa: 6.5, minProjects: 1, requiredKeywords: ["java", "python", "sql", "cloud"] },
+            "IBM": { tier: "Tier 2", type: "Tech", minCgpa: 7.0, minProjects: 1, requiredKeywords: ["java", "python", "cloud", "ai"] }
+        };
+
+        let studentData = {};
+        let currentFilter = 'all';
+        let appliedCompanies = [];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const raw = localStorage.getItem('student') || localStorage.getItem('currentUser');
+            if (raw) {
+                try { studentData = JSON.parse(raw); } catch (err) { studentData = {}; }
+            }
+
+            // Defaults fallback
+            if (!studentData.cgpa) studentData.cgpa = 0.00;
+            if (!studentData.projects) studentData.projects = 0;
+            if (!studentData.skills) studentData.skills = "";
+
+            // Load applied tracking list from local storage
+            const savedApps = localStorage.getItem('applied_companies');
+            if (savedApps) {
+                try { appliedCompanies = JSON.parse(savedApps); } catch(e) { appliedCompanies = []; }
+            }
+
+            localStorage.setItem('student', JSON.stringify(studentData));
+
+            // Render profile quick banner
+            document.getElementById('banner-cgpa').innerText = Number(studentData.cgpa).toFixed(2);
+            document.getElementById('banner-projects').innerText = studentData.projects;
+            document.getElementById('banner-skills').innerText = studentData.skills.split(',').length;
+
+            renderCompanyGrid();
+        });
+
+        // Helper to check individual company eligibility status
+        function checkEligibility(companyName) {
+            const criteria = companyCriteria[companyName];
+            const studentCgpa = parseFloat(studentData.cgpa) || 8.0;
+            const studentProjects = parseInt(studentData.projects) || 2;
+            const studentSkillsArr = (studentData.skills || "").toLowerCase().split(',').map(s => s.trim());
+
+            const cgpaPass = studentCgpa >= criteria.minCgpa;
+            const projectsPass = studentProjects >= criteria.minProjects;
+            
+            let matchedCount = 0;
+            criteria.requiredKeywords.forEach(kw => {
+                if (studentSkillsArr.some(skill => skill === kw || skill.includes(kw) || kw.includes(skill))) {
+                    matchedCount++;
+                }
+            });
+            const skillsPass = matchedCount > 0;
+            const isEligible = cgpaPass && projectsPass && skillsPass;
+
+            return { isEligible, cgpaPass, projectsPass, skillsPass, matchedCount };
+        }
+
+        // Render Company Grid with Filtering & Sorting features
+        function renderCompanyGrid() {
+            const grid = document.getElementById('company-grid');
+            grid.innerHTML = '';
+
+            let companies = Object.keys(companyCriteria);
+
+            // Calculate precise counts for filter pills
+            let eligibleCount = 0;
+            let ineligibleCount = 0;
+            companies.forEach(comp => {
+                if (checkEligibility(comp).isEligible) eligibleCount++;
+                else ineligibleCount++;
+            });
+
+            document.getElementById('count-all').innerText = companies.length;
+            document.getElementById('count-eligible').innerText = eligibleCount;
+            document.getElementById('count-ineligible').innerText = ineligibleCount;
+
+            // Apply Filtering Logic
+            companies = companies.filter(comp => {
+                const res = checkEligibility(comp);
+                if (currentFilter === 'eligible') return res.isEligible;
+                if (currentFilter === 'ineligible') return !res.isEligible;
+                return true;
+            });
+
+            // Apply Sorting Logic
+            const sortVal = document.getElementById('sort-select').value;
+            companies.sort((a, b) => {
+                if (sortVal === 'cgpa-asc') return companyCriteria[a].minCgpa - companyCriteria[b].minCgpa;
+                if (sortVal === 'cgpa-desc') return companyCriteria[b].minCgpa - companyCriteria[a].minCgpa;
+                if (sortVal === 'name') return a.localeCompare(b);
+                return 0; // Default Order
+            });
+
+            if (companies.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 bg-[#170c28]/40 rounded-2xl border border-white/5">
+                        <i data-lucide="filter-x" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+                        <p class="text-sm">No companies match this active filter criterion.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            companies.forEach(name => {
+                const criteria = companyCriteria[name];
+                const res = checkEligibility(name);
+                const isApplied = appliedCompanies.includes(name);
+
+                let initialLetter = name.charAt(0);
+                if (name === "Goldman Sachs") initialLetter = "GS";
+                if (name === "Salesforce") initialLetter = "Sf";
+                if (name === "Oracle") initialLetter = "Or";
+                if (name === "PayPal") initialLetter = "PP";
+                if (name === "Accenture") initialLetter = "Ac";
+                if (name === "IBM") initialLetter = "IBM";
+
+                const cardHTML = `
+                    <div onclick="selectCompany('${name}')" class="company-card cursor-pointer p-5 rounded-2xl bg-[#170c28]/90 border border-white/10 hover:border-[#ff2a85] transition-all group relative overflow-hidden flex flex-col justify-between shadow-lg" data-company="${name}">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-300 flex items-center justify-center font-bold text-sm group-hover:scale-110 transition-transform shadow-inner">${initialLetter}</div>
+                                ${isApplied ? `<span class="text-[10px] px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-semibold border border-blue-500/30">Applied ✓</span>` : 
+                                  res.isEligible ? `<span class="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold border border-emerald-500/30">Eligible</span>` : 
+                                  `<span class="text-[10px] px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 font-semibold border border-rose-500/30">Gap</span>`}
+                            </div>
+                            <h4 class="font-bold text-white text-base">${name}</h4>
+                            <p class="text-slate-400 text-xs mt-1">${criteria.type} • ${criteria.tier}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400">
+                            <span>Req: ${criteria.minCgpa} CGPA</span>
+                            <span class="text-[#ff2a85] font-semibold group-hover:translate-x-1 transition-transform">Check &rarr;</span>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+
+            lucide.createIcons();
+        }
+
+        function setFilter(filterType) {
+            currentFilter = filterType;
+            document.querySelectorAll('.filter-tab').forEach(btn => {
+                btn.className = "filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10 transition-all cursor-pointer whitespace-nowrap";
+            });
+            document.getElementById(`filter-${filterType}`).className = "filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-[#ff2a85] text-white shadow-md shadow-[#ff2a85]/30 transition-all cursor-pointer whitespace-nowrap";
+            renderCompanyGrid();
+        }
+
+        function handleSort() {
+            renderCompanyGrid();
+        }
+
+        // Select Company & Open Evaluation Popup Modal
+        function selectCompany(companyName) {
+            const criteria = companyCriteria[companyName];
+            if (!criteria) return;
+
+            document.querySelectorAll('.company-card').forEach(card => {
+                card.classList.remove('border-[#ff2a85]', 'bg-[#240b3b]');
+                if (card.getAttribute('data-company') === companyName) {
+                    card.classList.add('border-[#ff2a85]', 'bg-[#240b3b]');
+                }
+            });
+
+            const studentCgpa = parseFloat(studentData.cgpa) || 8.0;
+            const studentProjects = parseInt(studentData.projects) || 2;
+            const studentSkillsArr = (studentData.skills || "").toLowerCase().split(',').map(s => s.trim());
+
+            const cgpaPass = studentCgpa >= criteria.minCgpa;
+            const projectsPass = studentProjects >= criteria.minProjects;
+            
+            let matchedKeywordsCount = 0;
+            criteria.requiredKeywords.forEach(kw => {
+                const isMatch = studentSkillsArr.some(skill => skill === kw || skill.includes(kw) || kw.includes(skill));
+                if (isMatch) matchedKeywordsCount++;
+            });
+            const skillsPass = matchedKeywordsCount > 0;
+            const isEligible = cgpaPass && projectsPass && skillsPass;
+            const isAlreadyApplied = appliedCompanies.includes(companyName);
+
+            // Open Modal
+            const modal = document.getElementById('results-modal');
+            modal.classList.remove('hidden');
+
+            document.getElementById('selected-company-title').innerText = `${companyName} Eligibility Analysis`;
+
+            // Status Badge Setup
+            const badge = document.getElementById('overall-status-badge');
+            if (isAlreadyApplied) {
+                badge.className = "px-4 py-2 rounded-xl font-bold text-sm bg-blue-500/20 text-blue-400 border border-blue-500/40 flex items-center gap-2";
+                badge.innerHTML = `<i data-lucide="check-check" class="w-4 h-4"></i> Application Submitted`;
+            } else if (isEligible) {
+                badge.className = "px-4 py-2 rounded-xl font-bold text-sm bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center gap-2";
+                badge.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i> Eligible to Apply`;
+            } else {
+                badge.className = "px-4 py-2 rounded-xl font-bold text-sm bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center gap-2";
+                badge.innerHTML = `<i data-lucide="alert-circle" class="w-4 h-4"></i> Criteria Gap Detected`;
+            }
+
+            // CGPA Metric Card
+            document.getElementById('student-cgpa-display').innerText = studentCgpa.toFixed(2);
+            document.getElementById('target-cgpa').innerText = criteria.minCgpa.toFixed(2);
+            document.getElementById('cgpa-icon').innerHTML = cgpaPass 
+                ? `<span class="p-1.5 rounded-full bg-emerald-500/20 text-emerald-400"><i data-lucide="check" class="w-4 h-4"></i></span>`
+                : `<span class="p-1.5 rounded-full bg-rose-500/20 text-rose-400"><i data-lucide="x" class="w-4 h-4"></i></span>`;
+            document.getElementById('cgpa-msg').innerText = cgpaPass ? "CGPA meets cutoff." : `Need ${(criteria.minCgpa - studentCgpa).toFixed(2)} more points.`;
+
+            // Projects Metric Card
+            document.getElementById('student-projects-display').innerText = studentProjects;
+            document.getElementById('target-projects').innerText = criteria.minProjects;
+            document.getElementById('projects-icon').innerHTML = projectsPass 
+                ? `<span class="p-1.5 rounded-full bg-emerald-500/20 text-emerald-400"><i data-lucide="check" class="w-4 h-4"></i></span>`
+                : `<span class="p-1.5 rounded-full bg-rose-500/20 text-rose-400"><i data-lucide="x" class="w-4 h-4"></i></span>`;
+            document.getElementById('projects-msg').innerText = projectsPass ? "Sufficient project count." : `Complete ${criteria.minProjects - studentProjects} more project(s).`;
+
+            // Skills Metric Card
+            document.getElementById('student-skills-match').innerText = `${matchedKeywordsCount} / ${criteria.requiredKeywords.length} Match`;
+            document.getElementById('skills-icon').innerHTML = skillsPass 
+                ? `<span class="p-1.5 rounded-full bg-emerald-500/20 text-emerald-400"><i data-lucide="check" class="w-4 h-4"></i></span>`
+                : `<span class="p-1.5 rounded-full bg-rose-500/20 text-rose-400"><i data-lucide="x" class="w-4 h-4"></i></span>`;
+            document.getElementById('skills-msg').innerText = `Primary threshold satisfied`;
+
+            // Granular Skill Tag Breakdown Matrix
+            const breakdownContainer = document.getElementById('skill-breakdown-tags');
+            breakdownContainer.innerHTML = '';
+            criteria.requiredKeywords.forEach(kw => {
+                const matched = studentSkillsArr.some(skill => skill === kw || skill.includes(kw) || kw.includes(skill));
+                const tagClass = matched 
+                    ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/30" 
+                    : "bg-rose-500/10 text-rose-300 border border-rose-500/30";
+                const iconSymbol = matched ? "✓" : "×";
+                breakdownContainer.innerHTML += `<span class="text-xs px-2.5 py-1 rounded-lg font-medium ${tagClass}">${iconSymbol} ${kw}</span>`;
+            });
+
+            // Recommendation Box & Apply Action Button
+            const recBox = document.getElementById('recommendation-box');
+            const recTitle = document.getElementById('recommendation-title');
+            const recText = document.getElementById('recommendation-text');
+            const recIcon = document.getElementById('recommendation-icon');
+            const applyBtn = document.getElementById('apply-action-btn');
+
+            if (isAlreadyApplied) {
+                recBox.className = "p-4 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-start gap-3";
+                recIcon.innerHTML = `<i data-lucide="check-check" class="w-5 h-5 text-blue-400"></i>`;
+                recTitle.innerText = "Application Logged Successfully";
+                recText.innerText = `You have already recorded your application to ${companyName}. Track your progress from your connected modules.`;
+                applyBtn.classList.add('hidden');
+            } else if (isEligible) {
+                recBox.className = "p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-start gap-3";
+                recIcon.innerHTML = `<i data-lucide="sparkles" class="w-5 h-5 text-emerald-400"></i>`;
+                recTitle.innerText = "You are ready to apply!";
+                recText.innerText = `Your profile meets primary screening requirements for ${companyName}. Click apply below to log your status securely.`;
+                
+                applyBtn.classList.remove('hidden');
+                applyBtn.setAttribute('onclick', `submitApplication('${companyName}')`);
+            } else {
+                recBox.className = "p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 flex items-start gap-3";
+                recIcon.innerHTML = `<i data-lucide="lightbulb" class="w-5 h-5 text-rose-400"></i>`;
+                recTitle.innerText = "Action Plan to Unlock Eligibility";
+                recText.innerText = `To qualify for ${companyName}, focus on filling the missing skill tags listed in the matrix above or updating your academic milestones.`;
+                applyBtn.classList.add('hidden');
+            }
+
+            lucide.createIcons();
+        }
+
+        // Apply Action Handler & Local Storage Persistence
+        function submitApplication(companyName) {
+            if (!appliedCompanies.includes(companyName)) {
+                appliedCompanies.push(companyName);
+                localStorage.setItem('applied_companies', JSON.stringify(appliedCompanies));
+            }
+            closeModal();
+            renderCompanyGrid();
+        }
+
+        function closeModal() {
+            document.getElementById('results-modal').classList.add('hidden');
+            document.querySelectorAll('.company-card').forEach(card => {
+                card.classList.remove('border-[#ff2a85]', 'bg-[#240b3b]');
+            });
+        }
+
+        function performLogout() {
+            localStorage.removeItem('student');
+            localStorage.removeItem('currentUser');
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+
+</html>

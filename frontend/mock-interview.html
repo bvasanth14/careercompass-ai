@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strict Keyword-Check Mock Interview | CareerCompass-AI</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Lottie Animation Web Component CDN -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.4/dist/dotlottie-wc.js" type="module"></script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0714; }
+        ::-webkit-scrollbar-thumb { background: #2d164d; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a85; }
+
+        /* Neon Glow & Focus Effects */
+        .neon-border {
+            border: 1px solid rgba(255, 42, 133, 0.2);
+        }
+        .neon-border:focus {
+            border-color: #ff2a85;
+            box-shadow: 0 0 15px rgba(255, 42, 133, 0.35);
+            outline: none;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+
+        @keyframes soundwave {
+            0%, 100% { height: 8px; }
+            50% { height: 32px; }
+        }
+        .wave-bar {
+            animation: soundwave 1.2s ease-in-out infinite;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.3s; }
+    </style>
+</head>
+
+<body class="bg-[#0d0714] text-slate-100 font-sans antialiased min-h-screen flex selection:bg-[#ff2a85] selection:text-white">
+
+    <!-- Sidebar -->
+    <aside class="w-[260px] bg-[#120921] border-r border-white/10 flex flex-col shrink-0 z-25 relative min-h-screen">
+        <div class="absolute -left-20 top-20 w-40 h-40 bg-[#ff2a85]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Logo Area -->
+        <div class="p-6 border-b border-white/10 flex items-center gap-3 cursor-pointer" onclick="window.location.href='dashboard.html'">
+            <div class="p-2.5 rounded-xl bg-gradient-to-br from-[#ff2a85] to-[#7928ca] text-white shadow-lg shadow-[#ff2a85]/30">
+                <i data-lucide="compass" class="w-6 h-6"></i>
+            </div>
+            <span class="text-lg font-bold tracking-wide text-white">
+                CareerCompass<span class="text-[#ff2a85]">AI</span>
+            </span>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="flex-1 overflow-y-auto px-4 py-6 space-y-1.5 text-sm font-medium text-slate-400">
+            <li>
+                <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="profile.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="user" class="w-5 h-5"></i> Profile
+                </a>
+            </li>
+            <li>
+                <a href="resume-analyzer.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="file-text" class="w-5 h-5"></i> Resume Analyzer
+                </a>
+            </li>
+            <li>
+                <a href="skill-roadmap.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="git-fork" class="w-5 h-5"></i> Skill Roadmap
+                </a>
+            </li>
+            <li>
+                <a href="placement-checker.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="building-2" class="w-5 h-5"></i> Placement Checker
+                </a>
+            </li>
+            <li>
+                <a href="mock-interview.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white shadow-lg shadow-[#ff2a85]/30 transition-all font-semibold">
+                    <i data-lucide="mic" class="w-5 h-5"></i> Mock Interview
+                </a>
+            </li>
+            <li>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="award" class="w-5 h-5"></i> Certificates
+                </a>
+            </li>
+            <li>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i> Projects
+                </a>
+            </li>
+            <li>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all">
+                    <i data-lucide="settings" class="w-5 h-5"></i> Settings
+                </a>
+            </li>
+        </ul>
+        
+        <!-- Logout Button -->
+        <div class="p-4 border-t border-white/10 mt-auto">
+            <button id="logout-btn" onclick="performLogout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-rose-400 hover:bg-rose-500/10 transition-all text-left font-medium cursor-pointer">
+                <i data-lucide="log-out" class="w-5 h-5"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col min-h-screen overflow-y-auto bg-gradient-to-br from-[#0d0714] via-[#180a2a] to-[#240b3b] relative z-10">
+        
+        <!-- Ambient Glow -->
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-[#c026d3]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
+
+        <!-- Header -->
+        <header class="px-8 py-6 flex items-center justify-between sticky top-0 z-40 bg-[#0d0714]/80 backdrop-blur-xl border-b border-white/5">
+            <div>
+                <h1 class="text-2xl font-extrabold text-white flex items-center gap-2">
+                    🎙️ Professional AI Interview Studio
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">Multi-track technical and HR screenings with rigorous keyword validation & benchmark grading.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> NLP Strict Keyword Engine
+                </span>
+            </div>
+        </header>
+
+        <!-- Content Container -->
+        <div class="p-8 max-w-5xl w-full mx-auto space-y-8 pb-16">
+
+            <!-- STEP 1: Setup View -->
+            <div id="setup-view" class="space-y-6">
+                
+                <!-- Hero Banner with Lottie Animation -->
+                <div class="p-8 rounded-3xl bg-gradient-to-r from-[#170c28] via-[#200f38] to-[#170c28] border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-[#ff2a85]/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="space-y-3 z-10 max-w-lg">
+                        <span class="px-3 py-1 rounded-full bg-[#ff2a85]/20 text-[#ff2a85] font-bold text-xs border border-[#ff2a85]/30">AI Practice Arena</span>
+                        <h2 class="text-2xl font-extrabold text-white leading-tight">Master Your Next Interview with Confidence</h2>
+                        <p class="text-sm text-slate-300">Simulate real-world technical deep dives, behavioral STAR questions, and culture fit screenings evaluated instantly by industry-grade NLP metrics.</p>
+                    </div>
+                    <div class="z-10 shrink-0 flex items-center justify-center">
+                        <dotlottie-wc src="https://lottie.host/a2ed223e-4f50-4935-86b7-80fae1ee97bb/BhgGcSO8Kx.lottie" style="width: 220px; height: 220px;" autoplay loop></dotlottie-wc>
+                    </div>
+                </div>
+
+                <!-- Mode Selector Tabs -->
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="setInterviewTrack('Technical')" id="track-technical" class="p-4 rounded-2xl bg-gradient-to-br from-[#ff2a85] to-[#c026d3] text-white font-bold text-sm shadow-lg shadow-[#ff2a85]/20 border border-[#ff2a85]/50 flex flex-col items-center gap-2 cursor-pointer transition-all">
+                        <i data-lucide="code-2" class="w-5 h-5"></i> Technical Track
+                        <span class="text-[11px] font-normal opacity-90">DSA, System Design & Code</span>
+                    </button>
+                    <button onclick="setInterviewTrack('Behavioral')" id="track-behavioral" class="p-4 rounded-2xl bg-[#170c28] text-slate-300 font-semibold text-sm border border-white/10 flex flex-col items-center gap-2 cursor-pointer hover:bg-white/5 transition-all">
+                        <i data-lucide="users" class="w-5 h-5 text-purple-400"></i> Behavioral (STAR)
+                        <span class="text-[11px] text-slate-400 font-normal">Leadership & Conflict</span>
+                    </button>
+                    <button onclick="setInterviewTrack('HR')" id="track-hr" class="p-4 rounded-2xl bg-[#170c28] text-slate-300 font-semibold text-sm border border-white/10 flex flex-col items-center gap-2 cursor-pointer hover:bg-white/5 transition-all">
+                        <i data-lucide="briefcase" class="w-5 h-5 text-emerald-400"></i> HR & Culture Fit
+                        <span class="text-[11px] text-slate-400 font-normal">Goals, Salary & Values</span>
+                    </button>
+                </div>
+
+                <!-- Configuration Form -->
+                <div class="p-6 rounded-3xl bg-[#170c28] border border-white/10 shadow-2xl space-y-6">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="sliders" class="w-5 h-5 text-[#ff2a85]"></i> Session Parameters
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Role Selector -->
+                        <div id="role-container" class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-300 block">Target Role / Domain</label>
+                            <select id="interview-role" class="w-full bg-[#10061e] border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 focus:border-[#ff2a85] outline-none cursor-pointer">
+                                <option value="Frontend Developer">Frontend Developer (React, UI/UX)</option>
+                                <option value="Backend Developer">Backend Developer (Node.js, Databases)</option>
+                                <option value="Full Stack Engineer">Full Stack Engineer (MERN / Systems)</option>
+                                <option value="Data Scientist / ML">Data Scientist & Machine Learning</option>
+                                <option value="Software Engineer - Core">Software Engineer (DSA & Core)</option>
+                            </select>
+                        </div>
+
+                        <!-- Question Count -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-300 block">Number of Questions</label>
+                            <select id="interview-count" class="w-full bg-[#10061e] border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 focus:border-[#ff2a85] outline-none cursor-pointer">
+                                <option value="3">Quick Session (3 Questions)</option>
+                                <option value="4" selected>Standard Session (4 Questions)</option>
+                                <option value="5">Deep-Dive Session (5 Questions)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div class="text-xs text-slate-400">
+                            <i data-lucide="info" class="w-3.5 h-3.5 inline mr-1 text-[#ff2a85]"></i> Answers are fully verified against expected industry keywords at final submission.
+                        </div>
+                        <button onclick="startInterview()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-[#ff2a85]/30 cursor-pointer flex items-center gap-2">
+                            <i data-lucide="play" class="w-4 h-4"></i> Start Interview Session &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Past History Quick View -->
+                <div class="p-6 rounded-3xl bg-[#170c28]/60 border border-white/10 space-y-4">
+                    <h3 class="font-bold text-white text-sm flex items-center gap-2">
+                        <i data-lucide="history" class="w-4 h-4 text-purple-400"></i> Recent Evaluated Sessions
+                    </h3>
+                    <div id="past-sessions-list" class="space-y-2">
+                        <div class="p-3 rounded-xl bg-[#10061e] border border-white/5 text-xs text-slate-400">No recent sessions recorded yet.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: Active Interview Studio (Initially Hidden) -->
+            <div id="active-interview-view" class="hidden space-y-6">
+                <!-- Session Status Bar -->
+                <div class="p-4 rounded-2xl bg-[#170c28] border border-white/10 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span id="active-track-badge" class="px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 font-bold text-xs border border-purple-500/30">Technical</span>
+                        <span id="session-badge" class="px-3 py-1 rounded-lg bg-[#ff2a85]/20 text-[#ff2a85] font-bold text-xs border border-[#ff2a85]/30">Frontend Developer</span>
+                        <span id="question-counter" class="text-xs text-slate-400 font-semibold">Question 1 of 4</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-slate-300 bg-[#10061e] px-3 py-1.5 rounded-xl border border-white/10">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-[#ff2a85]"></i> <span id="timer-display" class="font-bold text-white">00:00</span>
+                    </div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="p-8 rounded-3xl bg-[#170c28] border border-white/10 shadow-2xl space-y-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-[#ff2a85]/5 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div>
+                        <span class="text-xs font-semibold text-[#ff2a85] uppercase tracking-wider block mb-1">Interviewer Prompt</span>
+                        <h3 id="question-text" class="text-xl font-bold text-white leading-relaxed">
+                            <!-- Populated Dynamically -->
+                        </h3>
+                    </div>
+
+                    <!-- Answer Input Area -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <label class="text-xs font-semibold text-slate-300">Your Detailed Professional Response</label>
+                            <span class="text-[11px] text-slate-400">Include exact concepts, technical terms, and structured explanations.</span>
+                        </div>
+                        <textarea id="user-answer-input" rows="6" class="w-full bg-[#10061e] border border-white/10 rounded-2xl p-4 text-sm text-slate-200 neon-border resize-none" placeholder="Type your response here... (e.g., Mentioning specific keywords like virtual dom, diffing, state, hooks...)"></textarea>
+                    </div>
+
+                    <!-- Action Footer -->
+                    <div class="flex items-center justify-between pt-2">
+                        <button onclick="toggleVoiceInput()" class="px-4 py-2.5 rounded-xl bg-white/5 text-slate-300 hover:bg-white/10 transition-all text-xs font-semibold border border-white/10 flex items-center gap-2 cursor-pointer">
+                            <i data-lucide="mic" class="w-4 h-4 text-[#ff2a85]"></i> Simulate Voice Dictation
+                        </button>
+                        <button onclick="submitAnswer()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-[#ff2a85]/30 cursor-pointer flex items-center gap-2">
+                            Next Question / Submit <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: Evaluation & Summary Report (Initially Hidden) -->
+            <div id="report-view" class="hidden space-y-6">
+                <div class="p-8 rounded-3xl bg-[#170c28] border border-white/10 shadow-2xl space-y-6 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
+                        <i data-lucide="award" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Session Evaluated with Strict Keyword Matrix</span>
+                        <h2 class="text-2xl font-bold text-white mt-1">Final Performance & Keyword Report</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-4">
+                        <div class="p-4 rounded-2xl bg-[#10061e] border border-white/10 space-y-1">
+                            <span class="text-xs text-slate-400">Strict Final Score</span>
+                            <div id="report-score" class="text-3xl font-extrabold text-[#ff2a85]">0/100</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-[#10061e] border border-white/10 space-y-1">
+                            <span class="text-xs text-slate-400">Keyword Hit Rate</span>
+                            <div id="keyword-hit-display" class="text-3xl font-extrabold text-purple-400">0%</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-[#10061e] border border-white/10 space-y-1">
+                            <span class="text-xs text-slate-400">Recommendation</span>
+                            <div id="recommendation-status" class="text-xl font-extrabold text-amber-400 pt-1">Needs Work</div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-[#10061e] border border-white/10 text-left space-y-4">
+                        <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-[#ff2a85]"></i> Answer Check & Keyword Breakdown
+                        </h4>
+                        <div id="transcript-breakdown" class="space-y-3">
+                            <!-- Populated dynamically with strict checks -->
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 pt-4">
+                        <button onclick="resetInterview()" class="px-6 py-3 rounded-xl bg-white/5 text-white font-bold text-sm hover:bg-white/10 transition-all border border-white/10 cursor-pointer flex items-center gap-2">
+                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Try Again
+                        </button>
+                        <a href="dashboard.html" class="px-6 py-3 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-[#ff2a85]/30 cursor-pointer flex items-center gap-2">
+                            Return to Dashboard <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Scripting Logic -->
+    <script>
+        lucide.createIcons();
+
+        // Expanded Professional Question Banks containing mandatory keywords for strict checking
+        const questionBanks = {
+            "Technical": {
+                "Frontend Developer": [
+                    {
+                        q: "Explain how React's Virtual DOM works and why it improves rendering efficiency.",
+                        keywords: ["virtual dom", "diffing", "reconciliation", "fiber", "render", "dom", "memory"]
+                    },
+                    {
+                        q: "What are React hooks, and how do useMemo and useCallback optimize performance?",
+                        keywords: ["hooks", "usememo", "usecallback", "memoization", "cache", "re-render", "performance"]
+                    },
+                    {
+                        q: "How would you handle global state management in a large-scale enterprise React application?",
+                        keywords: ["redux", "context api", "zustand", "store", "global state", "provider", "actions"]
+                    },
+                    {
+                        q: "What strategies do you use for optimizing web application loading speed and core Web Vitals?",
+                        keywords: ["lazy loading", "code splitting", "caching", "compression", "lcp", "cls", "bundle"]
+                    },
+                    {
+                        q: "Explain closures in JavaScript and provide a practical use case in web development.",
+                        keywords: ["closure", "scope", "lexical", "private", "state", "function", "memory"]
+                    }
+                ],
+                "Backend Developer": [
+                    {
+                        q: "Explain the event loop in Node.js and how asynchronous operations are handled.",
+                        keywords: ["event loop", "single-threaded", "callback queue", "libuv", "non-blocking", "async", "promises"]
+                    },
+                    {
+                        q: "What are the key differences between SQL (Relational) and NoSQL databases?",
+                        keywords: ["sql", "nosql", "relational", "schema", "acid", "mongodb", "postgresql", "scalability"]
+                    },
+                    {
+                        q: "How do you design a secure RESTful API authentication system using JWT?",
+                        keywords: ["jwt", "token", "authentication", "authorization", "bearer", "refresh token", "security", "hash"]
+                    },
+                    {
+                        q: "What is database indexing, and how does it speed up query performance?",
+                        keywords: ["indexing", "b-tree", "query", "performance", "speed", "search", "table scan"]
+                    },
+                    {
+                        q: "How do you handle database migration and schema versioning in production environments?",
+                        keywords: ["migration", "schema", "versioning", "rollback", "downtime", "deployment", "seeding"]
+                    }
+                ],
+                "Full Stack Engineer": [
+                    {
+                        q: "Walk me through your complete architectural approach when building a full-stack web app.",
+                        keywords: ["frontend", "backend", "database", "api", "rest", "architecture", "deployment", "scalable"]
+                    },
+                    {
+                        q: "How do you prevent common security vulnerabilities such as SQL injection, XSS, and CSRF?",
+                        keywords: ["sql injection", "xss", "csrf", "sanitization", "escape", "tokens", "prepared statements"]
+                    },
+                    {
+                        q: "Explain the concept of CORS (Cross-Origin Resource Sharing) and how you configure it.",
+                        keywords: ["cors", "origin", "headers", "allow-access", "security", "browser", "domain"]
+                    },
+                    {
+                        q: "Describe how you structure CI/CD deployment pipelines for automated testing and releases.",
+                        keywords: ["ci/cd", "pipeline", "github actions", "automated testing", "docker", "deploy", "build"]
+                    },
+                    {
+                        q: "How do you handle microservices communication and service discovery in distributed systems?",
+                        keywords: ["microservices", "grpc", "rest", "message broker", "rabbitmq", "kafka", "service discovery"]
+                    }
+                ],
+                "Data Scientist / ML": [
+                    {
+                        q: "Explain the bias-variance tradeoff in machine learning models and how you address overfitting.",
+                        keywords: ["bias", "variance", "overfitting", "regularization", "training", "test data", "model complexity"]
+                    },
+                    {
+                        q: "What is the difference between L1 (Lasso) and L2 (Ridge) regularization?",
+                        keywords: ["l1", "l2", "lasso", "ridge", "penalty", "sparsity", "coefficients", "normalization"]
+                    },
+                    {
+                        q: "How do you handle missing or imbalanced datasets prior to model training?",
+                        keywords: ["imbalanced", "missing", "imputation", "smote", "resampling", "outliers", "preprocessing"]
+                    },
+                    {
+                        q: "Explain how gradient descent works and the role of learning rate in optimization.",
+                        keywords: ["gradient descent", "learning rate", "loss function", "convergence", "weights", "optimization"]
+                    },
+                    {
+                        q: "How do you evaluate classification model performance beyond simple accuracy?",
+                        keywords: ["precision", "recall", "f1-score", "roc-auc", "confusion matrix", "false positives"]
+                    }
+                ],
+                "Software Engineer - Core": [
+                    {
+                        q: "Explain time and space complexity using Big-O notation with examples.",
+                        keywords: ["big-o", "time complexity", "space complexity", "o(n)", "o(1)", "algorithms", "growth"]
+                    },
+                    {
+                        q: "When would you choose a Hash Map over a Binary Search Tree for data retrieval?",
+                        keywords: ["hash map", "binary search tree", "o(1)", "o(log n)", "lookup", "keys", "collisions"]
+                    },
+                    {
+                        q: "Explain the principles of Object-Oriented Programming (OOP) and polymorphism.",
+                        keywords: ["oop", "polymorphism", "inheritance", "encapsulation", "abstraction", "classes"]
+                    },
+                    {
+                        q: "How do deadlocks occur in multi-threaded programming, and how can they be prevented?",
+                        keywords: ["deadlock", "threads", "mutex", "lock", "concurrency", "race condition", "resource"]
+                    },
+                    {
+                        q: "Explain dynamic programming and when you would use memoization vs tabulation.",
+                        keywords: ["dynamic programming", "memoization", "tabulation", "optimal substructure", "overlapping subproblems"]
+                    }
+                ]
+            },
+            "Behavioral": {
+                "All": [
+                    {
+                        q: "Tell me about a time when you had a disagreement with a team member. How did you resolve it?",
+                        keywords: ["situation", "task", "action", "result", "communication", "compromise", "team", "resolved"]
+                    },
+                    {
+                        q: "Describe a situation where you had to deliver a critical project under an extremely tight deadline.",
+                        keywords: ["deadline", "pressure", "priority", "milestone", "delivery", "plan", "success"]
+                    },
+                    {
+                        q: "Give an example of a time when you made a significant mistake. How did you handle it?",
+                        keywords: ["mistake", "error", "accountability", "fix", "learned", "root cause", "resolved"]
+                    },
+                    {
+                        q: "Tell me about a time when you took the initiative to solve an unassigned problem.",
+                        keywords: ["initiative", "proactive", "ownership", "solution", "identified", "impact", "leadership"]
+                    },
+                    {
+                        q: "Describe a time when you had to explain complex technical concepts to a non-technical stakeholder.",
+                        keywords: ["stakeholder", "communication", "simplified", "analogy", "clarity", "audience", "alignment"]
+                    }
+                ]
+            },
+            "HR": {
+                "All": [
+                    {
+                        q: "Why are you interested in joining our company, and what value do you expect to bring?",
+                        keywords: ["company", "values", "culture", "skills", "growth", "contribution", "mission"]
+                    },
+                    {
+                        q: "Where do you see your career progression and professional growth over the next 3 to 5 years?",
+                        keywords: ["career", "goals", "growth", "leadership", "senior", "learning", "long-term"]
+                    },
+                    {
+                        q: "What are your primary salary expectations, and what factors do you consider?",
+                        keywords: ["compensation", "market rate", "value", "package", "flexible", "skills", "expectations"]
+                    },
+                    {
+                        q: "How do you handle constructive criticism and feedback during performance reviews?",
+                        keywords: ["feedback", "criticism", "improvement", "growth", "open", "professional", "adaptable"]
+                    },
+                    {
+                        q: "What is your greatest professional achievement to date, and why does it stand out?",
+                        keywords: ["achievement", "impact", "measurable", "success", "proud", "challenge", "milestone"]
+                    }
+                ]
+            }
+        };
+
+        let currentTrack = "Technical";
+        let currentRole = "Frontend Developer";
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let sessionTimer = null;
+        let secondsElapsed = 0;
+        let userAnswers = [];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadPastSessions();
+        });
+
+        function setInterviewTrack(track) {
+            currentTrack = track;
+            ['Technical', 'Behavioral', 'HR'].forEach(t => {
+                const btn = document.getElementById(`track-${t.toLowerCase()}`);
+                if (t === track) {
+                    btn.className = "p-4 rounded-2xl bg-gradient-to-r from-[#ff2a85] to-[#c026d3] text-white font-bold text-sm shadow-lg shadow-[#ff2a85]/25 border border-[#ff2a85]/50 flex flex-col items-center gap-2 cursor-pointer transition-all";
+                } else {
+                    btn.className = "p-4 rounded-2xl bg-[#170c28] text-slate-300 font-semibold text-sm border border-white/10 flex flex-col items-center gap-2 cursor-pointer hover:bg-white/5 transition-all";
+                }
+            });
+
+            // Automatically show or hide the technical role selector depending on the track
+            const roleContainer = document.getElementById('role-container');
+            if (roleContainer) {
+                if (track === 'Technical') {
+                    roleContainer.style.display = 'block';
+                } else {
+                    roleContainer.style.display = 'none';
+                }
+            }
+        }
+
+        function startInterview() {
+            if (currentTrack === 'Technical') {
+                currentRole = document.getElementById('interview-role').value;
+            } else {
+                currentRole = currentTrack + " Screening";
+            }
+            
+            const count = parseInt(document.getElementById('interview-count').value);
+
+            let bank = [];
+            if (currentTrack === "Technical") {
+                bank = questionBanks["Technical"][currentRole] || questionBanks["Technical"]["Frontend Developer"];
+            } else {
+                bank = questionBanks[currentTrack]["All"];
+            }
+
+            currentQuestions = bank.slice(0, count);
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            secondsElapsed = 0;
+
+            document.getElementById('active-track-badge').innerText = `${currentTrack} Track`;
+            document.getElementById('session-badge').innerText = currentRole;
+            document.getElementById('setup-view').classList.add('hidden');
+            document.getElementById('active-interview-view').classList.remove('hidden');
+            document.getElementById('report-view').classList.add('hidden');
+
+            renderQuestion();
+
+            if (sessionTimer) clearInterval(sessionTimer);
+            sessionTimer = setInterval(() => {
+                secondsElapsed++;
+                const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+                const secs = String(secondsElapsed % 60).padStart(2, '0');
+                document.getElementById('timer-display').innerText = `${mins}:${secs}`;
+            }, 1000);
+
+            lucide.createIcons();
+        }
+
+        function renderQuestion() {
+            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('question-text').innerText = currentQuestions[currentQuestionIndex].q;
+            document.getElementById('user-answer-input').value = '';
+        }
+
+        function toggleVoiceInput() {
+            const inputField = document.getElementById('user-answer-input');
+            inputField.value += (inputField.value ? " " : "") + "Virtual DOM reconciliation diffing component hooks state architecture performance scalability optimization.";
+        }
+
+        function submitAnswer() {
+            const answerText = document.getElementById('user-answer-input').value.trim();
+            if (!answerText) {
+                alert("Please provide an answer before proceeding.");
+                return;
+            }
+
+            userAnswers.push({ 
+                questionObj: currentQuestions[currentQuestionIndex], 
+                answer: answerText 
+            });
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < currentQuestions.length) {
+                renderQuestion();
+            } else {
+                finishInterview();
+            }
+        }
+
+        function finishInterview() {
+            if (sessionTimer) clearInterval(sessionTimer);
+
+            document.getElementById('active-interview-view').classList.add('hidden');
+            document.getElementById('report-view').classList.remove('hidden');
+
+            let totalScorePoints = 0;
+            let totalKeywordsMatched = 0;
+            let totalKeywordsRequired = 0;
+            let breakdownHTML = '';
+
+            userAnswers.forEach((item, idx) => {
+                const ansLower = item.answer.toLowerCase();
+                const requiredKeywords = item.questionObj.keywords;
+                totalKeywordsRequired += requiredKeywords.length;
+
+                let matchedKeywordsForQ = [];
+                let missingKeywordsForQ = [];
+
+                requiredKeywords.forEach(kw => {
+                    if (ansLower.includes(kw.toLowerCase())) {
+                        matchedKeywordsForQ.push(kw);
+                        totalKeywordsMatched++;
+                    } else {
+                        missingKeywordsForQ.push(kw);
+                    }
+                });
+
+                let keywordRatio = matchedKeywordsForQ.length / requiredKeywords.length;
+                let qScore = Math.round(keywordRatio * 100);
+
+                if (ansLower.length < 20 || ansLower === "no" || ansLower === "none") {
+                    qScore = 5;
+                }
+
+                totalScorePoints += qScore;
+
+                let badgeColor = "text-emerald-400 bg-emerald-500/20 border-emerald-500/30";
+                if (qScore < 40) badgeColor = "text-rose-400 bg-rose-500/20 border-rose-500/30";
+                else if (qScore < 75) badgeColor = "text-amber-400 bg-amber-500/20 border-amber-500/30";
+
+                breakdownHTML += `
+                    <div class="p-4 rounded-xl bg-[#10061e] border border-white/10 space-y-2 text-xs">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-sm">Q${idx + 1}: ${item.questionObj.q}</span>
+                            <span class="px-2.5 py-1 rounded-md font-bold text-xs border ${badgeColor}">${qScore}/100 Score</span>
+                        </div>
+                        <p class="text-slate-300"><b>Your Answer:</b> "${item.answer}"</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-white/5">
+                            <div>
+                                <span class="text-emerald-400 font-semibold block mb-1">&check; Keywords Found (${matchedKeywordsForQ.length}):</span>
+                                <span class="text-slate-400">${matchedKeywordsForQ.length > 0 ? matchedKeywordsForQ.join(', ') : 'None detected'}</span>
+                            </div>
+                            <div>
+                                <span class="text-rose-400 font-semibold block mb-1">&cross; Missing Required Keywords:</span>
+                                <span class="text-slate-400">${missingKeywordsForQ.length > 0 ? missingKeywordsForQ.join(', ') : 'None (Perfect Match!)'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const finalScore = Math.round(totalScorePoints / currentQuestions.length);
+            const totalHitRate = totalKeywordsRequired > 0 ? Math.round((totalKeywordsMatched / totalKeywordsRequired) * 100) : 0;
+
+            document.getElementById('report-score').innerText = `${finalScore}/100`;
+            document.getElementById('keyword-hit-display').innerText = `${totalHitRate}%`;
+
+            const recStatus = document.getElementById('recommendation-status');
+            if (finalScore >= 80) {
+                recStatus.innerText = "Strong Hire";
+                recStatus.className = "text-xl font-extrabold text-emerald-400 pt-1";
+            } else if (finalScore >= 50) {
+                recStatus.innerText = "Moderate / Borderline";
+                recStatus.className = "text-xl font-extrabold text-amber-400 pt-1";
+            } else {
+                recStatus.innerText = "Rejected (Low Detail)";
+                recStatus.className = "text-xl font-extrabold text-rose-400 pt-1";
+            }
+
+            document.getElementById('transcript-breakdown').innerHTML = breakdownHTML;
+
+            const sessionRecord = {
+                track: currentTrack,
+                role: currentRole,
+                score: finalScore,
+                date: new Date().toLocaleDateString()
+            };
+
+            let history = [];
+            try {
+                const saved = localStorage.getItem('interview_history_strict');
+                if (saved) history = JSON.parse(saved);
+            } catch (e) { history = []; }
+
+            history.unshift(sessionRecord);
+            localStorage.setItem('interview_history_strict', JSON.stringify(history));
+
+            loadPastSessions();
+            lucide.createIcons();
+        }
+
+        function loadPastSessions() {
+            const container = document.getElementById('past-sessions-list');
+            let history = [];
+            try {
+                const saved = localStorage.getItem('interview_history_strict');
+                if (saved) history = JSON.parse(saved);
+            } catch (e) { history = []; }
+
+            if (history.length === 0) {
+                container.innerHTML = `<div class="p-3 rounded-xl bg-[#10061e] border border-white/5 text-xs text-slate-400">No recent sessions recorded yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            history.slice(0, 3).forEach(item => {
+                container.innerHTML += `
+                    <div class="p-3 rounded-xl bg-[#10061e] border border-white/10 flex items-center justify-between text-xs">
+                        <div>
+                            <span class="font-semibold text-white block">${item.role}</span>
+                            <span class="text-[10px] text-purple-400">${item.track} Track</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-slate-400">${item.date}</span>
+                            <span class="px-2 py-0.5 rounded-md font-bold ${item.score >= 50 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}">${item.score}/100</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function resetInterview() {
+            document.getElementById('report-view').classList.add('hidden');
+            document.getElementById('setup-view').classList.remove('hidden');
+        }
+
+        function performLogout() {
+            localStorage.removeItem('student');
+            localStorage.removeItem('currentUser');
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+
+</html>
