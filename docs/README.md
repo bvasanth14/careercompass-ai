@@ -20,10 +20,10 @@ CareerCompass-AI is a modern, full-stack web application designed to help studen
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, Tailwind CSS, Vanilla JavaScript, and dynamic modular scripts
-- **Backend:** Node.js, Express.js, custom analysis modules (ATS checker, resume extractor, skill gap analyzer)
-- **Storage/Database:** Database integration (`db.js`), local file storage (`uploads/`), and LocalStorage
-
+* **Frontend:** HTML5, CSS3, JavaScript (Vanilla JS with dynamic production/development API routing)
+* **Backend:** Node.js, Express.js, Multer (File uploads), `pdf-parse`
+* **Database:** MySQL hosted via **TiDB Cloud** (managed cloud database with connection pooling)
+* **Deployment:** Hosted live on **Render**
 ---
 
 ## 📁 Project Structure
